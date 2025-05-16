@@ -23,30 +23,21 @@
         section {
             padding: 20px;
         }
-        iframe {
+        table {
             width: 100%;
-            height: 800px;
-            border: none;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-        footer {
+        th, td {
+            padding: 10px;
             text-align: center;
-            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        th {
             background-color: #333;
-            color: #fff;
-            position: relative; /* Change to relative so it stays at the bottom but doesn't cover content */
-            width: 100%;
+            color: white;
         }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
+        .team-member {
             font-weight: bold;
         }
     </style>
@@ -57,31 +48,12 @@
     <h1>Project Plan</h1>
 </header>
 
-<!-- About the Project Section -->
-<section id="about">
-    <h2>About the Project</h2>
-    <p>This section will describe the project in detail. You can update this content later.</p>
-</section>
-
-<!-- Home Section with navigation links -->
-<section>
-    <h2>Home</h2>
-    <nav>
-        <ul>
-            <li><a href="#project-plan">Project Plan</a></li>
-            <li><a href="#logbooks">Logbooks</a></li>
-            <li><a href="#test-plan">Test Plan</a></li>
-            <li><a href="#about">About the Project</a></li>
-        </ul>
-    </nav>
-</section>
-
 <!-- Project Plan Section -->
 <section id="project-plan">
     <h2>Project Plan Details</h2>
     <p>This section contains the project plan with the tasks, phases, and progress over the weeks.</p>
 
-   <table>
+    <table>
         <thead>
             <tr>
                 <!-- Add Phase column header -->
@@ -213,32 +185,7 @@
             <!-- Add more tasks for Phase 2 here -->
         </tbody>
     </table>
-
-
-    <!-- Link to the Excel file directly -->
-    <p><a href="ProjectPlan.xlsx" download>Download the Project Plan (Excel File)</a></p>
 </section>
-
-<!-- Logbooks Section -->
-<section id="logbooks">
-    <h2>Logbooks</h2>
-    <ul>
-        <li><a href="Logbooks/Blaise_Swan_logbook.html">Blaise Swan's Logbook</a></li>
-        <li><a href="Logbooks/Amy_Wetzell_logbook.html">Amy Wetzell's Logbook</a></li>
-    </ul>
-</section>
-
-<!-- Test Plan Section -->
-<section id="test-plan">
-    <h2>Test Plan</h2>
-    <ul>
-        <li><a href="testPlan/testPlan.html">View Test Plan</a></li>
-    </ul>
-</section>
-
-<footer>
-    <p>&copy; 2025 Your Project. All Rights Reserved.</p>
-</footer>
 
 </body>
 </html>
