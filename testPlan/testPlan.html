@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Test Plan - VI Elevator Communication</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2, h3 {
+      color: #2E3A87;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .procedure, .objective {
+      margin-top: 10px;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Test Plan for the VI Elevator Project</h1>
+  <h2>Test Objectives and Scope</h2>
+  <p>The purpose of testing the Project's VI elevator is to confirm CAN, Ethernet, and Wireless communication with the Raspberry Pi. The testing will verify that all components can successfully communicate with each other and exchange data as expected.</p>
+
+  <h2>Test Types</h2>
+  <h3>Communications Testing and Verification</h3>
+  <ul>
+    <li>CANBus</li>
+    <li>Wireless</li>
+  </ul>
+
+  <h2>Test Procedures</h2>
+  <h3>CANBus</h3>
+
+  <h4>Transmission of CAN Messages</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Verify that the supervisory controller can transmit CAN messages to itself, MCUs, and Arduino.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Program the supervisory controller to send messages on the CAN bus.
+Verify that messages are received by the intended recipients (itself, MCUs, Arduino).
+Ensure that payloads are correctly formatted and as expected.
+    </pre>
+  </div>
+
+  <h4>Listening for CAN Messages (Message Filtering)</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Ensure that the supervisory controller correctly listens for messages and filters out unnecessary traffic.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Set up a specific MCU to periodically broadcast messages on the CAN bus.
+Verify that only the supervisory controller is receiving the messages (filters are working correctly).
+Monitor and log message activity to verify the CAN bus is correctly receiving and processing.
+    </pre>
+  </div>
+
+  <h4>Message Payload Verification</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Verify the integrity and correctness of payloads within the messages.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+The supervisory controller should read and decode the payloads from messages on the CAN bus.
+Check for correctness in the payload data for different types of messages (move floors, control signals, etc.).
+    </pre>
+  </div>
+
+  <h3>Wireless</h3>
+
+  <h4>Wireless Communication Setup</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Ensure proper setup of the wireless communication (Wi-Fi, Bluetooth, etc.) between the supervisory controller and external devices.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Set up the wireless module on both the supervisory controller and any external devices (e.g., Arduino, MCU).
+Verify successful connection between devices via the wireless network.
+    </pre>
+  </div>
+
+  <h4>Wireless Communication Stability</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Verify the reliability of wireless communication.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Test message transmission under various conditions (e.g., interference, distance).
+Measure latency, packet loss, and data throughput over the wireless link.
+    </pre>
+  </div>
+
+  <h4>Website Controller Integration</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Test communication between the supervisory controller and the website interface.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Use the website to control supervisory controller features.
+Monitor Ethernet communication for performance and correctness.
+Verify that the website can send and receive valid commands.
+    </pre>
+  </div>
+
+  <h2>Pass / Fail Chart</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Communication Type</th>
+        <th>Test Object</th>
+        <th>Expected Result</th>
+        <th>Pass / Fail (P/F)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CANBus</td>
+        <td>Supervisory Controller CAN BUS receive</td>
+        <td>Receives proper ID, LEN, DATA:07</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>CANBus</td>
+        <td>CAN Transmit (Supervisory Controller to self)</td>
+        <td>Can the supervisory controller receive its own message?</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>CANBus</td>
+        <td>CAN Transmit (Supervisory Controller to Arduino/Elevator Controller)</td>
+        <td>Can the supervisory controller send a message to the Elevator Controller?</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>CANBus</td>
+        <td>CAN Transmit (Car Controller to Supervisory Controller)</td>
+        <td>Can the Elevator Car Controller send a message to the Supervisory Controller?</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>CANBus</td>
+        <td>CAN Transmit Floors to supervisory controller (Floor x)</td>
+        <td>Can the Floor Controllers receive messages from the Supervisory Controller?</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Ethernet</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Ethernet</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Wireless</td>
+        <td>Website Communication to CAN</td>
+        <td>Website is able to replicate all CAN functionality tests</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Wireless</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
