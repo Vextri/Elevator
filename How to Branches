@@ -1,0 +1,15 @@
+git checkout -b branchName //checks out and creates a new branch. This will always create it from the repo youre in. ie if youre on a branch creating a new branch itll copy that branches files not the main branches files
+git add . //this adds all files
+git commit  // there is two versions of this we can use. git commit is typically used for the first commit. This will open your default text editor. This allows you to provide a detailed description of the
+//feature being implemented an example of a template you could use for this message could be:
+
+<branch name> <assignment or project> <feature name> - Short description
+-Detailed Description ie how when where why
+
+git commit -m "Provides a small message that is typically used for further commits" // this is because all commits gets squashed into one for when a pull requests are merged that big detailed one is the main message
+
+git push -f -u origin branchName // -f is forcing so be careful if theres any issues too bad itll be pushed, -u sets the upstream branch so it knows where to actually send your push requests
+// I believe you dont need to do -u after your first commit but I always include it anyways
+
+
+//HUGE NOTE as soon as you commit do NOT make any changes youll fuck everything up and itll take awhile to fix
