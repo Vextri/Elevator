@@ -1,12 +1,17 @@
 <!DOCTYPE html>
+<!--[if lt IE 9]>
+<script src=http://html5shiv.googlecode.com/svn/trunk/html5.js></script>
+<![endif] -->
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
   <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
   <title>Login</title>
 </head>
 <body>
-  <h2>Login</h2>
+  <header><h2>Login</h2></header>
   <form action="login.php" method="post">
     <label for="username">Username:</label><br />
     <input type="text" id="username" name="username" required><br /><br />
@@ -16,6 +21,10 @@
     
     <input type="submit" value="Login">
   </form>
-  <p><a href="request_access.html">Don't have an account? Request access here.</a></p>
+  <p></p>
+  <footer>Need Access?</footer>
+  <div>
+    <a class="request" href="request_access.html"></a>
+  </div>
 </body>
 </html>
