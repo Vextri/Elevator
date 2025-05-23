@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Blaise Swan">
   <link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
   <title>Project Test Plan - VI Elevator Communication</title>
 </head>
@@ -113,59 +114,45 @@ Verify that the website can send and receive valid commands.
       <tr>
         <td>CANBus</td>
         <td>Supervisory Controller CAN BUS receive</td>
-        <td>Receives proper ID, LEN, DATA:07</td>
-        <td></td>
+        <td>Receives proper ID, LEN, DATA:</td>
+        <td>P</td>
       </tr>
       <tr>
         <td>CANBus</td>
         <td>CAN Transmit (Supervisory Controller to self)</td>
         <td>Can the supervisory controller receive its own message?</td>
-        <td></td>
+        <td>P</td>
       </tr>
       <tr>
         <td>CANBus</td>
         <td>CAN Transmit (Supervisory Controller to Arduino/Elevator Controller)</td>
         <td>Can the supervisory controller send a message to the Elevator Controller?</td>
-        <td></td>
+        <td>P</td>
       </tr>
       <tr>
         <td>CANBus</td>
         <td>CAN Transmit (Car Controller to Supervisory Controller)</td>
         <td>Can the Elevator Car Controller send a message to the Supervisory Controller?</td>
-        <td></td>
+        <td>P</td>
       </tr>
       <tr>
         <td>CANBus</td>
         <td>CAN Transmit Floors to supervisory controller (Floor x)</td>
         <td>Can the Floor Controllers receive messages from the Supervisory Controller?</td>
-        <td></td>
+        <td>P</td>
       </tr>
-      <tr>
-        <td>Ethernet</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Ethernet</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+
       <tr>
         <td>Wireless</td>
         <td>Website Communication to CAN</td>
         <td>Website is able to replicate all CAN functionality tests</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Wireless</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>P</td>
       </tr>
     </tbody>
   </table>
-
+<!-- Add this before the closing </body> tag in each HTML file -->
+<footer style="text-align:center; margin-top:2rem;">
+  &copy; 2025 Blaise Swan. All rights reserved.
+</footer>
 </body>
 </html>

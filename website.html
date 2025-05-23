@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
-    <title>SW Controls - Project VI</title>
+<title>Home</title>
+<meta name="author" content="Your Name" />
+<meta name="description" content="Elevator Project Home Page" />
+<meta name="robots" content="noindex nofollow" />
+<meta http-equiv="pragma" content="no-cache" />
+<link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
+<title>SW Controls - Project VI</title>
 </head>
 <body>
  
@@ -76,8 +79,18 @@
 </section>
 
 
-<footer>
-    <p>&copy; 2025 Your Project. All Rights Reserved.</p>
+
+<!-- Add this script to show the current date and time -->
+<div id="current-datetime" style="text-align:center; margin-top:1rem; font-size:1.1em;"></div>
+<script>
+  const now = new Date();
+  document.getElementById('current-datetime').textContent =
+    "Current date and time: " + now.toLocaleString();
+</script>
+
+<!-- Add this before the closing </body> tag in each HTML file -->
+<footer style="text-align:center; margin-top:2rem;">
+  &copy; 2025 Elevator Project Team. All rights reserved.
 </footer>
 
 </body>

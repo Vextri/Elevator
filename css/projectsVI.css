@@ -12087,3 +12087,95 @@ textarea.form-control-lg {
     }
 
     /* Personalised
+/* Center the form and add a card-like appearance */
+form {
+  max-width: 420px;
+  margin: 2.5rem auto;
+  padding: 2.5rem 2rem 2rem 2rem;
+  background: #f4f8fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+  border: 1px solid #e0e6ed;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Optional: Add a fieldset for grouping */
+form fieldset {
+  border: 2px solid #0078d7;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  margin-bottom: 1.5rem;
+  background: #eaf4ff;
+  box-shadow: 0 1px 4px rgba(0,120,215,0.05);
+}
+
+form legend {
+  font-weight: bold;
+  color: #0078d7;
+  padding: 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Align labels and inputs */
+form label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: block;
+  color: #222;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.1rem;
+  border: 1.5px solid #b6c6d6;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border 0.2s;
+  box-sizing: border-box;
+}
+
+form input:focus,
+form textarea:focus {
+  border: 1.5px solid #0078d7;
+  outline: none;
+  background: #f0f8ff;
+}
+
+/* Style the submit button */
+form input[type="submit"] {
+  background: linear-gradient(90deg, #0078d7 60%, #005fa3 100%);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 0;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,120,215,0.08);
+  letter-spacing: 0.5px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+form input[type="submit"]:hover {
+  background: linear-gradient(90deg, #005fa3 60%, #0078d7 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Responsive for mobile */
+@media (max-width: 500px) {
+  form {
+    padding: 1.2rem 0.5rem;
+  }
+  form fieldset {
+    padding: 1rem 0.3rem;
+  }
+}
+
