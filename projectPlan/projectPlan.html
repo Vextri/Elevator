@@ -40,6 +40,9 @@
         .team-member {
             font-weight: bold;
         }
+        .phase {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +61,7 @@
             <tr>
                 <!-- Add Phase column header -->
                 <th class="header-cell">Phase</th>
+                <th class="header-cell">Task Header</th>
                 <th class="header-cell">Task</th> <!-- First column for tasks -->
                 <!-- Columns for each week -->
                 <th class="header-cell">Week 1</th>
@@ -79,7 +83,8 @@
         <tbody>
             <!-- Row for Phase 1 Task 1 -->
             <tr>
-                <td class="team-member">Phase 1</td> <!-- Phase column -->
+                <td rowspan='9' class="phase">1</td> <!-- Phase column -->
+                <td>1. Project plan</td>
                 <td>Complete and submit Project Plan</td>
                 <td class="team-member">ALL</td> <!-- BS = Blaise Swan -->
                 <td></td>
@@ -95,17 +100,17 @@
                 <td></td>
                 <td></td>
                 <td></td>
-
-
             </tr>
             <!-- Row for Phase 1 Task 2 -->
             <tr>
-                <td class="team-member">Phase 1</td> <!-- Phase column -->
+                <td rowspan="2">2. Set up Raspberry Pi as Server and confirmed communication</td>
                 <td>Set up Raspberry Pi as Server</td>
-                <td class="team-member">AW</td> <!-- AW = Amy Wetzell -->
-                <td class="team-member">AW</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">AW</td>
+                <td class="team-member">ALL</td> <!-- AW = Amy Wetzell -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -115,9 +120,27 @@
                 <td></td>
                 <td></td>
             </tr>
-                        <tr>
-                <td class="team-member">Phase 1</td> <!-- Phase column -->
+             <!-- Row for Phase 1 Task 2 -->
+            <tr>
                 <td>Confirm communication between client computer and server (HTTP/SSH) </td>
+                <td colspan="2" class="team-member">ALL</td> <!-- BS = Blaise Swan -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 1 Task 3 -->
+            <tr>
+                <td rowspan="4">3. STM32 Programming via HAL </td>
+                <td>Explain common CAN messaging protocol  (see document)</td>
                 <td class="team-member">ALL</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
@@ -135,11 +158,49 @@
             </tr>
             <!-- Row for Phase 1 Task 3 -->
             <tr>
-                <td class="team-member">Phase 1</td> <!-- Phase column -->
-                <td>STM32 Programming via HAL</td>
-                <td class="team-member">BS</td>
-                <td class="team-member">BS</td>
-                <td class="team-member">BS</td>
+                <td> Implement the CAN messaging protocol by properly setting the filters (code demo) on STM32</td>
+                <td></td>
+                <td></td>
+                <td class="team-member">BS</td> <!-- BS = Blaise Swan -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 1 Task 3 -->
+            <tr>
+                <td>Able to read CAN messages placed on the CAN bus (Raspberry Pi) and detect up/down request, floor
+     request, door open/close, location of elevator car</td>
+                <td></td>
+                <td></td>
+                <td class="team-member">AW</td> <!-- BS = Blaise Swan -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 1 Task 3 -->
+            <tr>
+                <td>Develop and implement a test plan to confirm functionality of software/hardware</td>
+                <td class="team-member">ALL</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -152,31 +213,14 @@
             </tr>
             <!-- Row for Phase 1 Task 4 -->
             <tr>
-                <td class="team-member">Phase 1</td> <!-- Phase column -->
-                <td>Develop Finite State Machine Logic</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">AW</td>
+                <td rowspan="2">4. Controls / indicators (virtual and physical hardware)</td>
+                <td>Controls (up/down) built in HTML (possibly add CSS if students work ahead)</td>
                 <td></td>
                 <td></td>
                 <td></td>
+                <td class="team-member">BS</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            <!-- Phase 2 -->
-            <!-- Row for Phase 2 Task 19 -->
-            <tr>
-                <td class="team-member">Phase 2</td> <!-- Phase column -->
-                <td>Fully working and completed front-end GUI/Webpage to control elevator</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">BS</td>
-                <td class="team-member">BS</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -186,14 +230,43 @@
                 <td></td>
                 <td></td>
             </tr>
-            <!-- Row for Phase 2 Task 20 -->
+            <!-- Row for Phase 1 Task 4 -->
             <tr>
-                <td class="team-member">Phase 2</td> <!-- Phase column -->
+                <td>Elevator Car Controls (up/down/floor number) built in HTML (possibly CSS if students work ahead)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="team-member">AW</td> <!-- BS = Blaise Swan -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 1 -->
+            <tr>
+                <td rowspan="13" class="phase">2</td> <!-- Phase column -->
+                <td rowspan="4">1.  User Interface / Client Program</td>
+                <td>Fully working and completed front end Graphical User Interface /Webpage to control elevator</td>
+                <td></td>
+                <td></td>
+                <td colspan="9" class="team-member">ALL</td> <!-- BS = Blaise Swan -->
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 1 -->
+            <tr>
                 <td>User action buttons/icons implemented</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">BS</td>
-                <td class="team-member">AW</td>
-                <td class="team-member">AW</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member">AW</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -203,7 +276,329 @@
                 <td></td>
                 <td></td>
             </tr>
-
+            <!-- Row for Phase 2 Task 1 -->
+            <tr>
+                <td>User action buttons developed to make changes to UI that are reflected in the database</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member">BS</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 1 -->
+            <tr>
+                <td> User indicator buttons change - changes in database are reflected in UI</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member">AW</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 2 -->
+            <tr>
+                <td rowspan="2">2. Database Repository </td>
+                <td>Database set up and accepting values/commands from website</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member">AW</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 2 -->
+            <tr>
+                <td>Database has fields for logging information placed on the CAN bus</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member">BS</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 3 -->
+            <tr>
+                <td rowspan="2">3. Diagnostic Reports</td>
+                <td>Database set up and accepting values/commands from website</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="5" class="team-member">ALL</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 3 -->
+            <tr>
+                <td>Displayed on webpage</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member">ALL</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 4 -->
+            <tr>
+                <td rowspan="2">4. Server Program</td>
+                <td>Users are authorized/authenticated based on username/password</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="6" class="team-member">BS</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 4 -->
+            <tr>
+                <td>Server program provides logging data/accepts commands only from authorized users</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="5" class="team-member">AW</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 5 -->
+            <tr>
+                <td rowspan="2">5. Announce floor numbers (Function of the Client or Server Program) for users with Visual Impairments</td>
+                <td>Implement a Server Program for announcing the floor numbers</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">BS</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 5 -->
+            <tr>
+                <td>Speaker on elevator used to announce the current/next floor (speaker already connected to system)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">AW</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 6 -->
+            <tr>
+                <td>6. Sabbath mode (Function of the Client Program)</td>
+                <td>Users may operate the elevator without having to push buttons (e.g. verbally, based on schedule/time)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">BS</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 1 -->
+            <tr>
+                <td rowspan='10' class="phase">3</td> <!-- Phase column -->
+                <td rowspan="5">1. CAN/LAN network communication</td>
+                <td>Research and Implement a CAN/LAN communication bridge</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">BS</td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 1 -->
+            <tr>
+                <td>Ensure activity in CAN network changes values in database</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">AW</td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 1 -->
+            <tr>
+                <td>Changes in User Interface/Website changes value in database and generate CAN messages</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">AW</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>CAN Messages result in changes to database and GUI/Indicators</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">ALL</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Commands from CAN/LAN networks are sent to the controller and move the elevator / indicate floor number</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">ALL</td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 2 -->
+            <tr>
+                <td>2. Controller Software Written</td>
+                <td>CAN Supervisor (Raspberry Pi) relays messages between CAN/LAN Network (see sample program on Rpi)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">BS</td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 3 -->
+            <tr>
+                <td>3. Finite State Machine logic written</td>
+                <td>Develop and Implement a finite state machine (using C/C+, PHP, Python to implement logic)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member">AW</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 4 -->
+            <tr>
+                <td>4. Additional capability that shows ingenuity</td>
+                <td>Implement card scanner on elevator</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="6" class="team-member">ALL</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 5 -->
+            <tr>
+                <td>5. Ideas for Capstone (at least 3 per student)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member">ALL</td>
+            </tr>
+            <!-- Row for Phase 3 Task 6 -->
+            <tr>
+                <td>6. Final Presentation & Demonstration</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="6" class="team-member">ALL</td>
+            </tr>
             <!-- Add more tasks for Phase 2 here -->
         </tbody>
     </table>
