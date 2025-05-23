@@ -37,10 +37,28 @@
             background-color: #333;
             color: white;
         }
+        .section {
+            background-color:lightgray;
+            font-weight: bold;
+        }
+        .task {
+            background-color:gainsboro;
+        }
         .team-member {
+            background-color: LightGray;
+            font-weight: bold;
+        }
+        .team-member-amy {
+            background-color:Plum;
+            font-weight: bold;
+        }
+        .team-member-blaise {
+            background-color:LightBlue;
             font-weight: bold;
         }
         .phase {
+            background-color:Gray;
+            color: white;
             font-weight: bold;
         }
     </style>
@@ -61,7 +79,7 @@
             <tr>
                 <!-- Add Phase column header -->
                 <th class="header-cell">Phase</th>
-                <th class="header-cell">Task Header</th>
+                <th class="header-cell">Section</th>
                 <th class="header-cell">Task</th> <!-- First column for tasks -->
                 <!-- Columns for each week -->
                 <th class="header-cell">Week 1</th>
@@ -84,8 +102,8 @@
             <!-- Row for Phase 1 Task 1 -->
             <tr>
                 <td rowspan='9' class="phase">1</td> <!-- Phase column -->
-                <td>1. Project plan</td>
-                <td>Complete and submit Project Plan</td>
+                <td class="section">1. Project plan</td>
+                <td class="task">Complete and submit Project Plan</td>
                 <td class="team-member">ALL</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
@@ -103,8 +121,8 @@
             </tr>
             <!-- Row for Phase 1 Task 2 -->
             <tr>
-                <td rowspan="2">2. Set up Raspberry Pi as Server and confirmed communication</td>
-                <td>Set up Raspberry Pi as Server</td>
+                <td rowspan="2" class="section">2. Set up Raspberry Pi as Server and confirmed communication</td>
+                <td class="task">Set up Raspberry Pi as Server</td>
                 <td class="team-member">ALL</td> <!-- AW = Amy Wetzell -->
                 <td></td>
                 <td></td>
@@ -122,7 +140,7 @@
             </tr>
              <!-- Row for Phase 1 Task 2 -->
             <tr>
-                <td>Confirm communication between client computer and server (HTTP/SSH) </td>
+                <td class="task">Confirm communication between client computer and server (HTTP/SSH) </td>
                 <td colspan="2" class="team-member">ALL</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
@@ -139,8 +157,8 @@
             </tr>
             <!-- Row for Phase 1 Task 3 -->
             <tr>
-                <td rowspan="4">3. STM32 Programming via HAL </td>
-                <td>Explain common CAN messaging protocol  (see document)</td>
+                <td rowspan="4" class="section">3. STM32 Programming via HAL </td>
+                <td class="task">Explain common CAN messaging protocol  (see document)</td>
                 <td class="team-member">ALL</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
@@ -158,10 +176,10 @@
             </tr>
             <!-- Row for Phase 1 Task 3 -->
             <tr>
-                <td> Implement the CAN messaging protocol by properly setting the filters (code demo) on STM32</td>
+                <td class="task"> Implement the CAN messaging protocol by properly setting the filters (code demo) on STM32</td>
                 <td></td>
                 <td></td>
-                <td class="team-member">BS</td> <!-- BS = Blaise Swan -->
+                <td class="team-member-blaise">BS</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
                 <td></td>
@@ -176,11 +194,11 @@
             </tr>
             <!-- Row for Phase 1 Task 3 -->
             <tr>
-                <td>Able to read CAN messages placed on the CAN bus (Raspberry Pi) and detect up/down request, floor
+                <td class="task">Able to read CAN messages placed on the CAN bus (Raspberry Pi) and detect up/down request, floor
      request, door open/close, location of elevator car</td>
                 <td></td>
                 <td></td>
-                <td class="team-member">AW</td> <!-- BS = Blaise Swan -->
+                <td class="team-member-amy">AW</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
                 <td></td>
@@ -195,7 +213,7 @@
             </tr>
             <!-- Row for Phase 1 Task 3 -->
             <tr>
-                <td>Develop and implement a test plan to confirm functionality of software/hardware</td>
+                <td class="task">Develop and implement a test plan to confirm functionality of software/hardware</td>
                 <td class="team-member">ALL</td>
                 <td></td>
                 <td></td>
@@ -213,12 +231,12 @@
             </tr>
             <!-- Row for Phase 1 Task 4 -->
             <tr>
-                <td rowspan="2">4. Controls / indicators (virtual and physical hardware)</td>
-                <td>Controls (up/down) built in HTML (possibly add CSS if students work ahead)</td>
+                <td rowspan="2" class="section">4. Controls / indicators (virtual and physical hardware)</td>
+                <td class="task">Controls (up/down) built in HTML (possibly add CSS if students work ahead)</td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="team-member">BS</td> <!-- BS = Blaise Swan -->
+                <td class="team-member-blaise">BS</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
                 <td></td>
@@ -232,11 +250,11 @@
             </tr>
             <!-- Row for Phase 1 Task 4 -->
             <tr>
-                <td>Elevator Car Controls (up/down/floor number) built in HTML (possibly CSS if students work ahead)</td>
+                <td class="task">Elevator Car Controls (up/down/floor number) built in HTML (possibly CSS if students work ahead)</td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="team-member">AW</td> <!-- BS = Blaise Swan -->
+                <td class="team-member-amy">AW</td> <!-- BS = Blaise Swan -->
                 <td></td>
                 <td></td>
                 <td></td>
@@ -251,8 +269,8 @@
             <!-- Row for Phase 2 Task 1 -->
             <tr>
                 <td rowspan="13" class="phase">2</td> <!-- Phase column -->
-                <td rowspan="4">1.  User Interface / Client Program</td>
-                <td>Fully working and completed front end Graphical User Interface /Webpage to control elevator</td>
+                <td rowspan="4" class="section">1.  User Interface / Client Program</td>
+                <td class="task">Fully working and completed front end Graphical User Interface /Webpage to control elevator</td>
                 <td></td>
                 <td></td>
                 <td colspan="9" class="team-member">ALL</td> <!-- BS = Blaise Swan -->
@@ -262,29 +280,13 @@
             </tr>
             <!-- Row for Phase 2 Task 1 -->
             <tr>
-                <td>User action buttons/icons implemented</td>
+                <td class="task">User action buttons/icons implemented</td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="3" class="team-member">AW</td>
+                <td colspan="3" class="team-member-amy">AW</td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <!-- Row for Phase 2 Task 1 -->
-            <tr>
-                <td>User action buttons developed to make changes to UI that are reflected in the database</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="3" class="team-member">BS</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -294,13 +296,29 @@
             </tr>
             <!-- Row for Phase 2 Task 1 -->
             <tr>
-                <td> User indicator buttons change - changes in database are reflected in UI</td>
+                <td class="task">User action buttons developed to make changes to UI that are reflected in the database</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="3" class="team-member">AW</td>
+                <td colspan="3" class="team-member-blaise">BS</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 1 -->
+            <tr>
+                <td class="task"> User indicator buttons change - changes in database are reflected in UI</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3" class="team-member-amy">AW</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -310,14 +328,14 @@
             </tr>
             <!-- Row for Phase 2 Task 2 -->
             <tr>
-                <td rowspan="2">2. Database Repository </td>
-                <td>Database set up and accepting values/commands from website</td>
+                <td rowspan="2" class="section">2. Database Repository </td>
+                <td class="task">Database set up and accepting values/commands from website</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="3" class="team-member">AW</td>
+                <td colspan="3" class="team-member-amy">AW</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -327,13 +345,13 @@
             </tr>
             <!-- Row for Phase 2 Task 2 -->
             <tr>
-                <td>Database has fields for logging information placed on the CAN bus</td>
+                <td class="task">Database has fields for logging information placed on the CAN bus</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="3" class="team-member">BS</td>
+                <td colspan="3" class="team-member-blaise">BS</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -343,8 +361,8 @@
             </tr>
             <!-- Row for Phase 2 Task 3 -->
             <tr>
-                <td rowspan="2">3. Diagnostic Reports</td>
-                <td>Database set up and accepting values/commands from website</td>
+                <td rowspan="2" class="section">3. Diagnostic Reports</td>
+                <td class="task">Database set up and accepting values/commands from website</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -358,7 +376,7 @@
             </tr>
             <!-- Row for Phase 2 Task 3 -->
             <tr>
-                <td>Displayed on webpage</td>
+                <td class="task">Displayed on webpage</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -374,43 +392,27 @@
             </tr>
             <!-- Row for Phase 2 Task 4 -->
             <tr>
-                <td rowspan="2">4. Server Program</td>
-                <td>Users are authorized/authenticated based on username/password</td>
+                <td rowspan="2" class="section">4. Server Program</td>
+                <td class="task">Users are authorized/authenticated based on username/password</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="6" class="team-member">BS</td>
+                <td colspan="6" class="team-member-blaise">BS</td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <!-- Row for Phase 2 Task 4 -->
             <tr>
-                <td>Server program provides logging data/accepts commands only from authorized users</td>
+                <td class="task">Server program provides logging data/accepts commands only from authorized users</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="5" class="team-member">AW</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <!-- Row for Phase 2 Task 5 -->
-            <tr>
-                <td rowspan="2">5. Announce floor numbers (Function of the Client or Server Program) for users with Visual Impairments</td>
-                <td>Implement a Server Program for announcing the floor numbers</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="4" class="team-member">BS</td>
+                <td colspan="5" class="team-member-amy">AW</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -418,14 +420,30 @@
             </tr>
             <!-- Row for Phase 2 Task 5 -->
             <tr>
-                <td>Speaker on elevator used to announce the current/next floor (speaker already connected to system)</td>
+                <td rowspan="2" class="section">5. Announce floor numbers (Function of the Client or Server Program) for users with Visual Impairments</td>
+                <td class="task">Implement a Server Program for announcing the floor numbers</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="4" class="team-member">AW</td>
+                <td colspan="4" class="team-member-blaise">BS</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 2 Task 5 -->
+            <tr>
+                <td class="task">Speaker on elevator used to announce the current/next floor (speaker already connected to system)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member-amy">AW</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -433,15 +451,15 @@
             </tr>
             <!-- Row for Phase 2 Task 6 -->
             <tr>
-                <td>6. Sabbath mode (Function of the Client Program)</td>
-                <td>Users may operate the elevator without having to push buttons (e.g. verbally, based on schedule/time)</td>
+                <td class="section">6. Sabbath mode (Function of the Client Program)</td>
+                <td class="task">Users may operate the elevator without having to push buttons (e.g. verbally, based on schedule/time)</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="4" class="team-member">BS</td>
+                <td colspan="4" class="team-member-blaise">BS</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -450,8 +468,8 @@
             <!-- Row for Phase 3 Task 1 -->
             <tr>
                 <td rowspan='10' class="phase">3</td> <!-- Phase column -->
-                <td rowspan="5">1. CAN/LAN network communication</td>
-                <td>Research and Implement a CAN/LAN communication bridge</td>
+                <td rowspan="5" class="section">1. CAN/LAN network communication</td>
+                <td class="task">Research and Implement a CAN/LAN communication bridge</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -461,27 +479,12 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="4" class="team-member">BS</td>
-                <td></td>
-            </tr>
-            <!-- Row for Phase 3 Task 1 -->
-            <tr>
-                <td>Ensure activity in CAN network changes values in database</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="4" class="team-member">AW</td>
+                <td colspan="4" class="team-member-blaise">BS</td>
                 <td></td>
             </tr>
             <!-- Row for Phase 3 Task 1 -->
             <tr>
-                <td>Changes in User Interface/Website changes value in database and generate CAN messages</td>
+                <td class="task">Ensure activity in CAN network changes values in database</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -491,11 +494,26 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="4" class="team-member">AW</td>
+                <td colspan="4" class="team-member-amy">AW</td>
+                <td></td>
+            </tr>
+            <!-- Row for Phase 3 Task 1 -->
+            <tr>
+                <td class="task">Changes in User Interface/Website changes value in database and generate CAN messages</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" class="team-member-amy">AW</td>
                 <td></td>
             </tr>
             <tr>
-                <td>CAN Messages result in changes to database and GUI/Indicators</td>
+                <td class="task">CAN Messages result in changes to database and GUI/Indicators</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -509,7 +527,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td>Commands from CAN/LAN networks are sent to the controller and move the elevator / indicate floor number</td>
+                <td class="task">Commands from CAN/LAN networks are sent to the controller and move the elevator / indicate floor number</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -524,8 +542,8 @@
             </tr>
             <!-- Row for Phase 3 Task 2 -->
             <tr>
-                <td>2. Controller Software Written</td>
-                <td>CAN Supervisor (Raspberry Pi) relays messages between CAN/LAN Network (see sample program on Rpi)</td>
+                <td class="section">2. Controller Software Written</td>
+                <td class="task">CAN Supervisor (Raspberry Pi) relays messages between CAN/LAN Network (see sample program on Rpi)</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -535,17 +553,17 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="4" class="team-member">BS</td>
+                <td colspan="4" class="team-member-blaise">BS</td>
                 <td></td>
             </tr>
             <!-- Row for Phase 3 Task 3 -->
             <tr>
-                <td>3. Finite State Machine logic written</td>
-                <td>Develop and Implement a finite state machine (using C/C+, PHP, Python to implement logic)</td>
+                <td class="section">3. Finite State Machine logic written</td>
+                <td class="task">Develop and Implement a finite state machine (using C/C+, PHP, Python to implement logic)</td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td colspan="3" class="team-member">AW</td>
+                <td colspan="3" class="team-member-amy">AW</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -557,8 +575,8 @@
             </tr>
             <!-- Row for Phase 3 Task 4 -->
             <tr>
-                <td>4. Additional capability that shows ingenuity</td>
-                <td>Implement card scanner on elevator</td>
+                <td class="section">4. Additional capability that shows ingenuity</td>
+                <td class="task">Implement card scanner on elevator</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -571,8 +589,8 @@
             </tr>
             <!-- Row for Phase 3 Task 5 -->
             <tr>
-                <td>5. Ideas for Capstone (at least 3 per student)</td>
-                <td></td>
+                <td class="section">5. Ideas for Capstone (at least 3 per student)</td>
+                <td class="task"></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -587,8 +605,8 @@
             </tr>
             <!-- Row for Phase 3 Task 6 -->
             <tr>
-                <td>6. Final Presentation & Demonstration</td>
-                <td></td>
+                <td class="section">6. Final Presentation & Demonstration</td>
+                <td class="task"></td>
                 <td></td>
                 <td></td>
                 <td></td>
