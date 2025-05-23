@@ -1,0 +1,79 @@
+    title {
+
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2, h3 {
+      color: #2E3A87;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .procedure, .objective {
+      margin-top: 10px;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    section {
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-color: black;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid black;
+    }
+    th {
+        background-color: #333;
+        border: 1px solid black;
+        color: white;
+    }
+    .section {
+        background-color:silver;
+        font-weight: bold;
+    }
+    .task {
+        background-color:gainsboro;
+    }
+    .team-member {
+        background-color: lavender;
+        font-weight: bold;
+    }
+    .team-member-amy {
+        background-color:Plum;
+        font-weight: bold;
+    }
+    .team-member-blaise {
+        background-color:LightBlue;
+        font-weight: bold;
+    }
+    .phase {
+        background-color:Gray;
+        color: white;
+        font-weight: bold;
+    }
