@@ -12179,3 +12179,7 @@ form input[type="submit"]:hover {
   }
 }
 
+.request-access-bg {
+  background: url("../images/blaise.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
