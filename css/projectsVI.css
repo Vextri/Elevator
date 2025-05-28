@@ -53,14 +53,30 @@ li {
 }
 
 
+body, html {
+  /* The image used */
+  background-image: url(../images/white_background.jpg);
+
+  /* Full height */
+  height: 100%;
+  width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: vertical;
+  background-size: cover;
+}
+
 section {
-    padding: 20px;
+    
+    height: 100%;
+    display: inline-block;
+    background-repeat: no-repeat;
 }
 .section {
     background-color:silver;
     font-weight: bold;
 }
-.task {
+.task { 
     background-color:gainsboro;
 }
 .team-member {
