@@ -12092,7 +12092,14 @@ form {
   max-width: 420px;
   margin: 2.5rem auto;
   padding: 2.5rem 2rem 2rem 2rem;
-  background: #f4f8fb;
+  /* background: #f4f8fb; */
+  background-image: url(../images/teto2.gif);
+
+  height: 100%;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.10);
   border: 1px solid #e0e6ed;
@@ -12180,6 +12187,17 @@ form input[type="submit"]:hover {
 }
 
 .request-access-bg {
-  background: url("../images/blaise.jpg") no-repeat center center fixed;
-  background-size: cover;
+background-image: url(../images/teto.gif);
+cursor: url(../images/cursor.cur), auto;
+height: 100%;
+
+background-position: center;
+background-repeat: no-repeat;
+background-size: 100%;
+
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
 }

@@ -5,31 +5,121 @@
   <meta name="author" content="Blaise Swan">
   <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
   <title>Request Access</title>
+  <style>
+  </style>
 </head>
 <body class="request-access-bg">
-  <h2>Request Access</h2>
+  <h2 style="text-align:center;"> Request Access</h2>
   <form action="request_access.php" method="post">
-    <label for="fullname">Full Name:</label><br />
-    <input type="text" id="fullname" name="fullname" required><br /><br />
+    <label for="fullname">Full Name:</label>
+    <input type="text" id="fullname" name="fullname" required>
     
-    <label for="email">Email Address:</label><br />
-    <input type="email" id="email" name="email" required><br /><br />
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
     
-    <label for="username">Desired Username:</label><br />
-    <input type="text" id="username" name="username" required><br /><br />
+    <label for="username">Desired Username:</label>
+    <input type="text" id="username" name="username" required>
     
-    <label for="password">Desired Password:</label><br />
-    <input type="password" id="password" name="password" required><br /><br />
+    <label for="password">Desired Password:</label>
+    <input type="password" id="password" name="password" required>
     
-    <label for="reason">Reason for Access:</label><br />
-    <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br /><br />
+    <label for="reason">Reason for Access:</label>
+    <textarea id="reason" name="reason" rows="4" cols="50" required></textarea>
+    
+    <!-- Display remaining characters -->
+    <div id="char-count" style="margin-top: 5px;">
+      <span>Remaining characters: <span id="remaining-char">180</span></span>
+    </div>
+    <!-- Display warning message if character limit exceeded -->
+    <div id="warning-message" class="warning" style="display:none;">
+      You have exceeded the maximum number of characters allowed (180).
+    </div>
     
     <input type="submit" value="Submit Request">
   </form>
 
-  <!-- Add this before the closing </body> tag in each HTML file -->
-<footer style="text-align:center; margin-top:2rem;">
-  &copy; 2025 Blaise Swan. All rights reserved.
-</footer>
+  <footer style="text-align:center; margin-top:2rem;">
+    &copy; 2025 Blaise Swan. All rights reserved.
+  </footer>
+
+  <!-- JavaScript to handle character count and warning -->
+  <script>
+    // Get the textarea and the elements where we will show the remaining characters and the warning
+    const textarea = document.getElementById('reason');
+    const remainingChar = document.getElementById('remaining-char');
+    const warningMessage = document.getElementById('warning-message');
+
+    // Maximum character limit
+    const maxLength = 180;
+
+    // Event listener to track changes in the textarea
+    textarea.addEventListener('input', function() {
+      const currentLength = textarea.value.length; // Get current number of characters
+      const charsLeft = maxLength - currentLength; // Calculate how many characters are left
+
+      // Update the remaining characters display
+      remainingChar.textContent = charsLeft;
+
+      // Show warning if characters exceed the limit
+      if (currentLength > maxLength) {
+        warningMessage.style.display = 'block'; // Show warning
+      } else {
+        warningMessage.style.display = 'none'; // Hide warning
+      }
+    });
+
+    // Form validation
+  document.querySelector('form').addEventListener('submit', function(e) {
+    // Get all required fields
+    const fullname = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const reason = document.getElementById('reason').value.trim();
+
+    // Check if any required field is empty
+    if (!fullname || !email || !username || !password || !reason) {
+      alert('Please complete all required fields.');
+      e.preventDefault(); // Stop form from submitting
+      return;
+    }
+
+    // Check character limit for reason
+    if (reason.length > 180) {
+      alert('Reason for Access must not exceed 180 characters.');
+      e.preventDefault();
+      return;
+    }
+ // Password requirements
+    if (
+      password.length < 7 ||
+      !/[A-Z]/.test(password) ||
+      !/[0-9]/.test(password) ||
+      !/[!@#$%^&*(),.?":{}|<>_\-+=~`]/.test(password)
+    ) {
+      alert('Password must be at least 7 characters long and include one uppercase letter, one special character, and one number.');
+      e.preventDefault();
+      return;
+    }
+  
+    // Custom test: block if any field contains "test" (case-insensitive)
+    const testRegex = /test/i;
+    if (
+      testRegex.test(fullname) ||
+      testRegex.test(email) ||
+      testRegex.test(username) ||
+      testRegex.test(password) ||
+      testRegex.test(reason)
+    ) {
+      alert('Fields cannot contain the word "test".');
+      e.preventDefault();
+      return;
+    }
+  });
+
+
+  
+  </script>
+
 </body>
 </html>
