@@ -1,0 +1,73 @@
+/* General Styles */
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
+header, footer {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  text-align: center;
+}
+
+main {
+  padding: 2rem;
+}
+
+/* Color Properties */
+.text-color {
+  color: darkblue;
+}
+
+.bg-color {
+  background-color: #ffe4b5;
+  padding: 0.5rem;
+}
+
+/* Text Styling */
+.text-styling {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* Box Model */
+.box {
+  width: 300px;
+  height: 100px;
+  margin: 1rem auto;
+  padding: 20px;
+  border: 2px solid #444;
+  background-color: #e6f7ff;
+}
+
+/* Selectors */
+.class-selector {
+  color: seagreen;
+}
+
+#id-selector {
+  color: crimson;
+  font-weight: bold;
+}
+
+div > .child-selector {
+  font-style: italic;
+  color: steelblue;
+}
+
+a:hover {
+  color: orange;
+  text-decoration: none;
+}
+
+/* Highlight class for header */
+.highlight {
+  font-weight: bold;
+  color: darkslategray;
+}

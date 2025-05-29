@@ -1,120 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blaise Swan - Logbook | Project VI - Elevator Project</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            margin: 0;
-        }
-        section {
-            padding: 20px;
-        }
-        .logbook-entry {
-            margin-bottom: 20px;
-        }
-        .logbook-entry h3 {
-            margin-top: 0;
-        }
-        .logbook-entry p {
-            font-size: 1.1em;
-            line-height: 1.6em;
-        }
-        .logbook-entry img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .image-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Blaise Swan - Logbook | Project VI - Elevator Project</title>
+  <link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
+  <meta name="author" content="Blaise Swan">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="description" content="Logbook for Blaise Swan's Elevator Project. Contains weekly tasks and updates on the project progress.">
 </head>
 <body>
 
-<header>
-    <h1>Blaise Swan - Logbook | Project VI - Elevator Project</h1>
-</header>
+<div id="start-overlay">
+    <img src="../videos/start.gif" alt="Start Animation" style="width:100vw; height:100vh; object-fit:cover;">
+</div>
 
-<section id="logbook">
-    <!-- Image Section -->
-    <div class="image-container">
-        <h2>About Me</h2>
-        <img src="../images/Blaise.jpg" alt="Blaise" title="Blaise" width=300> 
-        <p>My name is Blaise, this is where you can find my weekly tasks relating to Project 6.</p>
+<div class="matrix-side matrix-left"></div>
+<div class="matrix-side matrix-right"></div>
+
+
+
+<div class="blaise-logbook">
+    <header>
+        <h1> <a href="../website.html" style="color:#00ff00; border:1px solid #00ff00; padding:4px 12px; text-decoration:none; background:black; border-radius:4px; margin-top:-2.5rem; margin-right:1rem;">Home</a>Blaise Swan - Logbook | Project VI - Elevator Project</h1>
+    </header>
+    <div class="container">
+        <div class="left-col">
+        <div class="profile-pic">
+            <img src="../images/Blaiser.png" alt="Blaise" title="Blaise">
+        </div>
+        
+        <div class="contact-box">
+            <h3>Contacting Blaise</h3>
+            <ul>
+            <li><a href="bswan8085@conestogac.on.ca">Email</a></li>
+            <li><a href="https://github.com/Vextri" target="_blank">GitHub</a></li>
+            <li><a href="https://linkedin.com/in/BlaiseSwan" target="_blank">LinkedIn</a></li>
+            </ul>
+        </div>
+        </div>
+        <div class="right-col">
+        <div class="about-box">
+            <h2>About Me</h2>
+            <p>
+            My name is Blaise, I am 23 years old.<br>
+            This is where you can find my weekly tasks relating to my Elevator Project.
+            </p>
+        </div>
+        <div class="logbook-section">
+            <h2>Logbook</h2>
+            <div class="logbook-entry">
+            <h3>Week 1</h3>
+            <ul>
+                <li>Set up STM32 Cube IDE</li>
+                <li>Set up Ubuntu Linux</li>
+                <li>Set up Github</li>
+                <li>Basics of Git bash</li>
+                <li>Remote connection to R-Pi (VNC)</li>
+                <li>Reviewed Project Charter</li>
+                <li>Basics of CANBus protocol</li>
+            </ul>
+            </div>
+            <div class="logbook-entry">
+            <h3>Week 2</h3>
+            <ul>
+                <li>Created Project Plan</li>
+                <li>Basics of CANBus Protocol</li>
+                <li>Basics of Git bash</li>
+                <li>Created communications Test Plan</li>
+                <li>GUI layout plan</li>
+                <li>STM Part 2 Buildup and Understanding</li>
+                <li>Setup Website</li>
+            </ul>
+
+            </div>
+
+                    <div class="logbook-entry">
+            <h3>Week 3</h3>
+            <ul>
+                <!-- Add Week 3 log entries here -->
+                <li>Updated Website Code</li>
+                <li>Worked on card reader (Arduino)</li>
+                <li>Worked on technical documentation</li>
+                <li>Set up Pi with git repos</li>
+                <li>Database buildup and website to CAN communication</li>
+            </ul>
+            </div>
+            
+            <!-- Add more logbook entries as needed -->
+        </div>
+        </div>
     </div>
+    <footer>
+        <p id="copyright-footer"></p>
+    </footer>
+    <script>
+        // Update copyright year automatically
+        document.getElementById('copyright-footer').innerHTML =
+        '&copy; ' + new Date().getFullYear() + ' Blaise Swan. All Rights Reserved.';
 
-    <!-- Week 1 Logbook Entry -->
-    <div class="logbook-entry">
-        <h3>Week 1</h3>
-        <ul>
-            <li>Set up STM32 Cube IDE</li>
-            <li>Set up Ubuntu Linux</li>
-            <li>Set up Github</li>
-            <li>Basics of Git bash</li>
-            <li>Remote connection to R-Pi (VNC)</li>
-            <li>Reviewed Project Charter</li>
-            <li>Basics of CANBus protocol</li>
-        </ul>
-    </div>
-
-    <!-- Week 2 Logbook Entry -->
-    <div class="logbook-entry">
-        <h3>Week 2</h3>
-        <ul>
-            <li>Created Project Plan</li>
-            <li>Basics of CANBus Protocol</li>
-            <li>Basics of Git bash</li>
-            <li>Created communications Test Plan</li>
-            <li>GUI layout plan</li>
-            <li>STM Part 2 Buildup and Understanding</li>
-            <li>Setup Website</li>
-        </ul>
-    </div>
-
-    <!-- Additional weeks or logbook entries can be added below -->
-    <div class="logbook-entry">
-        <h3>Week 3</h3>
-        <ul>
-            <!-- Add Week 3 log entries here -->
-            <li>Added filters to each node</li>
-            <li>Added correct node IDS to each mcu</li>
-            <li>Updated R-pi code to properly receive messages</li>
-            <li>Updated Test Plan and Ghant Chart</li>
-            <li>Acquired Card Reader Hardware</li>
-        </ul>
-    </div>
-
-    <!-- More entries can be added similarly -->
-
-</section>
-
-<footer>
-    <p>&copy; 2025 Project VI - Elevator Project. All Rights Reserved.</p>
-</footer>
-
+    function hideStartOverlay() {
+        const overlay = document.getElementById('start-overlay');
+        if (overlay) overlay.style.display = 'none';
+        // Remove listeners after first interaction
+        window.removeEventListener('keydown', hideStartOverlay);
+        window.removeEventListener('mousedown', hideStartOverlay);
+        window.removeEventListener('touchstart', hideStartOverlay);
+  }
+    window.addEventListener('keydown', hideStartOverlay);
+    window.addEventListener('mousedown', hideStartOverlay);
+    window.addEventListener('touchstart', hideStartOverlay);
+    </script>
+</div>
 </body>
 </html>

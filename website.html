@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 9]>
-<script src=http://html5shiv.googlecode.com/svn/trunk/html5.js></script>
-<![endif] -->
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Your Name" />
+    <meta name="description" content="Elevator Project Home Page" />
+    <meta name="robots" content="noindex nofollow" />
+    <meta http-equiv="pragma" content="no-cache" />
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
     <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
     <title>SW Controls - Project VI</title>
@@ -82,14 +82,24 @@
     <section id="github">
         <h2>GitHub Repository</h2>
         <p>Access our project's source code and documentation on GitHub.</p>
-        <p><a href="https://github.com/your-team-name/project-repo" target="_blank">Visit Our GitHub Repository</a></p>
+        <p><a href="https://github.com/Vextri/Elevator" target="_blank">Visit Our GitHub Repository</a></p>
     </section>
 
 </article>
 
 
-<footer>
-    <p>&copy; 2025 Your Project. All Rights Reserved.</p>
+
+<!-- Add this script to show the current date and time -->
+<div id="current-datetime" style="text-align:center; margin-top:1rem; font-size:1.1em;"></div>
+<script>
+  const now = new Date();
+  document.getElementById('current-datetime').textContent =
+    "Current date and time: " + now.toLocaleString();
+</script>
+
+<!-- Add this before the closing </body> tag in each HTML file -->
+<footer style="text-align:center; margin-top:2rem;">
+  &copy; 2025 Elevator Project Team. All rights reserved.
 </footer>
 
 </body>
