@@ -1,8 +1,13 @@
 <!DOCTYPE html>
+<!--[if lt IE 9]>
+<script src=http://html5shiv.googlecode.com/svn/trunk/html5.js></script>
+<![endif] -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
     <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
     <title>SW Controls - Project VI</title>
 </head>
@@ -12,68 +17,75 @@
     <h1>SW Controls - Project VI</h1>
 </header>
 
-<!-- Home Section with navigation links -->
-<section>
-    <h2>Home</h2>
-    <nav>
+<article>
+    <!-- Home Section with navigation links -->
+    <section>
+        <h2>Home</h2>
+        <nav>
+            <ul>
+                <li><a href="#project-plan-header">Project Plan</a></li> <!-- Link to the Project Plan header on this page -->
+                <li><a href="#logbooks">Logbooks</a></li>
+                <li><a href="#test-plan">Test Plan</a></li>
+                <li><a href="#about">About the Project</a></li>
+                <li><a href="#github">GitHub Repository</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- About the Project Section -->
+    <section id="about">
+        <h2>About the Project</h2>
+            <p>Click the link below to view the about page</p>
+            <ul>
+                <li><a href="about.html">About</a></li>
+            </ul>
+
+    </section>
+
+    <section id="login">
+            <h2>Login</h2>
+            <p>Login Section</p>
+            <p>Click the link below to login</p>
+            <ul>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+    </section>
+
+    <!-- Project Plan Section Header -->
+    <section id="project-plan-header">
+        <h2>Project Plan</h2>
+        <p>Click the link below to view the detailed project plan:</p>
         <ul>
-            <li><a href="#project-plan-header">Project Plan</a></li> <!-- Link to the Project Plan header on this page -->
-            <li><a href="#logbooks">Logbooks</a></li>
-            <li><a href="#test-plan">Test Plan</a></li>
-            <li><a href="#about">About the Project</a></li>
-            <li><a href="#github">GitHub Repository</a></li>
-            <li><a href="#login">Login</a></li>
+            <li><a href="projectPlan/projectPlan.html">View Project Plan</a></li>
         </ul>
-    </nav>
-</section>
+    </section>
 
-<!-- About the Project Section -->
-<section id="about">
-    <h2>About the Project</h2>
-    <p>This section will describe the project in detail. You can update this content later.</p>
-</section>
+    <!-- Logbooks Section -->
+    <section id="logbooks">
+        <h2>Logbooks</h2>
+        <ul>
+            <li><a href="Logbooks/Blaise_Swan_logbook.html">Blaise Swan's Logbook</a></li>
+            <li><a href="Logbooks/Amy_Wentzell_logbook.html">Amy Wentzell's Logbook</a></li>
+        </ul>
+    </section>
 
-<section id="login">
-    <h2>login</h2>
-    <p>Login Section</p>
-    <p>Click the link below to login</p>
-    <ul>
-        <li><a href="login.html">Login</a></li>
-    </ul>
-</section>
+    <!-- Test Plan Section -->
+    <section id="test-plan">
+        <h2>Test Plan</h2>
+        <ul>
+            <li><a href="testPlan/testPlan.html">View Test Plan</a></li>
+        </ul>
+    </section>
 
-<!-- Project Plan Section Header -->
-<section id="project-plan-header">
-    <h2>Project Plan</h2>
-    <p>Click the link below to view the detailed project plan:</p>
-    <ul>
-        <li><a href="projectPlan/projectPlan.html">View Project Plan</a></li>
-    </ul>
-</section>
+    <!-- GitHub Repository Section -->
+    <section id="github">
+        <h2>GitHub Repository</h2>
+        <p>Access our project's source code and documentation on GitHub.</p>
+        <p><a href="https://github.com/your-team-name/project-repo" target="_blank">Visit Our GitHub Repository</a></p>
+    </section>
 
-<!-- Logbooks Section -->
-<section id="logbooks">
-    <h2>Logbooks</h2>
-    <ul>
-        <li><a href="Logbooks/Blaise_Swan_logbook.html">Blaise Swan's Logbook</a></li>
-        <li><a href="Logbooks/Amy_Wentzell_logbook.html">Amy Wentzell's Logbook</a></li>
-    </ul>
-</section>
-
-<!-- Test Plan Section -->
-<section id="test-plan">
-    <h2>Test Plan</h2>
-    <ul>
-        <li><a href="testPlan/testPlan.html">View Test Plan</a></li>
-    </ul>
-</section>
-
-<!-- GitHub Repository Section -->
-<section id="github">
-    <h2>GitHub Repository</h2>
-    <p>Access our project's source code and documentation on GitHub.</p>
-    <p><a href="https://github.com/your-team-name/project-repo" target="_blank">Visit Our GitHub Repository</a></p>
-</section>
+</article>
 
 
 <footer>

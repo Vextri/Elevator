@@ -1,12 +1,17 @@
 <!DOCTYPE html>
+<!--[if lt IE 9]>
+<script src=http://html5shiv.googlecode.com/svn/trunk/html5.js></script>
+<![endif] -->
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
   <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
   <title>Request Access</title>
 </head>
 <body>
-  <h2>Request Access</h2>
+  <header><h2>Request Access</h2></header>
   <form action="request_access.php" method="post">
     <label for="fullname">Full Name:</label><br />
     <input type="text" id="fullname" name="fullname" required><br /><br />
@@ -23,7 +28,10 @@
     <label for="reason">Reason for Access:</label><br />
     <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br /><br />
     
-    <input type="submit" value="Submit Request">
+    <div>
+      <a class="request"></a>
+    </div>
+    
   </form>
 </body>
 </html>
