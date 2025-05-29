@@ -12201,3 +12201,146 @@ background-size: 100%;
   color: red;
   font-weight: bold;
 }
+
+
+/* logbook */
+
+#start-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#start-overlay img {
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: cover;
+}
+
+
+.blaise-logbook {
+  font-family: "Courier New", monospace;
+  background: black;
+  color: #00ff00;
+  margin: 0;
+  padding: 0;
+}
+
+.blaise-logbook a { color: #00ff00; text-decoration: underline; }
+
+.blaise-logbook .container {
+  display: flex;
+  max-width: 1100px;
+  margin: 2rem auto;
+  gap: 2rem;
+}
+
+.blaise-logbook .left-col {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.blaise-logbook .profile-pic {
+  border: 2px solid #00ff00;
+  background: #111;
+  padding: 1rem;
+  text-align: center;
+}
+
+.blaise-logbook .profile-pic img {
+  width: 100%;
+  filter: sepia(100%) hue-rotate(45deg) saturate(5);
+  border: 2px solid #00ff00;
+  background: black;
+}
+
+.blaise-logbook .contact-box {
+  border: 2px solid #00ff00;
+  background: #111;
+  padding: 1rem;
+  color: #00ff00;
+}
+
+.blaise-logbook .contact-box h3 {
+  margin-top: 0;
+  color: #00ff00;
+  font-size: 1.1em;
+  border-bottom: 1px solid #00ff00;
+  padding-bottom: 0.3em;
+}
+
+.blaise-logbook .contact-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blaise-logbook .contact-box li {
+  margin-bottom: 0.5em;
+}
+
+.blaise-logbook .right-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.blaise-logbook .about-box {
+  border: 2px solid #00ff00;
+  background: #111;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.blaise-logbook .logbook-section {
+  border: 2px solid #00ff00;
+  background: #111;
+  padding: 1rem;
+}
+
+.blaise-logbook .logbook-entry {
+  margin-bottom: 1.5rem;
+}
+
+.blaise-logbook h1, 
+.blaise-logbook h2, 
+.blaise-logbook h3 {
+  color: #00ff00;
+  font-family: inherit;
+  margin-top: 0;
+}
+
+.blaise-logbook footer {
+  background: black;
+  border: 2px dotted #00ff00;
+  color: #00ff00;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+/* Matrix gif on both sides */
+.matrix-side {
+  position: fixed;
+  width: 400px; /* Adjust width as needed */
+  height: 100vh;
+  background: url(../videos/matrix.gif) repeat-y center center;
+
+  opacity: 0.1; /* Semi-transparent */
+  pointer-events: none;
+  background-size: cover;
+}
+.matrix-left {
+  left: 0;
+}
+.matrix-right {
+  right: 0;
+}
