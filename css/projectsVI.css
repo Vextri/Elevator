@@ -54,16 +54,22 @@ li {
 
 
 body, html {
-  /* The image used */
-  background-image: url(../images/white_background.jpg);
-
-  /* Full height */
+  position: relative;
   height: 100%;
-  width: 100%;
-  /* Center and scale the image nicely */
+  background: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  background-image: url(../images/tile.jpg);
+  background-size: 40px;
   background-position: center;
-  background-repeat: vertical;
-  background-size: cover;
+  background-repeat: repeat;
+  opacity: 0.5; /* Change this value as needed */
+  pointer-events: none;
 }
 
 section {
@@ -373,3 +379,47 @@ a.request:hover {
 a.request:active {
   background-image: url(../images/Request_3.png);
 }
+
+/* Buttons for Elevator Control */
+a.up {
+  width: 200px;
+  height: 100px;
+  background-image: url(../images/up.png);
+  background-size: 200px 100px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  padding: 20 px;
+}
+
+a.up:hover {
+  background-image: url(../images/uphover.png);
+}
+
+a.down {
+  width: 200px;
+  height: 100px;
+  background-image: url(../images/down.png);
+  background-size: 200px 100px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  padding: 20 px;
+}
+
+a.down:hover {
+  background-image: url(../images/downhover.png);
+}   
+
+a.floor {
+  width: 200px;
+  height: 100px;
+  background-image: url(../images/floor.png);
+  background-size: 200px 100px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  padding: 20 px;
+}
+
+a.floor:hover {
+  background-image: url(../images/floorhover.png);
+} 
+

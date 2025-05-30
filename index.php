@@ -34,8 +34,36 @@
 
 
 <html>
-	<h1>ESE Project VI Elevator</h1> 
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="../css/bootstrap.css" type="text/css" rel="stylesheet"/>
+		<link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
+		
+		<title>Elevator Controller GUI</title>
+	</head>
+
+	<body>
+		<header>
+    		<h1>Elevator Controls</h1>
+		</header>
+
+		<h1>Project VI</h1>
+		<h1>ESE 2026</h1>
+		<h2>Amy Wentzell, Blaise Swan</h2> 
+
+		<div>
+			<a class="up"> UP </a>
+			<a class="down"> DOWN </a>
+		</div>
+
+		<div>
+			<a class="floor"> 1 </a>
+			<a class="floor"> 2 </a>
+			<a class="floor"> 3 </a>
+		</div>
 	
+		
 		<?php 
 			if(isset($_POST['newfloor'])) {
 				$curFlr = update_elevatorNetwork(1, $_POST['newfloor']); 
@@ -50,9 +78,8 @@
 				Request floor # <input type="number" style="width:50px; height:40px" name="newfloor" max=3 min=1 required />
 				<input type="submit" value="Go"/>
 			</form>
-		</h2>
-		  
-		
+		</h2>	
+	</body>
 </html>
  
  
