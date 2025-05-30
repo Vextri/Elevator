@@ -20,7 +20,7 @@
     Your browser does not support the audio element.
   </audio>
 
-  <form id="login-form" action="login.php" method="post">
+  <form id="login-form" action="login1.php" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     
@@ -60,7 +60,7 @@
 
     // Add validation for username and password length
     document.getElementById('login-form').addEventListener('submit', function(e) {
-      var username = document.getElementById('username').value;
+      //var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
       if (username.length < 7 || password.length < 7) {
         alert('Username and password must both be at least 7 characters.');
