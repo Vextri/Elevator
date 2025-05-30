@@ -38,7 +38,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="../css/bootstrap.css" type="text/css" rel="stylesheet"/>
-		<link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
+		<link href="projectsVI.css" type="text/css" rel="stylesheet"/>
 		
 		<title>Elevator Controller GUI</title>
 	</head>
