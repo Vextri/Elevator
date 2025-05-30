@@ -1,30 +1,79 @@
 <!DOCTYPE html>
-<!--[if lt IE 9]>
-<script src=http://html5shiv.googlecode.com/svn/trunk/html5.js></script>
-<![endif] -->
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="author" content="Blaise Swan">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="description" content="Login to access the elevator code system. Enter your username and password to continue.">
   <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
   <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
   <title>Login</title>
 </head>
-<body>
-  <header><h2>Login</h2></header>
-  <form action="login.php" method="post">
-    <label for="username">Username:</label><br />
-    <input type="text" id="username" name="username" required><br /><br />
+<body class="request-access-bg">
+    <a href="website.html" class="btn btn-primary" style="margin: 1rem; display: inline-block;">Home</a>
+  <h2 style="text-align:center;">Login</h2>
+
+  <!-- Audio player (hidden) -->
+  <audio id="background-audio" loop>
+    <source src="audio/teto.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <form id="login-form" action="login.php" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
     
-    <label for="password">Password:</label><br />
-    <input type="password" id="password" name="password" required><br /><br />
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
     
     <input type="submit" value="Login">
   </form>
-  <p></p>
-  <footer>Need Access?</footer>
-  <div>
+
+  <p style="text-align:center;">
+    <a href="request_access.html">Don't have an account? Request access here.</a>
+  </p>
+
+  <div style="text-align:center;">
     <a class="request" href="request_access.html"></a>
   </div>
+
+  <!-- JavaScript to play audio on page click -->
+<script>
+  window.onload = function() {
+    var usernameInput = document.getElementById('username');
+      
+      // Focus the Username input field
+      usernameInput.focus();
+    // Play background audio when the page loads
+    // Get the audio element
+    var audioElement = document.getElementById("background-audio");
+    // Set volume to 50% initially
+    audioElement.volume = 0.5;
+    // Add an event listener to play the audio when the user clicks anywhere on the page
+    document.body.addEventListener('click', function() {
+      // Play audio only if it hasn't started already
+      if (audioElement.paused) {
+        audioElement.play();
+      }
+    });
+
+    // Add validation for username and password length
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      if (username.length < 7 || password.length < 7) {
+        alert('Username and password must both be at least 7 characters.');
+        e.preventDefault();
+      }
+    });
+  };
+</script>
+
+<footer style="text-align:center; margin-top:2rem;">
+  &copy; 2025 Blaise Swan. All rights reserved.
+</footer>
+
 </body>
 </html>
+
