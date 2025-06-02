@@ -51,18 +51,32 @@
 		<h1>Project VI</h1>
 		<h1>ESE 2026</h1>
 		<h2>Amy Wentzell, Blaise Swan</h2> 
-
-		<div>
-			<a class="up"> UP </a>
-			<a class="down"> DOWN </a>
-		</div>
-
-		<div>
-			<a class="floor"> 1 </a>
-			<a class="floor"> 2 </a>
-			<a class="floor"> 3 </a>
-		</div>
 	
+		<div>
+			<form action="index.php" method="POST" style="display:inline;">
+				<input type="hidden" name="newfloor" value="<?php echo min(3, get_currentFloor() + 1); ?>">
+				<button type="submit" class="up">UP</button>
+			</form>
+			<form action="index.php" method="POST" style="display:inline;">
+				<input type="hidden" name="newfloor" value="<?php echo max(1, get_currentFloor() - 1); ?>">
+				<button type="submit" class="down">DOWN</button>
+			</form>
+		</div>
+
+		<div>
+			<form action="index.php" method="POST" style="display:inline;">
+				<input type="hidden" name="newfloor" value="1">
+				<button type="submit" class="floor">1</button>
+			</form>
+			<form action="index.php" method="POST" style="display:inline;">
+				<input type="hidden" name="newfloor" value="2">
+				<button type="submit" class="floor">2</button>
+			</form>
+			<form action="index.php" method="POST" style="display:inline;">
+				<input type="hidden" name="newfloor" value="3">
+				<button type="submit" class="floor">3</button>
+			</form>
+		</div>
 		
 		<?php 
 			if(isset($_POST['newfloor'])) {
