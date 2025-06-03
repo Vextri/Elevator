@@ -55,6 +55,9 @@ if (!isset($_SESSION['username'])) {
         <a href="user_requests.php">User approvals</a>
         <a href="index.php">Elevator control</a>
         <a href="jsdoom-dosbox/index.html" target="_blank">Play JS DOOM</a>
+        <a href="logout.php">Logout</a>
+        <a href="inside.php">Inside Elevator</a>
+        <a href="outside.php">Outside Elevator</a>
     </div>
 </div>
 </body>
