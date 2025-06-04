@@ -78,6 +78,8 @@ void ElevatorController::initializeTimer() {
 void ElevatorController::Move(uint16_t sp) {
     DSM.sensor.start();
     dist = DSM.sensor.getDistance();
+    CM.setDistanceBytes(dist);
+    CM.transmitCAN();
     delay(100);
     DSM.sensor.stop();
 

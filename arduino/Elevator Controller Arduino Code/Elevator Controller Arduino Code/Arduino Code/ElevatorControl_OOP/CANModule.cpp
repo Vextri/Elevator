@@ -156,3 +156,8 @@ void CANModule::initializeCAN() {
     pinMode(INT_PIN, INPUT);                                  // Interrupt pin triggered by SLAVE (CAN Adapter) to ask MASTER to initiate SPI communication
     pinMode(SPI_CS_PIN, OUTPUT);                              // Chip select pin for CAN module
 }
+
+void CANModule::setDistanceBytes(uint16_t dist) {
+    txdata[0] = dist & 0xFF;
+    txdata[1] = (dist >> 8) & 0xFF;
+}
