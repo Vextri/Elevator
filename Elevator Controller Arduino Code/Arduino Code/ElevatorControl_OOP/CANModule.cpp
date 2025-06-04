@@ -51,14 +51,10 @@ void CANModule::setTxdata(byte data, uint16_t setpoint)                         
 void CANModule::transmitCAN() {
     // send data:  ID = 0x100, Standard CAN Frame, Data length = 8 bytes, 'data' = array of data bytes to send
     Serial.println("Before sendMsgBuf ...");
-    byte sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata);
-    Serial.println("After sendMsgBuf...");
-    Serial.println(sndStat);
-    Serial.println(TxID);
-    Serial.println(DLC);
-    //Serial.println(txdata);
-
-
+    Serial.println(txdata[0]);
+    Serial.println(txdata[1]);
+    Serial.println(txdata[2]);
+    byte sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[0]);
     if (sndStat == CAN_OK) {
         Serial.println("Message Sent Successfully!");
         Serial.println(txdata[0]);
@@ -66,6 +62,30 @@ void CANModule::transmitCAN() {
     else {
         Serial.println("Error Sending Message...");
     }
+    sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[1]);
+    if (sndStat == CAN_OK) {
+        Serial.println("Message Sent Successfully!");
+        Serial.println(txdata[0]);
+    }
+    else {
+        Serial.println("Error Sending Message...");
+    }
+    sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[2]);
+    if (sndStat == CAN_OK) {
+        Serial.println("Message Sent Successfully!");
+        Serial.println(txdata[0]);
+    }
+    else {
+        Serial.println("Error Sending Message...");
+    }   
+    // send data:  ID = 0x100, Standard CAN Frame, Data length = 8 bytes, 'data' = array of data bytes to send
+    Serial.println("Before sendMsgBuf ...");
+    byte sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata);
+    Serial.println("After sendMsgBuf...");
+    Serial.println(sndStat);
+    Serial.println(TxID);
+    Serial.println(DLC);
+    Serial.println(txdata);
 }
 
 // Receive CAN message (based on sample code in library)
