@@ -20,7 +20,7 @@
 #define INT_PIN 2                           // Pin 2 is the interrupt pin used by the CAN module (SLAVE) to notify the MASTER (Arduino) that a message has arrived (MASTER must initiate communication by setting the CS pin LOW in order to get the data via SPI)
 // Protocol for Elevator
 #define TxID 0x101                          // CAN ID OF THIS DEVICE (Elevator Controller) - Raspberry Pi (0x100), Elevator Controller (this device (0x101)), Car controller (0x200), Floor 1 (0x201), Floor 2 (0x202), Floor 3 (0x203) 
-#define DLC 1                               // Data length code in CAN (we only use one of the possible 8 bytes). This code can handle DLC from 1 to 8. 
+#define DLC 4                              // Data length code in CAN (we only use one of the possible 8 bytes). This code can handle DLC from 1 to 8. 
 #define FLOOR1  0x05                        // Floor 1 = 0x05, Floor 2 = 0x06,  Floor 3 = 0x07 (this is entered into txdata[0] - we only use one of the eight CAN message bytes)
 #define FLOOR2  0x06
 #define FLOOR3  0x07
@@ -55,8 +55,8 @@ public:
   // Getters and setters
   uint16_t getSetpoint();                   // Returns the value of the private variable 'setpoint'
   void setSetpoint(uint16_t);               // Sets the value of the private variable 'setpoint'
-  byte getTxdata();                         // Get the first byte of data from txdata array (per our protocol) - modify if you want to use more than first byte
-  void setTxdata(byte);                     // Set the first byte of data from txdata array (per our protocol) - modify if you want to use more than first byte 
+  uint32_t getTxdata();                         // Get the first byte of data from txdata array (per our protocol) - modify if you want to use more than first byte
+  void setTxdata(byte, uint16_t);                     // Set the first byte of data from txdata array (per our protocol) - modify if you want to use more than first byte 
 	
 private:
   uint16_t setpoint;					              // Distance in mm from the distance sensor to a given floor

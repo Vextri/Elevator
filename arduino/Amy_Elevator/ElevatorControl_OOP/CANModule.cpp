@@ -44,7 +44,7 @@ void CANModule::setTxdata(byte data, uint16_t setpoint)                         
   txdata[0] = data;
 
   //include distance measurement, Big Endian
-  txdata[1] = (setpoint && 0xFF) >> 4;
+  txdata[1] = (setpoint && 0xFF) >> 8;
   txdata[2] = (setpoint && 0xFF00);
 }                     
 
@@ -55,30 +55,20 @@ void CANModule::transmitCAN() {
     Serial.println(txdata[0]);
     Serial.println(txdata[1]);
     Serial.println(txdata[2]);
-    byte sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[0]);
-    if (sndStat == CAN_OK) {
-        Serial.println("Message Sent Successfully!");
-        Serial.println(txdata[0]);
+    byte sndStat;
+    
+    for (int i = 0; i < 3; i++)
+    {
+        sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[i]);
+        if (sndStat == CAN_OK) {
+            Serial.println("Message Sent Successfully!");
+            Serial.println(txdata[i]);
+        }
+        else {
+            Serial.println("Error Sending Message...");
+        }
     }
-    else {
-        Serial.println("Error Sending Message...");
-    }
-    sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[1]);
-    if (sndStat == CAN_OK) {
-        Serial.println("Message Sent Successfully!");
-        Serial.println(txdata[1]);
-    }
-    else {
-        Serial.println("Error Sending Message...");
-    }
-    sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[2]);
-    if (sndStat == CAN_OK) {
-        Serial.println("Message Sent Successfully!");
-        Serial.println(txdata[2]);
-    }
-    else {
-        Serial.println("Error Sending Message...");
-    }   
+   
     Serial.println("After sendMsgBuf...");
     Serial.println(sndStat);
     Serial.println(TxID);
@@ -121,17 +111,17 @@ void CANModule::receiveCAN(LCD lcd) {
     if (rxdata[0] == FLOOR1) {
         setpoint = FLOOR1_SP;
         lcd.lcdObj.print("Floor 1");
-        playFloorAudio(FLOOR1); // Play audio for Floor 1
+        //playFloorAudio(FLOOR1); // Play audio for Floor 1
     }
     else if (rxdata[0] == FLOOR2) {
         setpoint = FLOOR2_SP;
         lcd.lcdObj.print("Floor 2");
-        playFloorAudio(FLOOR2); // Play audio for Floor 2
+        //playFloorAudio(FLOOR2); // Play audio for Floor 2
     }
     else if (rxdata[0] == FLOOR3) {
         setpoint = FLOOR3_SP;
         lcd.lcdObj.print("Floor 3");
-        playFloorAudio(FLOOR3); // Play audio for Floor 3
+        //playFloorAudio(FLOOR3); // Play audio for Floor 3
     }
     else {
         setpoint = FLOOR1_SP;

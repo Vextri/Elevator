@@ -10,32 +10,37 @@
  */
 
 #include <SoftwareSerial.h>
-#include <DFRobotDFPlayerMini.h>
+//#include <DFRobotDFPlayerMini.h>
 
 #include "ElevatorController.h"
-#include "CardReader.h"
+//#include "CardReader.h"
 
 
-SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
-DFRobotDFPlayerMini myDFPlayer;
+//SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
+//DFRobotDFPlayerMini myDFPlayer;
 
 ElevatorController EC;                                     // Instantiate an Elevator controller object
 
 void setup() { 
   EC.setup(); 
-  CR.setup();  // Initialize card reader
+  //CR.setup();  // Initialize card reader
   attachInterrupt(digitalPinToInterrupt(INT_PIN), CAN_MSGRCVD_ISR, FALLING);      // Interrupt on falling edge of INT_PIN and call CAN_MSGRCVD() method of the ElevatorControl object  
   // Do not need to attach anything to the timer-based interrupt. It will automatically call ISR(TIMER1_COMPA_vect) when triggered. It is on a register external to the microcontroller.
   //start the virtual serial port for the DFPlayer Mini
+  /*
+
   mySoftwareSerial.begin(9600);
   if (!myDFPlayer.begin(mySoftwareSerial)) {
     Serial.println("Unable to begin DFPlayer Mini:");
     while(true);
   }
   myDFPlayer.volume(10); // Set volume (0~30)
+
+  */
 }
 
 // For playing the audio files corresponding to the floor number
+/*
 void playFloorAudio(byte floor) {
     switch(floor) {
         case FLOOR1:
@@ -51,6 +56,7 @@ void playFloorAudio(byte floor) {
             break;
     }
 }
+*/
 
 // Timer-based Interrupt routine for timer1 (occurs at 0.25 Hz 0r 4 seconds) - This ISR is called when the timer-based interrupt is triggered and is exteral to the ElevatorController Object
 ISR(TIMER1_COMPA_vect) {
@@ -65,5 +71,5 @@ void CAN_MSGRCVD_ISR() {
 void loop() 
 {
   EC.loop();
-  CR.checkCard();  // Poll RFID reader
+  //CR.checkCard();  // Poll RFID reader
 }

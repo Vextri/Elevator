@@ -30,7 +30,7 @@ void ElevatorController::setup() {
     LCDM.setup();                                           // Setup CAN module object
 
     // Initial settings (default floor)
-    CM.setTxdata(FLOOR1);                                  // FLOOR1, FLOOR2, FLOOR3    
+    CM.setTxdata(FLOOR1, dist);                                  // FLOOR1, FLOOR2, FLOOR3    
     LCDM.lcdObj.setCursor(0, 0);
     LCDM.lcdObj.print("Floor 1");
     CM.setSetpoint(FLOOR1_SP);                              // Initialize default setpoint to that of FLOOR1  

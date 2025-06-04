@@ -1,3 +1,4 @@
+/*
 #ifndef AUDIO_HELPER_H
 #define AUDIO_HELPER_H
 
@@ -7,3 +8,4 @@ extern DFRobotDFPlayerMini myDFPlayer;
 void playFloorAudio(byte floor);
 
 #endif
+*/
