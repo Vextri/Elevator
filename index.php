@@ -92,7 +92,8 @@
         <h2>Current floor: <span style="color:#007bff;"><?php echo $curFlr; ?></span></h2>
         <form action="index.php" method="POST">
             <div class="arrow-buttons">
-                <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="arrow-btn" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Up">&#8593;</button>
+                <!-- UP arrow: should INCREASE floor -->
+                <button type="submit" name="newfloor" value="<?php echo min(3, $curFlr+1); ?>" class="arrow-btn" <?php if($curFlr >= 3) echo 'disabled'; ?> title="Up">&#8593;</button>
             </div>
             <div class="floor-buttons">
                 <?php for($i=1; $i<=3; $i++): ?>
@@ -100,7 +101,8 @@
                 <?php endfor; ?>
             </div>
             <div class="arrow-buttons">
-                <button type="submit" name="newfloor" value="<?php echo min(3, $curFlr+1); ?>" class="arrow-btn" <?php if($curFlr >= 3) echo 'disabled'; ?> title="Down">&#8595;</button>
+                <!-- DOWN arrow: should DECREASE floor -->
+                <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="arrow-btn" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</button>
             </div>
         </form>
     </div>
