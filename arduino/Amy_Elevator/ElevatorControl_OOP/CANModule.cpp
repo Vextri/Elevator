@@ -56,17 +56,14 @@ void CANModule::transmitCAN() {
     Serial.println(txdata[1]);
     Serial.println(txdata[2]);
     byte sndStat;
-    
-    for (int i = 0; i < 3; i++)
-    {
-        sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[i]);
-        if (sndStat == CAN_OK) {
-            Serial.println("Message Sent Successfully!");
-            Serial.println(txdata[i]);
-        }
-        else {
-            Serial.println("Error Sending Message...");
-        }
+
+    sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata[i]);
+    if (sndStat == CAN_OK) {
+        Serial.println("Message Sent Successfully!");
+        Serial.println(txdata[i]);
+    }
+    else {
+        Serial.println("Error Sending Message...");
     }
    
     Serial.println("After sendMsgBuf...");
