@@ -10,13 +10,13 @@
  */
 
 #include "ElevatorController.h"
-#include "CardReader.h"
+//#include "CardReader.h"
 
 ElevatorController EC;                                     // Instantiate an Elevator controller object
 
 void setup() { 
   EC.setup(); 
-  CR.setup();  // Initialize card reader
+  //CR.setup();  // Initialize card reader
   attachInterrupt(digitalPinToInterrupt(INT_PIN), CAN_MSGRCVD_ISR, FALLING);      // Interrupt on falling edge of INT_PIN and call CAN_MSGRCVD() method of the ElevatorControl object  
   // Do not need to attach anything to the timer-based interrupt. It will automatically call ISR(TIMER1_COMPA_vect) when triggered. It is on a register external to the microcontroller.
 }
@@ -34,5 +34,5 @@ void CAN_MSGRCVD_ISR() {
 void loop() 
 {
   EC.loop();
-  CR.checkCard();  // Poll RFID reader
+  //CR.checkCard();  // Poll RFID reader
 }

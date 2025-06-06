@@ -48,6 +48,7 @@ void CANModule::transmitCAN() {
     // send data:  ID = 0x100, Standard CAN Frame, Data length = 8 bytes, 'data' = array of data bytes to send
     Serial.println("Before sendMsgBuf ...");
     byte sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata);
+
     Serial.println("After sendMsgBuf...");
     Serial.println(sndStat);
     Serial.println(TxID);
@@ -58,6 +59,7 @@ void CANModule::transmitCAN() {
     if (sndStat == CAN_OK) {
         Serial.println("Message Sent Successfully!");
         Serial.println(txdata[0]);
+        Serial.println(txdata[1]);
     }
     else {
         Serial.println("Error Sending Message...");
@@ -155,4 +157,9 @@ void CANModule::initializeCAN() {
     mcp2515.setMode(MCP_NORMAL);                              // Change to normal mode to allow messages to be transmitted
     pinMode(INT_PIN, INPUT);                                  // Interrupt pin triggered by SLAVE (CAN Adapter) to ask MASTER to initiate SPI communication
     pinMode(SPI_CS_PIN, OUTPUT);                              // Chip select pin for CAN module
+}
+
+void CANModule::setDistanceBytes(uint16_t dist) {
+    txdata[0] = dist & 0xFF;
+    txdata[1] = (dist >> 8) & 0xFF;
 }
