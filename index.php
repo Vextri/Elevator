@@ -52,31 +52,17 @@
 		<h1>ESE 2026</h1>
 		<h2>Amy Wentzell, Blaise Swan</h2> 
 	
-		<div>
-			<form action="index.php" method="POST" style="display:inline;">
-				<input type="hidden" name="newfloor" value="<?php echo min(3, get_currentFloor() + 1); ?>">
-				<button type="submit" class="up">UP</button>
+			<form action="index.php" method="POST">
+				<div>
+					<button type="submit" name="newfloor" class="up" value="<?php echo min(3, get_currentFloor() + 1); ?>">UP</button>
+					<button type="submit" name="newfloor" class="down" value="<?php echo max(1, get_currentFloor() - 1); ?>">DOWN</button>
+				</div>
+				<div>
+					<button type="submit" name="newfloor" class="floor" value="1">1</button>	
+					<button type="submit" name="newfloor" class="floor" value="2">2</button>
+					<button type="submit" name="newfloor" class="floor" value="3">3</button>
+				</div>	
 			</form>
-			<form action="index.php" method="POST" style="display:inline;">
-				<input type="hidden" name="newfloor" value="<?php echo max(1, get_currentFloor() - 1); ?>">
-				<button type="submit" class="down">DOWN</button>
-			</form>
-		</div>
-
-		<div>
-			<form action="index.php" method="POST" style="display:inline;">
-				<input type="hidden" name="newfloor" value="1">
-				<button type="submit" class="floor">1</button>
-			</form>
-			<form action="index.php" method="POST" style="display:inline;">
-				<input type="hidden" name="newfloor" value="2">
-				<button type="submit" class="floor">2</button>
-			</form>
-			<form action="index.php" method="POST" style="display:inline;">
-				<input type="hidden" name="newfloor" value="3">
-				<button type="submit" class="floor">3</button>
-			</form>
-		</div>
 		
 		<?php 
 			if(isset($_POST['newfloor'])) {
