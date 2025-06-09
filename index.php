@@ -52,7 +52,11 @@
         } 
         $curFlr = get_currentFloor();
     ?>
-    <h2>Current floor: <span style="color:#007bff;"><?php echo $curFlr; ?></span></h2>
+
+    <h2 class="floor-display">F <?php echo $curFlr; ?></h2>
+    
+    <div>
+    </div>
     <section class="elevator-panel">
         
             <div>

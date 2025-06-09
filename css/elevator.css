@@ -1,15 +1,69 @@
-/* Panel Styles for Elevator Control */
+/*Personalized Header for All Pages*/
+h1, .h1 {
+  font-size: 60px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  background-color: black;
+  color: goldenrod;
+  padding: 20px;
+}
 
+h2,.h2 {
+  font-size: 40px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+h3,.h3 {
+  font-size: 30px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  color: rebeccapurple;
+
+}
+
+h4, .h4 {
+  font-size: 20px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  color: blue;
+}
+
+
+body, html {
+  background-color: darkgrey;
+}
+
+
+
+
+/* Panel Styles for Elevator Control */
+.floor-display {
+  width: 250px; /* Width of the panel */
+  height: 100px; /* Height of the panel */
+  background-image: url(../images/floor_display.png); /* Semi-transparent background */
+  background-size: cover;
+  font-size: 100px;
+  color: rgb(202, 0, 0); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
 
 .elevator-panel {
-  width: 200px; /* Width of the panel */
-  height: 200px; /* Height of the panel */
+  width: 400px; /* Width of the panel */
+  height: 400px; /* Height of the panel */
+  margin: auto;
   background-image: url(../images/elevator_panel.png); /* Semi-transparent background */
   background-size: cover;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .floor-row {
@@ -24,8 +78,8 @@
 /* Buttons for Elevator Control */
 
 a.up, a.down, a.floor {
-  width: 48px;
-  height: 48px;
+  width: 100px;
+  height: 100px;
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
