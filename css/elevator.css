@@ -1,0 +1,66 @@
+/* Panel Styles for Elevator Control */
+
+
+.elevator-panel {
+  width: 200px; /* Width of the panel */
+  height: 200px; /* Height of the panel */
+  background-image: url(../images/elevator_panel.png); /* Semi-transparent background */
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.floor-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px; /* space between buttons */
+  width: 100%;
+}
+
+/* Buttons for Elevator Control */
+
+a.up, a.down, a.floor {
+  width: 48px;
+  height: 48px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* Adjust as needed */
+  box-sizing: border-box;
+  color: #222; /* or #fff if your image is dark */
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+a.up {
+  background-image: url(../images/up.png);
+}
+
+a.up:hover {
+  background-image: url(../images/uphover.png);
+}
+
+a.down {
+
+  background-image: url(../images/down.png);
+
+}
+
+a.down:hover {
+  background-image: url(../images/downhover.png);
+}   
+
+a.floor {
+  background-image: url(../images/floor.png);
+}
+
+a.floor:hover {
+  background-image: url(../images/floorhover.png);
+} 
+
