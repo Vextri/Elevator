@@ -103,9 +103,9 @@ section {
     font-weight: bold;
 }
 
-    /* Personalised
-/* Center the form and add a card-like appearance */
-form {
+/* Personalised Form Styles*/
+
+/*form::before {
   max-width: 420px;
   margin: 2rem auto;
   padding: 1.2rem 1rem;
@@ -118,8 +118,9 @@ form {
   border: 1px solid #e0e6ed;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem; /* less space between elements */
-}
+  gap: 0.6rem;
+  z-index: -1;
+}*/
 
 /* Optional: Add a fieldset for grouping */
 form fieldset {
@@ -169,6 +170,7 @@ form textarea:focus {
 }
 
 /* Style the submit button */
+/*
 form input[type="submit"] {
   background: linear-gradient(90deg, #0078d7 60%, #005fa3 100%);
   color: #fff;
@@ -188,6 +190,7 @@ form input[type="submit"]:hover {
   background: linear-gradient(90deg, #005fa3 60%, #0078d7 100%);
   transform: translateY(-2px) scale(1.03);
 }
+  */
 
 
 /* Responsive for mobile */
@@ -370,7 +373,6 @@ a.request {
   background-size: 200px 100px;
   display: inline-block;
   background-repeat: no-repeat;
-  padding: 20 px;
 }
 
 a.request:hover {
@@ -381,15 +383,29 @@ a.request:active {
   background-image: url(../images/Request_3.png);
 }
 
+/* Elevator Panel for Elevator Control Page */
+.elevator-panel {
+  width: 500px;
+  height: 500px;
+  background-image: url(../images/elevator_panel.png);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid black;
+} 
+
 /* Buttons for Elevator Control */
 a.up {
-  width: 200px;
-  height: 100px;
+  width: 30px;
+  height: 60px;
   background-image: url(../images/up.png);
-  background-size: 200px 100px;
+  background-size: 30px 0px;
   display: inline-block;
   background-repeat: no-repeat;
-  padding: 20 px;
+  justify-content: center;
 }
 
 a.up:hover {
@@ -397,13 +413,14 @@ a.up:hover {
 }
 
 a.down {
-  width: 200px;
-  height: 100px;
+  width: 30px;
+  height: 60px;
   background-image: url(../images/down.png);
-  background-size: 200px 100px;
+  background-size: 60px 60px;
   display: inline-block;
   background-repeat: no-repeat;
-  padding: 20 px;
+  justify-content: center;
+
 }
 
 a.down:hover {
@@ -411,13 +428,13 @@ a.down:hover {
 }   
 
 a.floor {
-  width: 200px;
-  height: 100px;
+  width: 30px;
+  height: 60px;
   background-image: url(../images/floor.png);
-  background-size: 200px 100px;
+  background-size: 60px 60px;
   display: inline-block;
   background-repeat: no-repeat;
-  padding: 20 px;
+  justify-content: center;
 }
 
 a.floor:hover {

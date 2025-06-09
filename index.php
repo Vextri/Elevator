@@ -37,20 +37,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/bootstrap.css" type="text/css" rel="stylesheet"/>
     <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
-    <link href="css/elevator.css" type="text/css" rel="stylesheet"/>
     <title>Elevator Controller GUI</title>
     <style>
-        .elevator-panel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        .floor-buttons, .arrow-buttons {
+       .floor-buttons, .arrow-buttons {
             display: flex;
             justify-content: center;
-            margin: 1rem 0;
+            /*margin: 1rem 0;*/
         }
         .floor-btn, .arrow-btn {
             width: 60px;
@@ -89,22 +81,24 @@
     ?>
 
     <div class="elevator-panel">
-        <h2>Current floor: <span style="color:#007bff;"><?php echo $curFlr; ?></span></h2>
-        <form action="index.php" method="POST">
             <div class="arrow-buttons">
                 <!-- UP arrow: should INCREASE floor -->
-                <button type="submit" name="newfloor" value="<?php echo min(3, $curFlr+1); ?>" class="arrow-btn" <?php if($curFlr >= 3) echo 'disabled'; ?> title="Up">&#8593;</button>
+                <a name="newfloor" value="<?php echo min(3, $curFlr+1); ?>" class="up" <?php if($curFlr >= 3) echo 'disabled'; ?> title="Up">&#8593;</a>
+            </div>
+        <h2>Current floor: <span style="color:#007bff;"><?php echo $curFlr; ?></span></h2>
+            <div class="arrow-buttons">
+                <!-- UP arrow: should INCREASE floor -->
+                <a type="submit" name="newfloor" value="<?php echo min(3, $curFlr+1); ?>" class="up" <?php if($curFlr >= 3) echo 'disabled'; ?> title="Up">&#8593;</a>
             </div>
             <div class="floor-buttons">
                 <?php for($i=1; $i<=3; $i++): ?>
-                    <button type="submit" name="newfloor" value="<?php echo $i; ?>" class="floor-btn<?php if($curFlr == $i) echo ' active'; ?>"><?php echo $i; ?></button>
+                    <a type="submit" name="newfloor" value="<?php echo $i; ?>" class="floor"<?php if($curFlr == $i) echo ' active'; ?>><?php echo $i; ?></a>
                 <?php endfor; ?>
             </div>
             <div class="arrow-buttons">
                 <!-- DOWN arrow: should DECREASE floor -->
-                <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="arrow-btn" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</button>
+                <a type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="down" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</a>
             </div>
-        </form>
     </div>
 </body>
 </html>
