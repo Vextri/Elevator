@@ -50,9 +50,26 @@
             exit;
         } 
         $curFlr = get_currentFloor();
+
+        switch ($curFlr)
+        {
+            case 1:
+                echo '<audio autoplay src="audio/Floor1.mp3"> </audio>';
+                break;
+            case 2:
+                echo '<audio autoplay src="audio/Floor2.mp3"> </audio>';
+                break;
+            case 3:
+                echo '<audio autoplay src="audio/Floor3.mp3"> </audio>';
+                break;
+            default:
+                $curFlr = 1; // Default to first floor if something goes wrong
+        }
     ?>
 
     <h2 class="floor-display">F <?php echo $curFlr; ?></h2>
+    <?php echo '<audio autoplay src="audio/Floor1.mp3"> </audio>'; ?>
+    <audio autoplay src="audio/Floor1.mp3"> </audio>
     <form  class="elevator-panel"method="post" action="index.php">
         <div>
             <!-- UP arrow: should INCREASE floor -->
