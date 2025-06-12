@@ -18,10 +18,7 @@
         try {
             $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
         } catch (PDOException $e) {
-            // Option 1: Log error to a file
-            error_log($e->getMessage());
-            // Option 2: Store error for later display in HTML
-            // global $db_error; $db_error = $e->getMessage();
+            echo $e->getMessage();
             return 0;
         }
         if (!$db) return 0;
@@ -73,5 +70,5 @@
     </form>
 </body>
 </html>
-
-
+ 
+ 
