@@ -119,3 +119,7 @@ button.floor:hover {
   background-image: url(../images/floorhover.png);
 } 
 
+button.up:disabled,
+button.down:disabled {
+  display: none;
+}

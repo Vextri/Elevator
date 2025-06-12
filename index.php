@@ -18,7 +18,10 @@
         try {
             $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            // Option 1: Log error to a file
+            error_log($e->getMessage());
+            // Option 2: Store error for later display in HTML
+            // global $db_error; $db_error = $e->getMessage();
             return 0;
         }
         if (!$db) return 0;
@@ -50,26 +53,9 @@
             exit;
         } 
         $curFlr = get_currentFloor();
-
-        switch ($curFlr)
-        {
-            case 1:
-                echo '<audio autoplay src="audio/Floor1.mp3"> </audio>';
-                break;
-            case 2:
-                echo '<audio autoplay src="audio/Floor2.mp3"> </audio>';
-                break;
-            case 3:
-                echo '<audio autoplay src="audio/Floor3.mp3"> </audio>';
-                break;
-            default:
-                $curFlr = 1; // Default to first floor if something goes wrong
-        }
     ?>
 
     <h2 class="floor-display">F <?php echo $curFlr; ?></h2>
-    <?php echo '<audio autoplay src="audio/Floor1.mp3"> </audio>'; ?>
-    <audio autoplay src="audio/Floor1.mp3"> </audio>
     <form  class="elevator-panel"method="post" action="index.php">
         <div>
             <!-- UP arrow: should INCREASE floor -->
@@ -87,5 +73,5 @@
     </form>
 </body>
 </html>
- 
- 
+
+
