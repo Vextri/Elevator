@@ -40,7 +40,7 @@
         }
         if (!$db) return 0;
 
-        $distance = $db->query('SELECT distance FROM elevatorNetwork WHERE nodeID = '.$curFlr)->fetchColumn();
+        $distance = $db->query('SELECT distance FROM elevatorNetwork WHERE currentFloor = '.$curFlr)->fetchColumn();
         $query = 'INSERT INTO diagnostic (nodeID,currentFloor, distance) 
                 VALUES (:i, :curFlr, :distance)
                 ON DUPLICATE KEY UPDATE 
