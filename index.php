@@ -15,8 +15,7 @@
 
     function setFloor_diagnostic(int $node_ID, int $new_floor =1): int {
         $db2 = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-        $distance = $db->query('SELECT distance FROM elevatorNetwork WHERE currentFloor = '.$curFlr )->fetchColumn();
-         $query = 'INSERT INTO diagnostic (nodeID, currentFloor)
+        $query = 'INSERT INTO diagnostic (nodeID, currentFloor)
               VALUES (:id, :floor)
               ON DUPLICATE KEY UPDATE currentFloor = :floor';
     
