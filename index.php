@@ -95,9 +95,8 @@
                 $distance = diagnostics($i, $curFlr);
 
                 $diagnosticArray[$curFlr-1][($i-1) % 50] = $distance;
-                echo '<pre>';
-                print_r($diagnosticArray[$curFlr-1][($i-1) % 50]); //double-check that it's updating
-                echo '</pre>';
+           
+                echo $diagnosticArray[$curFlr-1][($i-1) % 50]); //double-check that it's updating
 
             }
 
