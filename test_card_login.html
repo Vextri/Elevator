@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Card Login Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Card Login System Test</h1>
+        
+        <div class="status info">
+            <strong>Instructions:</strong><br>
+            1. Run <code>python clientalt_fixed.py</code> and choose option 1<br>
+            2. Click "Start Monitoring" below<br>
+            3. Scan your card with Arduino<br>
+            4. Watch for automatic redirect!
+        </div>
+
+        <div>
+            <button onclick="startMonitoring()">🔍 Start Monitoring</button>
+            <button onclick="stopMonitoring()">⏹️ Stop Monitoring</button>
+            <button onclick="testManualLogin()">🧪 Test Manual Card Login</button>
+            <button onclick="clearLog()">🗑️ Clear Log</button>
+        </div>
+
+        <div id="status-display" class="status info">
+            Ready to start monitoring...
+        </div>
+
+        <h3>Activity Log:</h3>
+        <div id="log"></div>
+    </div>
+
+    <script>
+        let pollInterval;
+        let isMonitoring = false;
+
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.textContent += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function updateStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status-display');
+            statusDiv.className = `status ${type}`;
+            statusDiv.innerHTML = message;
+        }
+
+        function startMonitoring() {
+            if (isMonitoring) return;
+            
+            isMonitoring = true;
+            log('🔍 Started monitoring for card logins...');
+            updateStatus('🔍 Monitoring for card logins...', 'info');
+            
+            pollInterval = setInterval(checkCardLogin, 1000);
+        }
+
+        function stopMonitoring() {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+                isMonitoring = false;
+                log('⏹️ Stopped monitoring');
+                updateStatus('⏹️ Monitoring stopped', 'info');
+            }
+        }
+
+        function checkCardLogin() {
+            fetch('check_card_login.php?' + new Date().getTime())
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'logged_in') {
+                        log(`✅ LOGIN DETECTED! User: ${data.username}`);
+                        updateStatus(`✅ Login successful! Redirecting to dashboard...`, 'success');
+                        stopMonitoring();
+                        
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.php';
+                        }, 2000);
+                        
+                    } else if (data.status === 'logged_in_manual') {
+                        log(`✅ MANUAL LOGIN DETECTED! User: ${data.username}`);
+                        updateStatus(`✅ Manual login detected! Redirecting...`, 'success');
+                        stopMonitoring();
+                        
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.php';
+                        }, 2000);
+                        
+                    } else {
+                        // Still monitoring...
+                    }
+                })
+                .catch(error => {
+                    log(`❌ Error checking login: ${error}`);
+                    updateStatus('❌ Error checking login status', 'error');
+                });
+        }
+
+        async function testManualLogin() {
+            log('🧪 Testing manual card login...');
+            updateStatus('🧪 Testing manual card login...', 'info');
+            
+            const testCard = "UID: 04 5C 63 5A 7E 70 80";
+            
+            try {
+                const formData = new FormData();
+                formData.append('student_card', testCard);
+                formData.append('action', 'card_login');
+                
+                const response = await fetch('card_login.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    log(`✅ Test login successful! User: ${result.username}`);
+                    updateStatus('✅ Test login successful! Checking AJAX...', 'success');
+                    
+                    // Check if AJAX will detect it
+                    setTimeout(checkCardLogin, 1000);
+                } else {
+                    log(`❌ Test login failed: ${result.message}`);
+                    updateStatus(`❌ Test login failed: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Test failed: ${error}`);
+                updateStatus(`❌ Test failed: ${error}`, 'error');
+            }
+        }
+
+        function clearLog() {
+            document.getElementById('log').textContent = '';
+        }
+
+        // Auto-start monitoring when page loads
+        window.onload = function() {
+            log('🚀 Card login test page loaded');
+            log('💡 Click "Start Monitoring" then scan your card!');
+        };
+    </script>
+</body>
+</html>

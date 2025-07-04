@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complete Workflow Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Card Login System - Complete Workflow Test</h1>
+    
+    <div class="test-section">
+        <h3>Step 1: Clear Sessions and Test Endpoints</h3>
+        <button onclick="runStep1()">Run Step 1</button>
+        <div id="step1-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Step 2: Simulate Card Login</h3>
+        <button onclick="runStep2()">Run Step 2</button>
+        <div id="step2-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Step 3: Test AJAX Detection</h3>
+        <button onclick="runStep3()">Run Step 3</button>
+        <div id="step3-results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Step 4: Test Cleanup</h3>
+        <button onclick="runStep4()">Run Step 4</button>
+        <div id="step4-results"></div>
+    </div>
+
+    <script>
+    async function runStep1() {
+        const resultDiv = document.getElementById('step1-results');
+        resultDiv.innerHTML = 'Running...';
+        
+        let output = '<h4>Step 1 Results:</h4>';
+        
+        // Clear sessions
+        try {
+            const clearResponse = await fetch('clear_session.php');
+            const clearData = await clearResponse.json();
+            output += `✅ Session clear: ${clearData.message}<br>`;
+        } catch (error) {
+            output += `❌ Session clear failed: ${error}<br>`;
+        }
+        
+        // Test AJAX endpoint (should show no session)
+        try {
+            const checkResponse = await fetch('check_card_login.php');
+            const checkData = await checkResponse.json();
+            output += `✅ AJAX endpoint: ${checkData.status}<br>`;
+            output += `Message: ${checkData.message}<br>`;
+            
+            if (checkData.status === 'not_logged_in') {
+                output += `✅ Correct: No active session detected<br>`;
+                resultDiv.className = 'test-section success';
+            } else {
+                output += `⚠️ Warning: Session still detected: ${checkData.status}<br>`;
+                resultDiv.className = 'test-section error';
+            }
+        } catch (error) {
+            output += `❌ AJAX endpoint failed: ${error}<br>`;
+            resultDiv.className = 'test-section error';
+        }
+        
+        resultDiv.innerHTML = output;
+    }
+    
+    async function runStep2() {
+        const resultDiv = document.getElementById('step2-results');
+        resultDiv.innerHTML = 'Running...';
+        
+        let output = '<h4>Step 2 Results:</h4>';
+        
+        // Simulate card login
+        try {
+            const formData = new FormData();
+            formData.append('student_card', 'UID: 04 5C 63 5A 7E 70 80');
+            formData.append('action', 'card_login');
+            
+            const loginResponse = await fetch('card_login.php', {
+                method: 'POST',
+                body: formData
+            });
+            const loginData = await loginResponse.json();
+            
+            output += `Card login attempt:<br>`;
+            output += `Success: ${loginData.success}<br>`;
+            output += `Message: ${loginData.message}<br>`;
+            
+            if (loginData.success) {
+                output += `✅ Card login successful<br>`;
+                resultDiv.className = 'test-section success';
+            } else {
+                output += `❌ Card login failed<br>`;
+                resultDiv.className = 'test-section error';
+            }
+        } catch (error) {
+            output += `❌ Card login error: ${error}<br>`;
+            resultDiv.className = 'test-section error';
+        }
+        
+        resultDiv.innerHTML = output;
+    }
+    
+    async function runStep3() {
+        const resultDiv = document.getElementById('step3-results');
+        resultDiv.innerHTML = 'Running...';
+        
+        let output = '<h4>Step 3 Results:</h4>';
+        
+        // Test AJAX detection multiple times
+        for (let i = 0; i < 3; i++) {
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+                
+                const checkResponse = await fetch(`check_card_login.php?t=${Date.now()}`);
+                const checkData = await checkResponse.json();
+                
+                output += `Attempt ${i + 1}: Status = ${checkData.status}<br>`;
+                output += `Message: ${checkData.message}<br>`;
+                
+                if (checkData.status === 'logged_in') {
+                    output += `✅ SUCCESS! Browser would redirect to: ${checkData.redirect_url || 'dashboard.php'}<br>`;
+                    output += `User: ${checkData.username} (ID: ${checkData.user_id})<br>`;
+                    resultDiv.className = 'test-section success';
+                    break;
+                } else if (checkData.status === 'logged_in_manual') {
+                    output += `✅ Manual login detected - would also redirect<br>`;
+                    resultDiv.className = 'test-section success';
+                    break;
+                } else if (i === 2) {
+                    output += `❌ No session detected after 3 attempts<br>`;
+                    resultDiv.className = 'test-section error';
+                }
+            } catch (error) {
+                output += `❌ AJAX check error: ${error}<br>`;
+                resultDiv.className = 'test-section error';
+            }
+        }
+        
+        resultDiv.innerHTML = output;
+    }
+    
+    async function runStep4() {
+        const resultDiv = document.getElementById('step4-results');
+        resultDiv.innerHTML = 'Running...';
+        
+        let output = '<h4>Step 4 Results:</h4>';
+        
+        // Clean up
+        try {
+            const clearResponse = await fetch('clear_session.php');
+            const clearData = await clearResponse.json();
+            output += `✅ Cleanup: ${clearData.message}<br>`;
+            resultDiv.className = 'test-section info';
+        } catch (error) {
+            output += `❌ Cleanup failed: ${error}<br>`;
+            resultDiv.className = 'test-section error';
+        }
+        
+        // Verify cleanup
+        try {
+            const checkResponse = await fetch('check_card_login.php');
+            const checkData = await checkResponse.json();
+            
+            if (checkData.status === 'not_logged_in') {
+                output += `✅ Cleanup verified: No active sessions<br>`;
+                resultDiv.className = 'test-section success';
+            } else {
+                output += `⚠️ Warning: Session still active after cleanup<br>`;
+                resultDiv.className = 'test-section error';
+            }
+        } catch (error) {
+            output += `❌ Cleanup verification failed: ${error}<br>`;
+            resultDiv.className = 'test-section error';
+        }
+        
+        resultDiv.innerHTML = output;
+    }
+    </script>
+</body>
+</html>

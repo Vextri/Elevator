@@ -13,6 +13,13 @@
 <body class="request-access-bg">
     <a href="website.html" class="btn btn-primary" style="margin: 1rem; display: inline-block;">Home</a>
   <h2 style="text-align:center;">Login</h2>
+  
+  <!-- Card Scan Status Display -->
+  <div id="card-scan-status" style="background: #e3f2fd; border: 1px solid #2196f3; border-radius: 5px; padding: 15px; margin: 20px auto; max-width: 500px; text-align: center; display: none;">
+    <h3 style="color: #1976d2; margin-top: 0;">🎓 Card Scanner Active</h3>
+    <p style="margin: 10px 0;">You can also log in by scanning your student card with the Arduino system.</p>
+    <p style="margin: 10px 0; font-size: 14px; color: #666;">If you have the card scanner running, just scan your card instead of typing your credentials.</p>
+  </div>
 
   <!-- Audio player (hidden) -->
   <audio id="background-audio" loop>
@@ -40,8 +47,12 @@
   window.onload = function() {
     var usernameInput = document.getElementById('username');
       
-      // Focus the Username input field
-      usernameInput.focus();
+    // Focus the Username input field
+    usernameInput.focus();
+    
+    // Check if user was logged in via card scan
+    checkCardScanStatus();
+    
     // Play background audio when the page loads
     // Get the audio element
     var audioElement = document.getElementById("background-audio");
@@ -57,14 +68,117 @@
 
     // Add validation for username and password length
     document.getElementById('login-form').addEventListener('submit', function(e) {
-      //var username = document.getElementById('username').value;
+      var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
       if (username.length < 7 || password.length < 7) {
         alert('Username and password must both be at least 7 characters.');
         e.preventDefault();
+      } else {
+        // Stop polling when user manually submits
+        stopCardLoginPolling();
+        updateCardScanStatus('Logging in manually...', 'info');
       }
     });
+    
+    // Stop polling when page is about to unload
+    window.addEventListener('beforeunload', function() {
+      stopCardLoginPolling();
+    });
   };
+  
+  // Global variables for polling
+  var cardLoginPollInterval;
+  var isPolling = false;
+  
+  function checkCardScanStatus() {
+    // Always show card scan status and start polling 
+    document.getElementById('card-scan-status').style.display = 'block';
+    
+    // No need to clear sessions since we're using file-based communication
+    console.log('Starting card scanner monitoring...');
+    updateCardScanStatus('Card scanner system ready - scan your card to login automatically', 'info');
+    
+    // Start polling for card login immediately
+    startCardLoginPolling();
+  }
+  
+  function startCardLoginPolling() {
+    if (isPolling) return; // Prevent multiple polling intervals
+    
+    isPolling = true;
+    console.log('Starting card login polling...');
+    
+    // Update the card scan status to show polling is active
+    updateCardScanStatus('Monitoring for card scans...', 'info');
+    
+    // Start polling for card login every 1 second (faster than before)
+    cardLoginPollInterval = setInterval(function() {
+      checkForCardLogin();
+    }, 1000);
+  }
+  
+  function stopCardLoginPolling() {
+    if (cardLoginPollInterval) {
+      clearInterval(cardLoginPollInterval);
+      cardLoginPollInterval = null;
+      isPolling = false;
+      console.log('Stopped card login polling');
+    }
+  }
+  
+  function checkForCardLogin() {
+    fetch('check_card_login.php?' + new Date().getTime(), {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Card status check response:', data);
+      
+      if (data.status === 'logged_in' || data.status === 'logged_in_manual') {
+        console.log('Login detected! Redirecting immediately...');
+        updateCardScanStatus('✅ Login successful! Redirecting...', 'success');
+        stopCardLoginPolling();
+        
+        // Simple, direct redirect
+        window.location.href = 'dashboard.php';
+        
+      } else if (data.status === 'not_logged_in') {
+        // Continue polling
+        console.log('No login detected, continuing to poll...');
+      }
+    })
+    .catch(error => {
+      console.error('Error checking card status:', error);
+    });
+  }
+  
+  function updateCardScanStatus(message, type) {
+    var statusDiv = document.getElementById('card-scan-status');
+    var h3 = statusDiv.querySelector('h3');
+    var firstP = statusDiv.querySelector('p');
+    
+    if (type === 'success') {
+      statusDiv.style.background = '#e8f5e8';
+      statusDiv.style.borderColor = '#4caf50';
+      h3.style.color = '#2e7d32';
+      h3.innerHTML = '✅ ' + message;
+    } else if (type === 'info') {
+      statusDiv.style.background = '#e3f2fd';
+      statusDiv.style.borderColor = '#2196f3';
+      h3.style.color = '#1976d2';
+      h3.innerHTML = '🔍 ' + message;
+    } else if (type === 'error') {
+      statusDiv.style.background = '#ffebee';
+      statusDiv.style.borderColor = '#f44336';
+      h3.style.color = '#c62828';
+      h3.innerHTML = '❌ ' + message;
+    }
+    
+    firstP.innerHTML = 'Scan your student card with the Arduino system for automatic login.';
+  }
 </script>
 
 <footer style="text-align:center; margin-top:2rem;">

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Card Status Debug</title>
+</head>
+<body>
+    <h1>Card Status Debug</h1>
+    <button onclick="checkStatus()">Check Status</button>
+    <button onclick="startPolling()">Start Polling</button>
+    <button onclick="stopPolling()">Stop Polling</button>
+    <div id="output"></div>
+
+    <script>
+    let pollInterval;
+    
+    function checkStatus() {
+        fetch('card_status.php?' + new Date().getTime())
+        .then(response => response.json())
+        .then(data => {
+            const timestamp = new Date().toLocaleTimeString();
+            const statusColor = data.status === 'logged_in' ? 'green' : 'black';
+            
+            document.getElementById('output').innerHTML += 
+                '<p style="color: ' + statusColor + ';"><strong>' + timestamp + ':</strong> ' + 
+                JSON.stringify(data) + '</p>';
+            
+            if (data.status === 'logged_in') {
+                alert('🎉 LOGIN DETECTED! Would redirect to: ' + data.redirect_url);
+                console.log('LOGIN DETECTED at', timestamp);
+                
+                // Show a big visual indicator
+                document.getElementById('output').innerHTML += 
+                    '<div style="background: green; color: white; padding: 10px; margin: 5px;">' +
+                    '🎉 CARD LOGIN DETECTED! Redirecting to ' + data.redirect_url + '</div>';
+            }
+        })
+        .catch(error => {
+            document.getElementById('output').innerHTML += 
+                '<p style="color: red;"><strong>' + new Date().toLocaleTimeString() + ':</strong> Error: ' + error + '</p>';
+        });
+    }
+    
+    function startPolling() {
+        if (pollInterval) clearInterval(pollInterval);
+        document.getElementById('output').innerHTML = '<p>Starting polling...</p>';
+        
+        pollInterval = setInterval(checkStatus, 1000);
+    }
+    
+    function stopPolling() {
+        if (pollInterval) {
+            clearInterval(pollInterval);
+            pollInterval = null;
+        }
+        document.getElementById('output').innerHTML += '<p><strong>Polling stopped</strong></p>';
+    }
+    </script>
+</body>
+</html>
