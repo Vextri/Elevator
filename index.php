@@ -29,6 +29,33 @@
         }
         return $current_floor ?? 0;
     }
+
+    function diagnostics(int $i,int $curFlr): int {
+        $db = null;
+        try {
+            $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return 0;
+        }
+        if (!$db) return 0;
+
+        $distance = $db->query('SELECT distance FROM elevatorNetwork WHERE nodeID = '.$curFlr)->fetchColumn();
+        $query = 'INSERT INTO diagnostic (nodeID,currentFloor, distance) 
+                VALUES (:i, :curFlr, :distance)
+                ON DUPLICATE KEY UPDATE 
+                currentFloor = :curFlr,
+                distance = :distance';
+
+        $insert = $db->prepare($query);
+        $insert->bindValue(':i', $i, PDO::PARAM_INT);
+        $insert->bindValue(':curFlr', $curFlr, PDO::PARAM_INT);
+        $insert->bindValue(':distance', $distance, PDO::PARAM_INT);
+        $insert->execute();
+        
+        return $distance;
+    }
+
 ?>
 
 <html>
@@ -50,6 +77,37 @@
             exit;
         } 
         $curFlr = get_currentFloor();
+
+        if(isset($_POST['diagnostics'])) {
+            // Diagnostics button clicked, handle it here
+            $diagnosticArray = array_fill(0, 3, array_fill(0, 50, 0)); // Initialize the array
+
+            get_currentFloor();
+
+            for($i=1; $i<=150; $i++)
+            {
+                $x = $i % 3;
+                if ($x == 1)
+                {
+                    $curFlr = update_elevatorNetwork($i, 1); // Resetting to floor 2 for diagnostics
+                }
+                if ($x == 2)
+                {
+                    $curFlr = update_elevatorNetwork($i, 2); // Resetting to floor 1 for diagnostics
+                }
+                if ($x == 0)
+                {
+                    $curFlr = update_elevatorNetwork($i, 3); // Resetting to floor 3 for diagnostics
+                }
+                sleep(3);
+                $distance = diagnostics($i, $curFlr); // Example call, adjust as needed
+                $diagnosticArray[$curFlr-1][($i-1) % 50] = $distance;
+            }
+
+            echo '<pre>';
+            print_r($diagnosticArray); //double-check that it's updating
+            echo '</pre>';
+        }
     ?>
 
     <h2 class="floor-display">F <?php echo $curFlr; ?></h2>
@@ -66,6 +124,11 @@
         <div>
             <!-- DOWN arrow: should DECREASE floor -->
             <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="down" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</button>
+        </div>
+    </form>
+    <form>
+        <div>
+            <button type="submit" name="diagnostics">Run Diagnostics</button>
         </div>
     </form>
 </body>
