@@ -13,6 +13,21 @@
         return $new_floor;
     }
 
+    function setFloor_diagnostic(int $node_ID, int $new_floor =1): int {
+        $db2 = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
+        $distance = $db->query('SELECT distance FROM elevatorNetwork WHERE currentFloor = '.$curFlr )->fetchColumn();
+         $query = 'INSERT INTO diagnostic (nodeID, currentFloor)
+              VALUES (:id, :floor)
+              ON DUPLICATE KEY UPDATE currentFloor = :floor';
+    
+        $statement = $db1->prepare($query);
+        $statement->bindvalue('floor', $new_floor);
+        $statement->bindvalue('id', $node_ID);
+        $statement->execute();	
+        
+        return $new_floor;
+    }
+
     function get_currentFloor(): int {
         $db = null;
         try {
@@ -30,29 +45,14 @@
         return $current_floor ?? 0;
     }
 
-    function diagnostics(int $i): int {
-        $db = null;
-        try {
-            $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return 0;
-        }
-        if (!$db) return 0;
-        $curFlr = get_currentFloor();
-        $distance = $db->query('SELECT distance FROM elevatorNetwork WHERE currentFloor = '.$curFlr)->fetchColumn();
-        $query = 'INSERT INTO diagnostic (nodeID,currentFloor, distance) 
-                VALUES (:i, :curFlr, :distance)
-                ON DUPLICATE KEY UPDATE 
-                currentFloor = :curFlr,
-                distance = :distance';
-
-        $insert = $db->prepare($query);
-        $insert->bindValue(':i', $i, PDO::PARAM_INT);
-        $insert->bindValue(':curFlr', $curFlr, PDO::PARAM_INT);
-        $insert->bindValue(':distance', $distance, PDO::PARAM_INT);
-        $insert->execute();
-        
+    function diagnostics($node_ID, $curFlr) {
+        $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
+        $stmt = $db->prepare('SELECT distance FROM elevatorNetwork WHERE nodeID = :id AND currentFloor = :floor');
+        $stmt->bindValue(':id', $node_ID, PDO::PARAM_INT);
+        $stmt->bindValue(':floor', $curFlr, PDO::PARAM_INT);
+        $stmt->execute();
+        $distance = $stmt->fetchColumn();
+        // Optionally update diagnostic table with distance here
         return $distance;
     }
 
@@ -75,32 +75,25 @@
             $curFlr = update_elevatorNetwork(1, $_POST['newfloor']); 
             header('Refresh:0; url=index.php');	
             exit;
-        } 
-        $curFlr = get_currentFloor();
+        }
 
         if(isset($_POST['diagnostics'])) {
-            // Diagnostics button clicked, handle it here
-            $diagnosticArray = array_fill(0, 3, array_fill(0, 50, 0)); // Initialize the array
-
-            get_currentFloor();
-
-            for($i=1; $i<=150; $i++)
+            
+            $diagnosticArray = array_fill(0, 3, array_fill(0, 50, 0));
+            for($i=1; $i<=150; $i++) 
             {
                 $x = $i % 3;
-                if ($x == 1)
-                {
-                    $curFlr = update_elevatorNetwork($i, 1); // Resetting to floor 1 for diagnostics
+                if ($x == 1) {
+                    $curFlr = 1;
+                } elseif ($x == 2) {
+                    $curFlr = 2;
+                } else {
+                    $curFlr = 3;
                 }
-                if ($x == 2)
-                {
-                    $curFlr = update_elevatorNetwork($i, 2); // Resetting to floor 2 for diagnostics
-                }
-                if ($x == 0)
-                {
-                    $curFlr = update_elevatorNetwork($i, 3); // Resetting to floor 3 for diagnostics
-                }
-                sleep(3);
-                $distance = diagnostics($i); // Example call, adjust as needed
+                update_elevatorNetwork(1, $curFlr);
+                setFloor_diagnostic($i, $curFlr);
+                sleep(2);
+                $distance = diagnostics($i, $curFlr);
                 $diagnosticArray[$curFlr-1][($i-1) % 50] = $distance;
             }
 
