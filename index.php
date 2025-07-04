@@ -79,7 +79,7 @@
         if(isset($_POST['diagnostics'])) {
             
             $diagnosticArray = array_fill(0, 3, array_fill(0, 50, 0));
-            for($i=1; $i<=150; $i++) 
+            for($i=1; $i<=10; $i++) 
             {
                 $x = $i % 3;
                 if ($x == 1) {
@@ -93,7 +93,12 @@
                 setFloor_diagnostic($i, $curFlr);
                 sleep(2);
                 $distance = diagnostics($i, $curFlr);
+
                 $diagnosticArray[$curFlr-1][($i-1) % 50] = $distance;
+                echo '<pre>';
+                print_r($diagnosticArray[$curFlr-1][($i-1) % 50]); //double-check that it's updating
+                echo '</pre>';
+
             }
 
             echo '<pre>';
