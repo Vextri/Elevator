@@ -30,7 +30,7 @@
         return $current_floor ?? 0;
     }
 
-    function diagnostics(int $i,int $curFlr): int {
+    function diagnostics(int $i): int {
         $db = null;
         try {
             $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
@@ -39,7 +39,7 @@
             return 0;
         }
         if (!$db) return 0;
-
+        $curFlr = get_currentFloor();
         $distance = $db->query('SELECT distance FROM elevatorNetwork WHERE currentFloor = '.$curFlr)->fetchColumn();
         $query = 'INSERT INTO diagnostic (nodeID,currentFloor, distance) 
                 VALUES (:i, :curFlr, :distance)
@@ -89,18 +89,18 @@
                 $x = $i % 3;
                 if ($x == 1)
                 {
-                    $curFlr = update_elevatorNetwork($i, 1); // Resetting to floor 2 for diagnostics
+                    $curFlr = update_elevatorNetwork($i, 1); // Resetting to floor 1 for diagnostics
                 }
                 if ($x == 2)
                 {
-                    $curFlr = update_elevatorNetwork($i, 2); // Resetting to floor 1 for diagnostics
+                    $curFlr = update_elevatorNetwork($i, 2); // Resetting to floor 2 for diagnostics
                 }
                 if ($x == 0)
                 {
                     $curFlr = update_elevatorNetwork($i, 3); // Resetting to floor 3 for diagnostics
                 }
                 sleep(3);
-                $distance = diagnostics($i, $curFlr); // Example call, adjust as needed
+                $distance = diagnostics($i); // Example call, adjust as needed
                 $diagnosticArray[$curFlr-1][($i-1) % 50] = $distance;
             }
 
