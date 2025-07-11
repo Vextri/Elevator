@@ -13,48 +13,6 @@
         return $new_floor;
     }
 
-    function setFloor_diagnostic(int $node_ID, int $new_floor =1): int {
-        $db2 = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-        $query = 'INSERT INTO diagnostic (nodeID, currentFloor)
-              VALUES (:id, :floor)
-              ON DUPLICATE KEY UPDATE currentFloor = :floor';
-    
-        $statement = $db1->prepare($query);
-        $statement->bindvalue('floor', $new_floor);
-        $statement->bindvalue('id', $node_ID);
-        $statement->execute();	
-        
-        return $new_floor;
-    }
-
-    function get_currentFloor(): int {
-        $db = null;
-        try {
-            $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return 0;
-        }
-        if (!$db) return 0;
-
-        $rows = $db->query('SELECT currentFloor FROM elevatorNetwork');
-        foreach ($rows as $row) {
-            $current_floor = $row[0];
-        }
-        return $current_floor ?? 0;
-    }
-
-    function diagnostics($node_ID, $curFlr) {
-        $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-        $stmt = $db->prepare('SELECT distance FROM elevatorNetwork WHERE nodeID = :id AND currentFloor = :floor');
-        $stmt->bindValue(':id', $node_ID, PDO::PARAM_INT);
-        $stmt->bindValue(':floor', $curFlr, PDO::PARAM_INT);
-        $stmt->execute();
-        $distance = $stmt->fetchColumn();
-        // Optionally update diagnostic table with distance here
-        return $distance;
-    }
-
 ?>
 
 <html>
@@ -77,32 +35,10 @@
         }
 
         if(isset($_POST['diagnostics'])) {
-            
-            $diagnosticArray = array_fill(0, 3, array_fill(0, 50, 0));
-            for($i=0; $i<=10; $i++) 
-            {
-                $x = $i % 3;
-                if ($x == 1) {
-                    $curFlr = 1;
-                } elseif ($x == 2) {
-                    $curFlr = 2;
-                } else {
-                    $curFlr = 3;
-                }
-                update_elevatorNetwork(1, $curFlr);
-                setFloor_diagnostic($i, $curFlr);
-                sleep(2);
-                $distance = diagnostics($i, $curFlr);
-
-                $diagnosticArray[$curFlr-1][($i-1) % 50] = $distance;
-           
-                echo $diagnosticArray[$curFlr-1][($i-1) % 50]); //double-check that it's updating
-                header('Refresh:0; url=index.php');	
-            }
-
-            echo '<pre>';
-            print_r($diagnosticArray); //double-check that it's updating
-            echo '</pre>';
+            $str = file_get_contents('json/diagnostics.json');
+            $json = json_decode($str, true);
+            echo '<pre>' . print_r($json, true) . '</pre>';
+            exit;
         }
     ?>
 
@@ -124,7 +60,7 @@
     </form>
     <form>
         <div>
-            <button type="submit" name="diagnostics">Run Diagnostics</button>
+            <button type="submit" name="diagnostics">Show Diagnostics</button>
         </div>
     </form>
 </body>

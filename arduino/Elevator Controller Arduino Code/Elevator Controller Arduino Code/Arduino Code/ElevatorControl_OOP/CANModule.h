@@ -26,7 +26,7 @@
 #define FLOOR3  0x07
 // Motion tuning
 #define diffMax 1500                        // Maximum difference between setpoint and distance measurement (Controlls the 1/e point on the dampening curve)
-#define DAMPENER 2                          // Motion dampening parameter (larger n dampens faster)
+#define DAMPENER 3                          // Motion dampening parameter (larger n dampens faster)
 #define A 1.5                               // Linear Gain on the difference measurement
 #define MINHEIGHT 100                       // Below this height the Elevator Stops moving - SOFTWARE KILL SWITCH
 #define MAXHEIGHT 1500                      // Above this height the Elevator stops moving - SOFTWARE KILL SWITCH
