@@ -100,7 +100,7 @@ button.up {
 }
 
 button.up:hover {
-  background-image: url(../images/uphover.PNG);
+  background-image: url(../images/uphover.png);
 }
 
 button.down {
@@ -108,7 +108,7 @@ button.down {
 }
 
 button.down:hover {
-  background-image: url(../images/downhover.PNG);
+  background-image: url(../images/downhover.png);
 }   
 
 button.floor {
