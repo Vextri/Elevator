@@ -44,27 +44,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode([
                     'success' => true,
                     'current_floor' => $result['floor'],
-                    'connected' => $result['connected'],
+                    'database_connected' => $result['connected'],
                     'message' => "Moved to floor {$result['floor']}"
                 ]);
             } else {
                 echo json_encode([
                     'success' => false,
-                    'connected' => $result['connected'],
+                    'database_connected' => $result['connected'],
                     'message' => 'Database error: ' . ($result['error'] ?? 'Unknown error')
                 ]);
             }
         } else {
             echo json_encode([
                 'success' => false,
-                'connected' => false,
+                'database_connected' => false,
                 'message' => 'Invalid floor number'
             ]);
         }
     } else {
         echo json_encode([
             'success' => false,
-            'connected' => false,
+            'database_connected' => false,
             'message' => 'Invalid action'
         ]);
     }
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode([
         'success' => $result['success'],
         'current_floor' => $result['floor'],
-        'connected' => $result['connected'],
+        'database_connected' => $result['connected'],
         'message' => $result['success'] ? 'Connected to elevator database' : 'Database connection failed'
     ]);
 }
