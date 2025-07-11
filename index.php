@@ -13,6 +13,18 @@
         return $new_floor;
     }
 
+    function get_currentFloor(): int {
+		try { $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');}
+		catch (PDOException $e){echo $e->getMessage();}
+
+			// Query the database to display current floor
+			$rows = $db->query('SELECT currentFloor FROM elevatorNetwork');
+			foreach ($rows as $row) {
+				$curFlr = $row[0];
+			}
+			return $curFlr;
+	}
+
 ?>
 
 <html>
@@ -28,6 +40,8 @@
     </header>
 
     <?php 
+        $curFlr = get_currentFloor(); // Get current floor from database
+        
         if(isset($_POST['newfloor'])) {
             $curFlr = update_elevatorNetwork(1, $_POST['newfloor']); 
             header('Refresh:0; url=index.php');	
