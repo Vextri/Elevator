@@ -33,13 +33,6 @@
             header('Refresh:0; url=index.php');	
             exit;
         }
-
-        if(isset($_POST['diagnostics'])) {
-            $str = file_get_contents('json/diagnostics.json');
-            $json = json_decode($str, true);
-            echo '<pre>' . print_r($json, true) . '</pre>';
-            exit;
-        }
     ?>
 
     <h2 class="floor-display">F <?php echo $curFlr; ?></h2>
@@ -56,11 +49,6 @@
         <div>
             <!-- DOWN arrow: should DECREASE floor -->
             <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="down" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</button>
-        </div>
-    </form>
-    <form>
-        <div>
-            <button type="submit" name="diagnostics">Show Diagnostics</button>
         </div>
     </form>
 </body>
