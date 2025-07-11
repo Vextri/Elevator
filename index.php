@@ -20,9 +20,9 @@
 			// Query the database to display current floor
 			$rows = $db->query('SELECT currentFloor FROM elevatorNetwork');
 			foreach ($rows as $row) {
-				$current_floor = $row[0];
+				$curFlr = $row[0];
 			}
-			return $current_floor;
+			return $curFlr;
 	}
 
 ?>
@@ -40,6 +40,8 @@
     </header>
 
     <?php 
+        $curFlr = get_currentFloor(); // Get current floor from database
+        
         if(isset($_POST['newfloor'])) {
             $curFlr = update_elevatorNetwork(1, $_POST['newfloor']); 
             header('Refresh:0; url=index.php');	
