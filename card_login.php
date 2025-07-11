@@ -41,6 +41,19 @@ try {
                 $_SESSION['login_method'] = 'card_scan';
                 $_SESSION['login_time'] = date('Y-m-d H:i:s');
                 
+                // Log successful card login
+                $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+                $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'Card Reader System';
+                $log_reason = "Card scan login successful - IP: {$client_ip} - System: {$user_agent}";
+                
+                $log_sql = "INSERT INTO access_logs (student_card, access_time, success, reason) VALUES (?, NOW(), 1, ?)";
+                $log_stmt = $mysqli->prepare($log_sql);
+                if ($log_stmt) {
+                    $log_stmt->bind_param("ss", $user['student_card'], $log_reason);
+                    $log_stmt->execute();
+                    $log_stmt->close();
+                }
+                
                 // Also create a status file for browser detection
                 $status_data = [
                     'status' => 'logged_in',
@@ -63,12 +76,38 @@ try {
                     'email' => $user['email']
                 ]);
             } else {
+                // Log failed card login - account not approved
+                $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+                $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'Card Reader System';
+                $log_reason = "Card scan login FAILED (account not approved) - Card: {$student_card} - IP: {$client_ip} - System: {$user_agent}";
+                
+                $log_sql = "INSERT INTO access_logs (student_card, access_time, success, reason) VALUES (?, NOW(), 0, ?)";
+                $log_stmt = $mysqli->prepare($log_sql);
+                if ($log_stmt) {
+                    $log_stmt->bind_param("ss", $student_card, $log_reason);
+                    $log_stmt->execute();
+                    $log_stmt->close();
+                }
+                
                 echo json_encode([
                     'success' => false,
                     'message' => 'Account not approved'
                 ]);
             }
         } else {
+            // Log failed card login - card not found
+            $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+            $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'Card Reader System';
+            $log_reason = "Card scan login FAILED (card not found) - Card: {$student_card} - IP: {$client_ip} - System: {$user_agent}";
+            
+            $log_sql = "INSERT INTO access_logs (student_card, access_time, success, reason) VALUES (?, NOW(), 0, ?)";
+            $log_stmt = $mysqli->prepare($log_sql);
+            if ($log_stmt) {
+                $log_stmt->bind_param("ss", $student_card, $log_reason);
+                $log_stmt->execute();
+                $log_stmt->close();
+            }
+            
             echo json_encode([
                 'success' => false,
                 'message' => 'Card not found'
