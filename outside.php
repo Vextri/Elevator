@@ -73,11 +73,33 @@ $curFlr = get_currentFloor();
             color: #fff;
             border-color: #28a745;
         }
+        .lockout-status {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .lockout-status.locked-out {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+        .lockout-status.operational {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
     </style>
 </head>
 <body>
  <div class="elevator-panel">
         <h2>Current floor: <span id="current-floor" style="color:#007bff;"><?php echo $curFlr; ?></span></h2>
+        
+        <!-- Lockout Status -->
+        <div id="lockoutStatus" class="lockout-status operational" style="display: none;">
+            System Operational
+        </div>
         <div id="elevator-controls">
             <div class="panel-vertical">
                 <div class="floor-buttons">
@@ -116,10 +138,35 @@ $curFlr = get_currentFloor();
             }
         }
         
+    <script>
+        let currentFloor = <?php echo $curFlr; ?>;
+        let pollInterval;
+        let doorBtnTimeout = null;
+        let isLockedOut = false;
+        
+        // Start polling when page loads
+        window.onload = function() {
+            updateFloorDisplay();
+            startPolling();
+        };
+        
+        function startPolling() {
+            pollInterval = setInterval(pollFloorStatus, 2000); // Poll every 2 seconds
+        }
+        
+        function stopPolling() {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+            }
+        }
+        
         function pollFloorStatus() {
             fetch('elevator_api.php')
                 .then(response => response.json())
                 .then(data => {
+                    // Update lockout status
+                    updateLockoutStatus(data.is_locked_out || false, data.lockout_reason, data.locked_by);
+                    
                     if (data.success && data.current_floor !== currentFloor) {
                         currentFloor = data.current_floor;
                         updateFloorDisplay();
@@ -131,6 +178,12 @@ $curFlr = get_currentFloor();
         }
         
         function callElevator(targetFloor) {
+            // Check if system is locked out
+            if (isLockedOut) {
+                document.getElementById('status-message').innerHTML = 'Elevator operations are locked out for safety';
+                return;
+            }
+            
             if (targetFloor === currentFloor) {
                 document.getElementById('status-message').innerHTML = `Elevator is already on floor ${targetFloor}`;
                 setTimeout(() => {
@@ -154,6 +207,9 @@ $curFlr = get_currentFloor();
             })
             .then(response => response.json())
             .then(data => {
+                // Update lockout status
+                updateLockoutStatus(data.is_locked_out || false, data.lockout_reason, data.locked_by);
+                
                 if (data.success) {
                     currentFloor = data.current_floor;
                     updateFloorDisplay();
@@ -167,13 +223,13 @@ $curFlr = get_currentFloor();
                     document.getElementById('status-message').innerHTML = 'Error: ' + data.message;
                 }
                 
-                // Re-enable buttons
-                setButtonsEnabled(true);
+                // Re-enable buttons (but check lockout status)
+                setButtonsEnabled(!isLockedOut);
             })
             .catch(error => {
                 console.error('Error:', error);
                 document.getElementById('status-message').innerHTML = 'Network error occurred';
-                setButtonsEnabled(true);
+                setButtonsEnabled(!isLockedOut);
             });
         }
         
@@ -225,6 +281,27 @@ $curFlr = get_currentFloor();
             });
             
             // Door buttons are always enabled
+        }
+        
+        function updateLockoutStatus(lockedOut, reason, lockedBy) {
+            isLockedOut = lockedOut;
+            const lockoutDiv = document.getElementById('lockoutStatus');
+            
+            lockoutDiv.style.display = 'block';
+            
+            if (lockedOut) {
+                lockoutDiv.className = 'lockout-status locked-out';
+                lockoutDiv.innerHTML = `🔒 ELEVATOR LOCKED OUT<br><small>Reason: ${reason || 'Safety lockout'}<br>By: ${lockedBy || 'Administrator'}</small>`;
+                
+                // Disable all elevator controls
+                setButtonsEnabled(false);
+            } else {
+                lockoutDiv.className = 'lockout-status operational';
+                lockoutDiv.innerHTML = '✅ System Operational';
+                
+                // Re-enable controls if not locked out
+                setButtonsEnabled(true);
+            }
         }
         
         // Stop polling when page unloads

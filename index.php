@@ -202,6 +202,27 @@ $curFlr = get_currentFloor();
             border: 1px solid #f5c6cb;
         }
         
+        .lockout-status {
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .lockout-status.locked-out {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+            font-weight: bold;
+        }
+        
+        .lockout-status.operational {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
         .status-indicator {
             width: 8px;
             height: 8px;
@@ -394,6 +415,11 @@ $curFlr = get_currentFloor();
                 Checking connection...
             </div>
             
+            <!-- Lockout Status -->
+            <div id="lockoutStatus" class="lockout-status operational" style="display: none;">
+                System Operational
+            </div>
+            
             <!-- Floor Display -->
             <div class="floor-display">
                 F <span id="current-floor"><?php echo $curFlr; ?></span>
@@ -425,6 +451,7 @@ $curFlr = get_currentFloor();
     <script>
         let currentFloor = <?php echo $curFlr; ?>;
         let pollInterval;
+        let isLockedOut = false;
         
         // Start polling when page loads
         window.onload = function() {
@@ -453,6 +480,9 @@ $curFlr = get_currentFloor();
                     // Update connection status
                     updateConnectionStatus(data.database_connected || false);
                     
+                    // Update lockout status
+                    updateLockoutStatus(data.is_locked_out || false, data.lockout_reason, data.locked_by);
+                    
                     if (data.success && data.current_floor !== currentFloor) {
                         currentFloor = data.current_floor;
                         updateFloorDisplay();
@@ -466,6 +496,14 @@ $curFlr = get_currentFloor();
         }
         
         function moveElevator(direction) {
+            // Check if system is locked out
+            if (isLockedOut) {
+                const statusEl = document.getElementById('status-message');
+                statusEl.innerHTML = 'Elevator operations are locked out for safety';
+                statusEl.style.display = 'block';
+                return;
+            }
+            
             let targetFloor;
             
             if (direction === 'up') {
@@ -501,6 +539,9 @@ $curFlr = get_currentFloor();
                 // Update connection status
                 updateConnectionStatus(data.database_connected || false);
                 
+                // Update lockout status
+                updateLockoutStatus(data.is_locked_out || false, data.lockout_reason, data.locked_by);
+                
                 if (data.success) {
                     currentFloor = data.current_floor;
                     updateFloorDisplay();
@@ -516,16 +557,38 @@ $curFlr = get_currentFloor();
                     statusEl.innerHTML = 'Error: ' + data.message;
                 }
                 
-                // Re-enable buttons
-                setButtonsEnabled(true);
+                // Re-enable buttons (but check lockout status)
+                setButtonsEnabled(!isLockedOut);
             })
             .catch(error => {
                 console.error('Error:', error);
                 updateConnectionStatus(false);
                 const statusEl = document.getElementById('status-message');
                 statusEl.innerHTML = 'Network error occurred';
-                setButtonsEnabled(true);
+                setButtonsEnabled(!isLockedOut);
             });
+        }
+        
+        function updateLockoutStatus(lockedOut, reason, lockedBy) {
+            isLockedOut = lockedOut;
+            const lockoutDiv = document.getElementById('lockoutStatus');
+            
+            lockoutDiv.style.display = 'block';
+            
+            if (lockedOut) {
+                lockoutDiv.className = 'lockout-status locked-out';
+                lockoutDiv.innerHTML = `🔒 ELEVATOR LOCKED OUT<br><small>Reason: ${reason || 'Safety lockout'}<br>By: ${lockedBy || 'Administrator'}</small>`;
+                
+                // Disable all elevator controls
+                setButtonsEnabled(false);
+            } else {
+                lockoutDiv.className = 'lockout-status operational';
+                lockoutDiv.innerHTML = '✅ System Operational';
+                
+                // Re-enable controls if not locked out
+                setButtonsEnabled(true);
+            }
+        }
         }
         
         function updateFloorDisplay() {
@@ -608,8 +671,8 @@ $curFlr = get_currentFloor();
                 btn.disabled = !enabled;
             });
             
-            // Re-apply floor-specific disabled states if enabling
-            if (enabled) {
+            // Re-apply floor-specific disabled states if enabling and not locked out
+            if (enabled && !isLockedOut) {
                 updateFloorDisplay();
             }
         }
