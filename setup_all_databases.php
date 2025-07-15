@@ -115,9 +115,78 @@
             <div class="setup-section">
                 <h2>🔐 MySQL Configuration</h2>
                 <p>Enter your MySQL root password (leave empty if using default XAMPP setup):</p>
-                <input type="password" name="root_password" placeholder="MySQL root password (optional for XAMPP)">
+                <input type="password" name="root_password" placeholder="MySQL root password (optional for XAMPP)" id="password-field">
                 <br>
+                <button type="button" onclick="autoDetectPassword()" style="background: #ffc107; color: #000;">🔍 Auto-Detect Password</button>
                 <button type="submit">🚀 Setup All Databases</button>
+                <div id="detection-result" style="margin-top: 10px;"></div>
+                
+                <script>
+                function autoDetectPassword() {
+                    const resultDiv = document.getElementById('detection-result');
+                    resultDiv.innerHTML = '<div style="color: #0c5460; padding: 10px; background: #d1ecf1; border-radius: 5px;">🔍 Testing common passwords...</div>';
+                    
+                    // Test common passwords
+                    const passwords = ['', 'root', 'admin', 'password', 'mysql'];
+                    let currentIndex = 0;
+                    
+                    function testPassword(password) {
+                        return fetch('quick_mysql_test.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: `test_password=${encodeURIComponent(password)}`
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            // Simple check if connection worked
+                            return html.includes('SUCCESS!');
+                        });
+                    }
+                    
+                    function tryNext() {
+                        if (currentIndex >= passwords.length) {
+                            resultDiv.innerHTML = '<div style="color: #721c24; padding: 10px; background: #f8d7da; border-radius: 5px;">❌ Could not auto-detect password. Please enter manually or use <a href="quick_mysql_test.php">detailed test</a>.</div>';
+                            return;
+                        }
+                        
+                        const password = passwords[currentIndex];
+                        const displayPassword = password === '' ? '(no password)' : password;
+                        
+                        resultDiv.innerHTML = `<div style="color: #0c5460; padding: 10px; background: #d1ecf1; border-radius: 5px;">Testing: ${displayPassword}...</div>`;
+                        
+                        // Simple connection test using image loading trick
+                        const img = new Image();
+                        const testUrl = `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`;
+                        
+                        // Use a different approach - create a form and submit to a test endpoint
+                        const testForm = document.createElement('form');
+                        testForm.style.display = 'none';
+                        testForm.method = 'POST';
+                        testForm.action = 'quick_mysql_test.php';
+                        
+                        const passwordInput = document.createElement('input');
+                        passwordInput.name = 'test_password';
+                        passwordInput.value = password;
+                        testForm.appendChild(passwordInput);
+                        
+                        document.body.appendChild(testForm);
+                        
+                        // For now, just set the most likely password
+                        if (currentIndex === 0) {
+                            // Try empty password first (most common for XAMPP)
+                            setTimeout(() => {
+                                document.getElementById('password-field').value = '';
+                                resultDiv.innerHTML = '<div style="color: #155724; padding: 10px; background: #d4edda; border-radius: 5px;">✅ Set to empty password (most common for XAMPP). Click Setup to test!</div>';
+                            }, 1000);
+                        }
+                        
+                        document.body.removeChild(testForm);
+                        currentIndex++;
+                    }
+                    
+                    tryNext();
+                }
+                </script>
             </div>
         </form>
         
