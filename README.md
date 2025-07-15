@@ -167,11 +167,37 @@ INSERT INTO elevator_lockout VALUES (1, FALSE, 'System initialized');
 - Debugging tool
 ```
 
+### **Complete System Setup (New Devices):**
+
+#### **4. `setup_all_databases.php` - Complete One-Click Setup**
+```php
+// Sets up ALL three databases needed for the system
+- Creates access_requests1 database (user management)
+- Creates elevator_lockout_db database (safety system)  
+- Creates elevator database (movement control)
+- Creates all tables and initial data
+- Sets up proper user permissions
+- Provides verification and next steps
+- Default admin user: Admin123/Admin123!
+```
+
+#### **5. Manual Setup Scripts:**
+- `sql/setup_access_requests.sql` - User management database
+- `sql/simple_setup.sql` - Lockout safety database
+- (elevator database setup included in complete setup)
+
+#### **6. For New Device Setup:**
+1. **Copy project files** to new device
+2. **Install XAMPP** and start Apache/MySQL
+3. **Run** `setup_all_databases.php` 
+4. **Login** with Admin123/Admin123!
+5. **Test** all system components
+
 ### **Setup Process:**
-1. **Create Database** - `elevator_lockout_db` (manual or via setup)
-2. **Run Setup Script** - Either automated PHP or manual SQL
+1. **Complete Setup** - `setup_all_databases.php` (recommended for new devices)
+2. **Individual Setup** - Use separate scripts if needed
 3. **Verify Tables** - Use check scripts to confirm
-4. **Test System** - Login and test lockout functionality
+4. **Test System** - Login and test all functionality
 
 ---
 
