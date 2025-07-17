@@ -89,7 +89,7 @@
             <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="down" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</button>
         </div>
     </form>
-    <a href="diagnostics.php">Show Diagnostics</a>
+    <a href="diagnostics/diagnostics.php">Show Diagnostics</a>
 </body>
 </html>
  
