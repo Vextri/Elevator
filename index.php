@@ -1,10 +1,20 @@
 <?php
+    session_start();
 
+    if (!isset($_SESSION['nodeID'])) 
+    {
+        $_SESSION['nodeID'] = 1;
+    } else {
+        $_SESSION['nodeID']++;
+        $_SESSION['nodeID'] = ($_SESSION['nodeID'] % 90) + 1 ; // only IDs or requests from 1 to 90
+    }
+    
     function update_elevatorNetwork(int $node_ID, int $new_floor =1): int {
         $db1 = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-        $query = 'UPDATE elevatorNetwork 
-                SET currentFloor = :floor
-                WHERE nodeID = :id';
+        $query = '
+            INSERT INTO elevatorNetwork (nodeID, requestedFloor)
+            VALUES (:id, :floor)
+            ON DUPLICATE KEY UPDATE requestedFloor = :floor';
         $statement = $db1->prepare($query);
         $statement->bindvalue('floor', $new_floor);
         $statement->bindvalue('id', $node_ID);
@@ -14,6 +24,21 @@
     }
 
     function get_currentFloor(): int {
+        try {
+            $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return 1; // Fallback floor
+        }
+
+        $query = 'SELECT currentFloor FROM elevatorNetwork ORDER BY nodeID ASC LIMIT 1';
+        $stmt = $db->query($query);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result ? (int)$result['currentFloor'] : 1;
+    }
+
+    /*function get_currentFloor(): int {
 		try { $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');}
 		catch (PDOException $e){echo $e->getMessage();}
 
@@ -23,8 +48,7 @@
 				$curFlr = $row[0];
 			}
 			return $curFlr;
-	}
-
+	}*/
 ?>
 
 <html>
@@ -41,9 +65,9 @@
 
     <?php 
         $curFlr = get_currentFloor(); // Get current floor from database
-        
         if(isset($_POST['newfloor'])) {
-            $curFlr = update_elevatorNetwork(1, $_POST['newfloor']); 
+            $curFlr = update_elevatorNetwork($_SESSION['nodeID'], $_POST['newfloor']); 
+
             header('Refresh:0; url=index.php');	
             exit;
         }
@@ -65,6 +89,7 @@
             <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="down" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</button>
         </div>
     </form>
+    <a href="diagnostics.php">Show Diagnostics</a>
 </body>
 </html>
  
