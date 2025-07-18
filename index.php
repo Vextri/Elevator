@@ -6,7 +6,7 @@
         $_SESSION['nodeID'] = 1;
     } else {
         $_SESSION['nodeID']++;
-        $_SESSION['nodeID'] = ($_SESSION['nodeID'] % 90) + 1 ; // only IDs or requests from 1 to 90
+        $_SESSION['nodeID'] = ($_SESSION['nodeID'] % 90) + 1; // Cycle through node IDs 1 to 90
     }
     
     function update_elevatorNetwork(int $node_ID, int $new_floor =1): int {
