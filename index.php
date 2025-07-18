@@ -6,7 +6,7 @@
         $_SESSION['nodeID'] = 1;
     } else {
         $_SESSION['nodeID']++;
-        $_SESSION['nodeID'] = ($_SESSION['nodeID'] % 90) + 1; // Cycle through node IDs 1 to 90
+        $_SESSION['nodeID'] = ($_SESSION['nodeID'] % 30) + 1; // Cycle through node IDs 1 to 30
     }
     
     function update_elevatorNetwork(int $node_ID, int $new_floor =1): int {
@@ -31,7 +31,7 @@
             return 1; // Fallback floor
         }
 
-        $query = 'SELECT currentFloor FROM elevatorNetwork ORDER BY nodeID ASC LIMIT 1';
+        $query = 'SELECT currentFloor FROM elevatorNetwork where nodeID = 1';
         $stmt = $db->query($query);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
