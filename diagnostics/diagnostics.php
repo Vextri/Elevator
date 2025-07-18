@@ -8,6 +8,7 @@
     $floor1_data = isset($json['floor1']) ? $json['floor1'] : [];
     $floor2_data = isset($json['floor2']) ? $json['floor2'] : [];
     $floor3_data = isset($json['floor3']) ? $json['floor3'] : [];
+    $timestamp = isset($json['timestamp']) ? $json['timestamp'] : '';
 
     // sort the array from lowest to highest value
     sort($floor1_data);
@@ -32,6 +33,7 @@
 <body>
     <header>
         <h1 style="text-align:center;">Height Diagnostics</h1>
+        <h2><?php echo "Timestamp: $timestamp"; ?></h2>
     </header>
     <div>
         <canvas id="floor1" width="700" height="100">Floor 1</canvas>
