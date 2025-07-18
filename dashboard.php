@@ -91,6 +91,7 @@ $user_id = $_SESSION['user_id'] ?? 'Unknown ID';
     <div class="nav">
         <a href="user_requests.php">User approvals</a>
         <a href="index.php">Elevator control</a>
+        <a href="test_lockout_integration.html">Test Lockout Integration</a>
         <a href="jsdoom-dosbox/index.html" target="_blank">Play JS DOOM</a>
         <a href="logout.php">Logout</a>
         <a href="inside.php">Outside Elevator</a>

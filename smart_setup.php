@@ -192,6 +192,7 @@
                 $tables_sql = "
                     CREATE TABLE IF NOT EXISTS requests (
                         id INT AUTO_INCREMENT PRIMARY KEY,
+                        fullname VARCHAR(255) NOT NULL,
                         username VARCHAR(255) UNIQUE NOT NULL,
                         email VARCHAR(255) UNIQUE NOT NULL,
                         password VARCHAR(255) NOT NULL,
@@ -201,7 +202,8 @@
                         approved BOOLEAN DEFAULT FALSE,
                         INDEX idx_username (username),
                         INDEX idx_email (email),
-                        INDEX idx_student_card (student_card)
+                        INDEX idx_student_card (student_card),
+                        INDEX idx_fullname (fullname)
                     );
                     
                     CREATE TABLE IF NOT EXISTS access_logs (

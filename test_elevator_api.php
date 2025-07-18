@@ -48,11 +48,12 @@ function update_elevatorNetwork(int $node_ID, int $new_floor = 1): array {
 function get_currentFloor(): array {
     try {
         $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-        $rows = $db->query('SELECT currentFloor FROM elevatorNetwork');
-        foreach ($rows as $row) {
-            $current_floor = $row[0];
-        }
-        return ['success' => true, 'floor' => $current_floor ?? 1, 'connected' => true];
+        $query = 'SELECT currentFloor FROM elevatorNetwork WHERE nodeID = 1';
+        $result = $db->query($query);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $current_floor = $row['currentFloor'] ?? 1;
+        
+        return ['success' => true, 'floor' => $current_floor, 'connected' => true];
     } catch (PDOException $e) {
         return ['success' => false, 'floor' => 0, 'connected' => false, 'error' => $e->getMessage()];
     }

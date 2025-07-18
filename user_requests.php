@@ -8,7 +8,33 @@ if (isset($_SESSION['flash_message'])) {
     // Clear the flash message after displaying it
     unset($_SESSION['flash_message']);
 }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Requests - Elevator System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .back-link { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px; }
+        .back-link:hover { background: #545b62; }
+        .alert { padding: 15px; margin: 10px 0; border-radius: 4px; }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .request-item { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; background: #f8f9fa; }
+        .approve-btn { background: #28a745; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; }
+        .approve-btn:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="dashboard.php" class="back-link">← Back to Dashboard</a>
+        <div class="header">
+            <h1>User Access Requests</h1>
+            <p>Review and approve pending user access requests</p>
+        </div>
 
+<?php
 // Connect to the database
 $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
 
@@ -34,17 +60,20 @@ $result = $mysqli->query($query);
 if ($result->num_rows > 0) {
     // Display each request
     while ($row = $result->fetch_assoc()) {
-        echo "<div>";
-        echo "<p><strong>Full Name:</strong> " . $row['fullname'] . "</p>";
-        echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
-        echo "<p><strong>Username:</strong> " . $row['username'] . "</p>";
-        echo "<p><strong>Reason:</strong> " . $row['reason'] . "</p>";
-        echo "<a href='approve_user.php?user_id=" . $row['id'] . "'>Approve</a>";  // Link to approve the request
-        echo "</div><hr>";
+        echo "<div class='request-item'>";
+        echo "<p><strong>Full Name:</strong> " . htmlspecialchars($row['fullname']) . "</p>";
+        echo "<p><strong>Email:</strong> " . htmlspecialchars($row['email']) . "</p>";
+        echo "<p><strong>Username:</strong> " . htmlspecialchars($row['username']) . "</p>";
+        echo "<p><strong>Reason:</strong> " . htmlspecialchars($row['reason']) . "</p>";
+        echo "<a href='approve_user.php?user_id=" . $row['id'] . "' class='approve-btn'>Approve User</a>";
+        echo "</div>";
     }
 } else {
-    echo "No pending requests.";
+    echo "<div class='request-item'><p>No pending requests.</p></div>";
 }
 
 $mysqli->close();
 ?>
+    </div>
+</body>
+</html>

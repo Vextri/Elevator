@@ -117,6 +117,13 @@ $curFlr = get_currentFloor();
         <div id="status-message" style="margin-top: 1rem; color: #666; text-align: center;"></div>
     </div>
 
+    <!-- Navigation -->
+    <div style="text-align: center; margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+        <a href="dashboard.php" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            ← Back to Dashboard
+        </a>
+    </div>
+
     <script>
         let currentFloor = <?php echo $curFlr; ?>;
         let pollInterval;

@@ -1,23 +1,7 @@
 <?php
-// Remove the POST handling - we'll use AJAX instead
-function get_currentFloor(): int {
-    $db = null;
-    try {
-        $db = new PDO('mysql:host=127.0.0.1;dbname=elevator','ese','ese');
-    } catch (PDOException $e) {
-        return 0;
-    }
-    if (!$db) return 0;
-
-    $rows = $db->query('SELECT currentFloor FROM elevatorNetwork');
-    foreach ($rows as $row) {
-        $current_floor = $row[0];
-    }
-    return $current_floor ?? 0;
-}
-
-// Get initial floor for page load
-$curFlr = get_currentFloor();
+// Remove PHP database connection - let JavaScript handle everything via API
+// This makes index.php work exactly like test_elevator.html
+$curFlr = 1; // Default floor, will be updated by JavaScript
 ?>
 
 <html>
@@ -221,6 +205,24 @@ $curFlr = get_currentFloor();
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
+        }
+        
+        .back-to-dashboard {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #6c757d;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+        
+        .back-to-dashboard:hover {
+            background: #545b62;
+            color: white;
         }
         
         .status-indicator {
@@ -447,6 +449,13 @@ $curFlr = get_currentFloor();
     </div>
 
     <div class="status-message" id="status-message"></div>
+
+    <!-- Navigation -->
+    <div style="text-align: center; margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+        <a href="dashboard.php" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            ← Back to Dashboard
+        </a>
+    </div>
 
     <script>
         let currentFloor = <?php echo $curFlr; ?>;
