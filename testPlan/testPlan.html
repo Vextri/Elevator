@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <h1>Test Plan for the VI Elevator Project</h1>
+  <h1>Test Plan for the Elevator Project</h1>
   <h2>Test Objectives and Scope</h2>
   <p>The purpose of testing the Project's VI elevator is to confirm CAN, Ethernet, and Wireless communication with the Raspberry Pi. The testing will verify that all components can successfully communicate with each other and exchange data as expected.</p>
 
@@ -23,6 +23,17 @@
   <ul>
     <li>CANBus</li>
     <li>Wireless</li>
+  </ul>
+  <h3>Functional Testing</h3>
+  <ul>
+    <li>Database</li>
+    <li>Height Sensor</li>
+    <li>Speed</li>
+  </ul>
+  <h3>Additional Features</h3>
+  <ul>
+    <li>Card Reader</li>
+    <li>Diagnostics</li>
   </ul>
 
   <h2>Test Procedures</h2>
@@ -105,7 +116,105 @@ Verify that the website can send and receive valid commands.
     </pre>
   </div>
 
-  <h2>Pass / Fail Chart</h2>
+  <h3>Database</h3>
+  <h4>Database Connection and Data Integrity</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Ensure that the database correctly stores and retrieves data related to elevator operations.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Test the database connection by performing read and write operations.
+Verify that data is correctly stored and can be retrieved without errors.
+Check for data integrity and consistency across different operations.
+  </pre>
+  </div>
+
+  <h4>Handling of Floor Requests</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Ensure that the system correctly handles floor requests from users.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Simulate floor requests from the website interface.
+Verify that the database stores multiple values in the floor request column.
+Check that the correct commands are sent to the elevator controllers.
+Check that current floor is updated correctly in the database.
+    </pre>
+  </div>
+
+  <h3>Height Sensor</h3>
+  <h4>Height Sensor Functionality</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Verify that the height sensors correctly measure the elevator's position.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Test the height sensors by moving the elevator to different floors.
+Verify that the sensors accurately report the current height.
+Check that set points are somewhat accurate.
+    </pre>
+  </div>
+
+  <h4>Height Sensor Data Logging</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Ensure that height sensor data is logged correctly in JSON file for diagnostics.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Verify that the height sensor data is logged in a JSON file.
+Check that the data includes a timestamp and 30 height values for each floor.
+    </pre>
+  </div>
+
+  <h3>Speed</h3>
+  <h4>Elevator Motor Speed</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Adjust the elevator motor speed to ensure smooth operation.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Test the elevator motor speed by moving the elevator between floors.
+Adjust the damper settings to ensure smooth operation.    
+Verify that the elevator does not over-shoot the target floor.
+    </pre>
+  </div>
+
+  <h3>Card Reader</h3>
+  <h4>Card Reader Functionality</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Verify that the card reader correctly reads and processes user cards.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Test the card reader by scanning different user cards.
+Verify that the reader correctly identifies the user and grants access to the elevator.
+    </pre>
+  </div>
+
+  <h3>Diagnostics</h3>
+  <h4>Diagnostics Functionality</h4>
+  <div class="objective">
+    <strong>Objective:</strong> Ensure that the diagnostics feature correctly logs and displays elevator data.
+  </div>
+  <div class="procedure">
+    <strong>Procedure:</strong>
+    <pre>
+Test the diagnostics feature by running the diagnostics section of "main.cpp".
+Verify that the diagnostics page displays the correct height data for each floor.
+Display setpoint with other collected data.
+    </pre>
+  </div>
+
+
+  <h2>Pass / Fail Charts</h2>
+
+  <h3>Communications Testing and Verification</h3>
   <table>
     <thead>
       <tr>
@@ -155,6 +264,79 @@ Verify that the website can send and receive valid commands.
       </tr>
     </tbody>
   </table>
+
+
+
+  <h3>Functional Testing</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Test Type</th>
+        <th>Test Object</th>
+        <th>Expected Result</th>
+        <th>Pass / Fail (P/F)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Database</td>
+        <td>Database commands, insert and append, etc.</td>
+        <td>Database is able to store and retrieve data correctly.</td>
+        <td>P</td>
+      </tr>
+      <tr>
+        <td>Database</td>
+        <td>Database Floor Requests</td>
+        <td>Database can handle multiple values in the floor request column, and update the current floor value correctly.</td>
+        <td>P</td>
+      </tr>
+      <tr>
+        <td>Height Sensor</td>
+        <td>Height Sensor Functionality on Arduino</td>
+        <td>Height sensor accurately measures elevator position.</td>
+        <td>P</td>
+      </tr>
+      <tr>
+        <td>Height Sensor</td>
+        <td>Height Sensor Data Logging</td>
+        <td>Height sensor data is logged in JSON file with timestamp and 30 height values for each floor.</td>
+        <td>P</td>
+      </tr>
+      <tr>
+        <td>Speed</td>
+        <td>Elevator Motor Speed</td>
+        <td>Elevator motor speed is implemented for smooth operation, no over-shooting.</td>
+        <td>P</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Additional Features</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Test Type</th>
+        <th>Test Object</th>
+        <th>Expected Result</th>
+        <th>Pass / Fail (P/F)</th>  
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Card Reader</td>
+        <td>Card Reader on Login Page</td>
+        <td>Card reader correctly reads and processes user cards.</td>
+        <td>P</td>
+      </tr>
+      <tr>
+        <td>Diagnostics</td>
+        <td>Diagnostics graphs on website (diagnostics.php)</td>
+        <td>Diagnostics feature logs and displays elevator data correctly.</td>
+        <td>P</td>
+      </tr>
+    </tbody>
+  </table>
+
 <!-- Add this before the closing </body> tag in each HTML file -->
 <footer style="text-align:center; margin-top:2rem;">
   &copy; 2025 Blaise Swan. All rights reserved.
