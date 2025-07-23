@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 session_start();
 
 // Connect to the database
-$mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests");
+$mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);

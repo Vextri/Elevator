@@ -36,7 +36,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inside Elevator</title>
-    <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
     <style>
         .elevator-panel {
             display: flex;
@@ -70,6 +70,13 @@
                 <button type="submit" name="newfloor" value="<?php echo max(1, $curFlr-1); ?>" class="arrow-btn" <?php if($curFlr <= 1) echo 'disabled'; ?> title="Down">&#8595;</button>
             </div>
         </form>
+        
+        <!-- Navigation -->
+        <div style="text-align: center; margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+            <a href="dashboard.php" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                ← Back to Dashboard
+            </a>
+        </div>
     </div>
 </body>
 </html>
