@@ -36,7 +36,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inside Elevator</title>
-    <link href="css/projectsVI.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
     <style>
         .elevator-panel {
             display: flex;

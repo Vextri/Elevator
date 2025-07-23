@@ -4,7 +4,7 @@
 
 ### **EASIEST METHOD: Smart Setup**
 1. **Start XAMPP** and make sure MySQL is running
-2. **Open browser** and go to: `http://localhost/projectsite/Elevator/smart_setup.php`
+2. **Open browser** and go to: `http://localhost/projectsite/Elevator/php/smart_setup.php`
 3. **Click "Auto-Detect & Setup"** - the system will automatically find your MySQL configuration
 4. **Login** with: Username: `Admin123`, Password: `Admin123!`
 
@@ -12,7 +12,7 @@
 This is the most common issue on new XAMPP installations. Here are your solutions:
 
 #### **Option 1: Use the Diagnostic Tool**
-- Go to: `http://localhost/projectsite/Elevator/diagnose_mysql.php`
+- Go to: `http://localhost/projectsite/Elevator/php/diagnose_mysql.php`
 - Click "Run Full Diagnostics"
 - Follow the suggested solutions
 
@@ -245,9 +245,29 @@ INSERT INTO elevator_lockout VALUES (1, FALSE, 'System initialized');
 
 ## 📁 File Structure & Components
 
+### **Project Structure:**
+```
+Elevator/
+├── html/                    # All HTML interfaces
+│   ├── login.html          # Login page
+│   ├── request_access.html # Access request form
+│   ├── test_lockout_integration.html # Testing interface
+│   └── ...other HTML files
+├── php/                    # All PHP backend files
+│   ├── dashboard.php       # Main dashboard
+│   ├── login1.php         # Login processing
+│   ├── test_elevator_api.php # Core elevator API
+│   ├── admin_lockout.php  # Safety lockout controls
+│   └── ...other PHP files
+├── css/                    # Stylesheets
+├── sql/                    # Database setup scripts
+├── logbooks/              # Project documentation
+└── documents/             # Technical documentation
+```
+
 ### **Core System Files:**
 
-#### **Authentication & User Management:**
+#### **Authentication & User Management (php/):**
 - `login1.php` - Manual login form and processing
 - `check_card_login.php` - Card-based authentication
 - `register_user.php` - New user registration
@@ -255,21 +275,25 @@ INSERT INTO elevator_lockout VALUES (1, FALSE, 'System initialized');
 - `approve_user.php` - Admin approval interface
 - `logout.php` - Session cleanup
 
-#### **Elevator Control Interfaces:**
+#### **Elevator Control Interfaces (php/):**
 - `index.php` - Main inside elevator interface
 - `outside.php` - External call buttons
-- `test_elevator.html` - Testing/debug interface
 - `test_elevator_api.php` - Core API for movement commands
 
-#### **Lockout/Tagout System:**
+#### **HTML Interfaces (html/):**
+- `login.html` - Login page
+- `test_lockout_integration.html` - Testing/debug interface
+- `request_access.html` - Access request form
+
+#### **Lockout/Tagout System (php/):**
 - `admin_lockout.php` - Lockout control panel
 - Integrated into all elevator interfaces
 - Real-time status checking and control disabling
 
-#### **Setup & Maintenance:**
+#### **Setup & Maintenance (php/):**
 - `setup_lockout_db.php` - Automated database setup
 - `check_database_structure.php` - Database inspector
-- `sql/simple_setup.sql` - Manual setup script
+- `smart_setup.php` - Auto-configuration tool
 
 ---
 

@@ -432,7 +432,7 @@
         }
         
         function pollFloorStatus() {
-            fetch('test_elevator_api.php')
+            fetch('../php/test_elevator_api.php')
                 .then(response => response.json())
                 .then(data => {
                     // Update connection status
@@ -482,7 +482,7 @@
             // Start elevator animation immediately for better UX
             animateElevatorToFloor(targetFloor);
             
-            fetch('test_elevator_api.php', {
+            fetch('../php/test_elevator_api.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

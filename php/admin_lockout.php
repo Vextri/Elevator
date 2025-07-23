@@ -4,7 +4,7 @@ session_start();
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    header("Location: ../html/login.html");
     exit();
 }
 
@@ -17,11 +17,16 @@ if ($mysqli->connect_error) {
 // Connect to existing user database for authentication
 $user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
 if ($user_mysqli->connect_error) {
-    die("User database connection failed: " . $user_mysqli->connect_error);
+    // Debug: Log the error and show a more helpful message
+    error_log("Admin lockout DB connection failed: " . $user_mysqli->connect_error);
+    die("User database connection failed. Please check database configuration. Error: " . $user_mysqli->connect_error);
 }
 
 // Check if user exists in access_requests1 (simple logged-in check)
 $user_check = $user_mysqli->prepare("SELECT username, email FROM requests WHERE id = ?");
+if (!$user_check) {
+    die("Database query preparation failed: " . $user_mysqli->error);
+}
 $user_check->bind_param("i", $_SESSION['user_id']);
 $user_check->execute();
 $result = $user_check->get_result();
@@ -31,7 +36,8 @@ $user_data = $result->fetch_assoc();
 $is_admin = ($user_data !== null);
 
 if (!$is_admin) {
-    die("Access denied. You must be logged in to access lockout controls.");
+    // Debug: Show more detailed error
+    die("Access denied. User ID " . $_SESSION['user_id'] . " not found in access_requests1.requests table. Please ensure you're logged in properly.");
 }
 
 $message = '';
@@ -362,7 +368,7 @@ $is_locked_out = $lockout_status && $lockout_status['is_locked_out'];
         <div class="nav-links">
             <a href="index.php">🏢 Elevator Controls</a>
             <a href="dashboard.php">📊 Dashboard</a>
-            <a href="test_elevator.html">🧪 Test Interface</a>
+            <a href="../html/test_elevator.html">🧪 Test Interface</a>
             <a href="logout.php">🚪 Logout</a>
         </div>
     </div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Path Test from HTML folder</title>
+</head>
+<body>
+    <h1>🔍 Path Test from HTML Folder</h1>
+    <p><strong>Current location:</strong> html/path_test.html</p>
+    
+    <h2>Test Links:</h2>
+    <ul>
+        <li><a href="../php/admin_lockout.php" target="_blank">../php/admin_lockout.php</a></li>
+        <li><a href="../php/diagnostic.php" target="_blank">../php/diagnostic.php</a></li>
+        <li><a href="../php/dashboard.php" target="_blank">../php/dashboard.php</a></li>
+    </ul>
+    
+    <h2>Absolute Test:</h2>
+    <ul>
+        <li><a href="/projectsite/Elevator/php/admin_lockout.php" target="_blank">/projectsite/Elevator/php/admin_lockout.php</a></li>
+    </ul>
+    
+    <h2>Debug Info:</h2>
+    <script>
+        document.write('<p><strong>Current URL:</strong> ' + window.location.href + '</p>');
+        document.write('<p><strong>Base URL:</strong> ' + window.location.origin + window.location.pathname + '</p>');
+        
+        // Test what the relative path resolves to
+        var link = document.createElement('a');
+        link.href = '../php/admin_lockout.php';
+        document.write('<p><strong>Resolved URL:</strong> ' + link.href + '</p>');
+    </script>
+</body>
+</html>

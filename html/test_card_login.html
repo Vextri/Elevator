@@ -126,7 +126,7 @@
         }
 
         function checkCardLogin() {
-            fetch('check_card_login.php?' + new Date().getTime())
+            fetch('../php/check_card_login.php?' + new Date().getTime())
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'logged_in') {
@@ -135,7 +135,7 @@
                         stopMonitoring();
                         
                         setTimeout(() => {
-                            window.location.href = 'dashboard.php';
+                            window.location.href = '../php/dashboard.php';
                         }, 2000);
                         
                     } else if (data.status === 'logged_in_manual') {
@@ -144,7 +144,7 @@
                         stopMonitoring();
                         
                         setTimeout(() => {
-                            window.location.href = 'dashboard.php';
+                            window.location.href = '../php/dashboard.php';
                         }, 2000);
                         
                     } else {
@@ -168,7 +168,7 @@
                 formData.append('student_card', testCard);
                 formData.append('action', 'card_login');
                 
-                const response = await fetch('card_login.php', {
+                const response = await fetch('../php/card_login.php', {
                     method: 'POST',
                     body: formData
                 });

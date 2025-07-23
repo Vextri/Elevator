@@ -14,7 +14,7 @@
     let pollInterval;
     
     function checkStatus() {
-        fetch('card_status.php?' + new Date().getTime())
+        fetch('../php/card_status.php?' + new Date().getTime())
         .then(response => response.json())
         .then(data => {
             const timestamp = new Date().toLocaleTimeString();

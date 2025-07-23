@@ -112,7 +112,7 @@
             1. If this test passes, your lockout database is ready<br>
             2. Visit <a href="admin_lockout.php">admin_lockout.php</a> to manage lockouts<br>
             3. Test the elevator interfaces to see lockout status<br>
-            4. Visit <a href="test_lockout_integration.html">test_lockout_integration.html</a> for full testing
+            4. Visit <a href="../html/test_lockout_integration.html">test_lockout_integration.html</a> for full testing
         </div>
     </div>
 </body>

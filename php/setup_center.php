@@ -199,7 +199,7 @@
                 <p>Lockout/Tagout (LOTO) safety system for maintenance.</p>
                 
                 <a href="admin_lockout.php" class="button">🔐 Lockout Control</a>
-                <a href="test_lockout_integration.html" class="button">🛡️ Test Safety System</a>
+                <a href="../html/test_lockout_integration.html" class="button">🛡️ Test Safety System</a>
                 
                 <hr style="margin: 15px 0;">
                 <small><strong>Safety First:</strong> Always use LOTO before maintenance</small>

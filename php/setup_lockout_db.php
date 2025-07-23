@@ -192,7 +192,7 @@
         ?>
         
         <hr>
-        <p><small>💡 <strong>Need Help?</strong> Check the <a href='README.md'>README.md</a> or <a href='check_database_structure.php'>Database Structure</a></small></p>
+        <p><small>💡 <strong>Need Help?</strong> Check the <a href='../README.md'>README.md</a> or <a href='check_database_structure.php'>Database Structure</a></small></p>
     </div>
 </body>
 </html>

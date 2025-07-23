@@ -85,10 +85,17 @@
         <div class="test-section">
             <h3>Frontend Integration Links</h3>
             <p>Test that lockout status displays correctly in all interfaces:</p>
-            <a href="index.php" target="_blank" style="margin-right: 10px;">📟 Main Elevator GUI</a>
+            <a href="../php/index.php" target="_blank" style="margin-right: 10px;">📟 Main Elevator GUI</a>
             <a href="test_elevator.html" target="_blank" style="margin-right: 10px;">🧪 Test Elevator</a>
-            <a href="outside.php" target="_blank" style="margin-right: 10px;">🚪 Outside Controls</a>
-            <a href="admin_lockout.php" target="_blank">🔐 Admin Lockout Panel</a>
+            <a href="../php/outside.php" target="_blank" style="margin-right: 10px;">🚪 Outside Controls</a>
+            <a href="../php/admin_lockout.php" target="_blank">🔐 Admin Lockout Panel</a>
+            
+            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin: 10px 0; border-radius: 5px;">
+                <strong>🔧 Debug Links (if 404 errors):</strong><br>
+                <a href="../php/admin_lockout_simple.php" target="_blank" style="margin-right: 10px;">🛠️ Simple Admin Panel</a>
+                <a href="../php/diagnostic.php" target="_blank" style="margin-right: 10px;">🔍 Diagnostic</a>
+                <a href="path_test.html" target="_blank">📍 Path Test</a>
+            </div>
         </div>
         
         <div class="test-section">
@@ -105,7 +112,7 @@
 
     <!-- Navigation -->
     <div style="text-align: center; margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
-        <a href="dashboard.php" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+        <a href="../php/dashboard.php" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
             ← Back to Dashboard
         </a>
     </div>
@@ -119,7 +126,7 @@
         function testAPIStatus() {
             showStatus('api-status', 'Testing API connection...', 'info');
             
-            fetch('test_elevator_api.php')
+            fetch('../php/test_elevator_api.php')
                 .then(response => response.json())
                 .then(data => {
                     const message = `
@@ -140,7 +147,7 @@
         function checkLockoutStatus() {
             showStatus('lockout-status', 'Checking lockout status...', 'info');
             
-            fetch('test_elevator_api.php')
+            fetch('../php/test_elevator_api.php')
                 .then(response => response.json())
                 .then(data => {
                     if (data.is_locked_out) {
@@ -163,7 +170,7 @@
         function testMovement(floor) {
             showStatus('movement-test', `Attempting to move to floor ${floor}...`, 'info');
             
-            fetch('test_elevator_api.php', {
+            fetch('../php/test_elevator_api.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
