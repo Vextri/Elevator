@@ -1,0 +1,7 @@
+Code was created in python
+Created and tested on windows
+
+
+This code tests the capability to create a user profile based on input from the client/query existing clients and all their data
+
+This was more of a test/proof of concept that will be expanded and utilized in Project 6 to allow a user to scan their card and login
