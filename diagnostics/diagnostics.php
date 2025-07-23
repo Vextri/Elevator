@@ -10,15 +10,23 @@
     $floor3_data = isset($json['floor3']) ? $json['floor3'] : [];
     $timestamp = isset($json['timestamp']) ? $json['timestamp'] : '';
 
-    // sort the array from lowest to highest value
+    //setpoints for each floor (mm)
+    $floor1_setpoint = 350;
+    $floor2_setpoint = 635;
+    $floor3_setpoint = 1220;
+
+    // create arrays with repeated setpoint values
+    $floor1_setpoint_array = array_fill(0, count($floor1_data), $floor1_setpoint);
+    $floor2_setpoint_array = array_fill(0, count($floor2_data), $floor2_setpoint);
+    $floor3_setpoint_array = array_fill(0, count($floor3_data), $floor3_setpoint);
+
+    // sort the floor data (diagnostics) array from lowest to highest value
     sort($floor1_data);
     sort($floor2_data); 
     sort($floor3_data);
 
     $total_numMeasurements = 30;
-    $floor1_setpoint = 350;
-    $floor2_setpoint = 635;
-    $floor3_setpoint = 1220;
+
 
 ?>
 
@@ -44,22 +52,33 @@
             const floor2Data = <?php echo json_encode($floor2_data); ?>;
             const floor3Data = <?php echo json_encode($floor3_data); ?>;
 
+            const floor1Setpoint = <?php echo json_encode($floor1_setpoint_array); ?>;
+            const floor2Setpoint = <?php echo json_encode($floor2_setpoint_array); ?>;
+            const floor3Setpoint = <?php echo json_encode($floor3_setpoint_array); ?>;
+
             const ctx1 = document.getElementById('floor1').getContext('2d');
             const ctx2 = document.getElementById('floor2').getContext('2d');
             const ctx3 = document.getElementById('floor3').getContext('2d');
 
             const chart1 = new Chart(ctx1, {
                 type: 'line',
-                data: {
-                    labels: floor1Data.map((_, i) => i + 1), // generates labels like "1", "2", "3", ...
-                    datasets: [{
-                        label: 'Floor 1',
-                        data: floor1Data,
-                        borderColor: 'pink',
-                        borderWidth: 2,
-                        fill: false
-                    }]
-                },
+                    data: {
+                        labels: floor1Data.map((_, i) => i + 1), // Use only one set of labels
+                        datasets: [{
+                            label: 'Floor 1',
+                            data: floor1Data,
+                            borderColor: 'pink',
+                            borderWidth: 2,
+                            fill: false
+                        }, // ✅ Added comma
+                        {
+                            label: 'Setpoint',
+                            data: floor1Setpoint, // This will create a horizontal line at 350
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            fill: false
+                        }]
+                    },
                 options: {
                     responsive: true,
                     scales: {
@@ -72,8 +91,10 @@
                         y: {
                             title: {
                                 display: true,
-                                text: 'Height'
-                            }
+                                text: 'Height (mm)'
+                            },
+                            min: 0,
+                            max: 400
                         }
                     }
                 }
@@ -82,14 +103,21 @@
             const chart2 = new Chart(ctx2, {
                 type: 'line',
                 data: {
-                    labels: floor2Data.map((_, i) => i + 1),
-                    datasets: [{
-                        label: 'Floor 2',
-                        data: floor2Data,
-                        borderColor: 'purple',  
-                        borderWidth: 2,
-                        fill: false
-                    }]
+                        labels: floor2Data.map((_, i) => i + 1), // Use only one set of labels
+                        datasets: [{
+                            label: 'Floor 2',
+                            data: floor2Data,
+                            borderColor: 'lightblue',
+                            borderWidth: 2,
+                            fill: false
+                        }, // ✅ Added comma
+                        {
+                            label: 'Setpoint',
+                            data: floor2Setpoint, // This will create a horizontal line at 350
+                            borderColor: 'blue',
+                            borderWidth: 2,
+                            fill: false
+                        }]
                 },
                 options: {
                     responsive: true,
@@ -103,8 +131,10 @@
                         y: {
                             title: {
                                 display: true,
-                                text: 'Height'
-                            }
+                                text: 'Height (mm)'
+                            },
+                            min: 0,
+                            max: 700,
                         }
                     }
                 }
@@ -113,14 +143,21 @@
             const chart3 = new Chart(ctx3, {
                 type: 'line',
                 data: {
-                    labels: floor3Data.map((_, i) => i + 1),
-                    datasets: [{
-                        label: 'Floor 3',
-                        data: floor3Data,
-                        borderColor: 'blue',
-                        borderWidth: 2,
-                        fill: false
-                    }]
+                        labels: floor3Data.map((_, i) => i + 1), // Use only one set of labels
+                        datasets: [{
+                            label: 'Floor 3',
+                            data: floor3Data,
+                            borderColor: 'lavender',
+                            borderWidth: 2,
+                            fill: false
+                        }, // ✅ Added comma
+                        {
+                            label: 'Setpoint',
+                            data: floor3Setpoint, // This will create a horizontal line at 350
+                            borderColor: 'purple',
+                            borderWidth: 2,
+                            fill: false
+                        }]
                 },
                 options: {
                     responsive: true,
@@ -134,8 +171,10 @@
                         y: {
                             title: {
                                 display: true,
-                                text: 'Height'
-                            }
+                                text: 'Height (mm)'
+                            },
+                            min: 0,
+                            max: 1300
                         }
                     }
                 }
