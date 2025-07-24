@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lockout Integration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .test-btn {
+            background: #007bff;
+            color: white;
+        }
+        .test-btn:hover {
+            background: #0056b3;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔒 Elevator Lockout Integration Test</h1>
+        <p>This page tests if the lockout/tagout feature is properly integrated across all elevator control interfaces.</p>
+        
+        <div class="test-section">
+            <h3>API Status Check</h3>
+            <button class="test-btn" onclick="testAPIStatus()">Test API Status</button>
+            <div id="api-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>Lockout Status Check</h3>
+            <button class="test-btn" onclick="checkLockoutStatus()">Check Lockout Status</button>
+            <div id="lockout-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>Movement Test (Should Fail if Locked Out)</h3>
+            <button class="test-btn" onclick="testMovement(2)">Try Move to Floor 2</button>
+            <div id="movement-test"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>Frontend Integration Links</h3>
+            <p>Test that lockout status displays correctly in all interfaces:</p>
+            <a href="../php/index.php" target="_blank" style="margin-right: 10px;">📟 Main Elevator GUI</a>
+            <a href="test_elevator.html" target="_blank" style="margin-right: 10px;">🧪 Test Elevator</a>
+            <a href="../php/outside.php" target="_blank" style="margin-right: 10px;">🚪 Outside Controls</a>
+            <a href="../php/admin_lockout.php" target="_blank">🔐 Admin Lockout Panel</a>
+            
+            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin: 10px 0; border-radius: 5px;">
+                <strong>🔧 Debug Links (if 404 errors):</strong><br>
+                <a href="../php/admin_lockout_simple.php" target="_blank" style="margin-right: 10px;">🛠️ Simple Admin Panel</a>
+                <a href="../php/diagnostic.php" target="_blank" style="margin-right: 10px;">🔍 Diagnostic</a>
+                <a href="path_test.html" target="_blank">📍 Path Test</a>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>Instructions</h3>
+            <ol>
+                <li>Check current lockout status using the button above</li>
+                <li>Visit the <strong>Admin Lockout Panel</strong> to lock/unlock the elevator</li>
+                <li>Test movement when locked out (should be blocked)</li>
+                <li>Visit each frontend interface to verify lockout status is displayed</li>
+                <li>Unlock the elevator and verify controls are re-enabled</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div style="text-align: center; margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+        <a href="../php/dashboard.php" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <script>
+        function showStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        function testAPIStatus() {
+            showStatus('api-status', 'Testing API connection...', 'info');
+            
+            fetch('../php/test_elevator_api.php')
+                .then(response => response.json())
+                .then(data => {
+                    const message = `
+                        <strong>API Response:</strong><br>
+                        • Success: ${data.success}<br>
+                        • Current Floor: ${data.current_floor}<br>
+                        • Database Connected: ${data.database_connected}<br>
+                        • Locked Out: ${data.is_locked_out}<br>
+                        • Message: ${data.message}
+                    `;
+                    showStatus('api-status', message, data.success ? 'success' : 'error');
+                })
+                .catch(error => {
+                    showStatus('api-status', `API Error: ${error.message}`, 'error');
+                });
+        }
+        
+        function checkLockoutStatus() {
+            showStatus('lockout-status', 'Checking lockout status...', 'info');
+            
+            fetch('../php/test_elevator_api.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.is_locked_out) {
+                        const message = `
+                            <strong>🔒 SYSTEM IS LOCKED OUT</strong><br>
+                            • Reason: ${data.lockout_reason || 'Not specified'}<br>
+                            • Locked By: ${data.locked_by || 'Unknown'}<br>
+                            • Time: ${data.lockout_time || 'Unknown'}
+                        `;
+                        showStatus('lockout-status', message, 'error');
+                    } else {
+                        showStatus('lockout-status', '✅ System is operational - no lockout active', 'success');
+                    }
+                })
+                .catch(error => {
+                    showStatus('lockout-status', `Error checking lockout: ${error.message}`, 'error');
+                });
+        }
+        
+        function testMovement(floor) {
+            showStatus('movement-test', `Attempting to move to floor ${floor}...`, 'info');
+            
+            fetch('../php/test_elevator_api.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=move_floor&newfloor=${floor}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                let message = `<strong>Movement Test Result:</strong><br>`;
+                
+                if (data.is_locked_out) {
+                    message += `🔒 Movement BLOCKED due to lockout<br>`;
+                    message += `• Reason: ${data.lockout_reason}<br>`;
+                    message += `• Locked By: ${data.locked_by}<br>`;
+                    showStatus('movement-test', message, 'error');
+                } else if (data.success) {
+                    message += `✅ Movement successful to floor ${data.current_floor}`;
+                    showStatus('movement-test', message, 'success');
+                } else {
+                    message += `❌ Movement failed: ${data.message}`;
+                    showStatus('movement-test', message, 'error');
+                }
+            })
+            .catch(error => {
+                showStatus('movement-test', `Network error: ${error.message}`, 'error');
+            });
+        }
+        
+        // Auto-run status check when page loads
+        window.onload = function() {
+            testAPIStatus();
+            setTimeout(checkLockoutStatus, 1000);
+        };
+    </script>
+</body>
+</html>

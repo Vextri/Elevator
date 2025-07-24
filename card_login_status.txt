@@ -1,0 +1,1 @@
+{"status":"logged_in","user_id":6,"username":"Blaise","email":"bswan8085@conestogac.on.ca","student_card":"UID: 04 5C 63 5A 7E 70 80","login_method":"card_scan","redirect_url":"dashboard.php","timestamp":1752864903,"message":"Card login successful"}

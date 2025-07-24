@@ -47,7 +47,16 @@ void CANModule::setTxdata(byte data)                                      // Set
 void CANModule::transmitCAN() {
     // send data:  ID = 0x100, Standard CAN Frame, Data length = 8 bytes, 'data' = array of data bytes to send
     Serial.println("Before sendMsgBuf ...");
-    byte sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata);
+    byte sndStat;
+    
+    if (txdata[0] == 0x05 || txdata[0] == 0x06 || txdata[0] == 0x07)
+    {
+        sndStat = mcp2515.sendMsgBuf(TxID, 0, DLC, txdata);
+    }
+    else
+    {
+        sndStat = mcp2515.sendMsgBuf(0x301, 0, DLC, txdata); //lower priority ID for distance readings
+    }
 
     Serial.println("After sendMsgBuf...");
     Serial.println(sndStat);

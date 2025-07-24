@@ -54,16 +54,22 @@ li {
 
 
 body, html {
-  /* The image used */
-  background-image: url(../images/white_background.jpg);
-
-  /* Full height */
+  position: relative;
   height: 100%;
-  width: 100%;
-  /* Center and scale the image nicely */
+  background: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  background-image: url(../images/tile.jpg);
+  background-size: 40px;
   background-position: center;
-  background-repeat: vertical;
-  background-size: cover;
+  background-repeat: repeat;
+  opacity: 0.5; /* Change this value as needed */
+  pointer-events: none;
 }
 
 section {
@@ -97,9 +103,9 @@ section {
     font-weight: bold;
 }
 
-    /* Personalised
-/* Center the form and add a card-like appearance */
-form {
+/* Personalised Form Styles*/
+
+form::before {
   max-width: 420px;
   margin: 2rem auto;
   padding: 1.2rem 1rem;
@@ -112,7 +118,8 @@ form {
   border: 1px solid #e0e6ed;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem; /* less space between elements */
+  gap: 0.6rem;
+  z-index: -1;
 }
 
 /* Optional: Add a fieldset for grouping */
@@ -163,6 +170,7 @@ form textarea:focus {
 }
 
 /* Style the submit button */
+
 form input[type="submit"] {
   background: linear-gradient(90deg, #0078d7 60%, #005fa3 100%);
   color: #fff;
@@ -182,6 +190,8 @@ form input[type="submit"]:hover {
   background: linear-gradient(90deg, #005fa3 60%, #0078d7 100%);
   transform: translateY(-2px) scale(1.03);
 }
+
+
 
 /* Responsive for mobile */
 @media (max-width: 500px) {
@@ -363,7 +373,6 @@ a.request {
   background-size: 200px 100px;
   display: inline-block;
   background-repeat: no-repeat;
-  padding: 20 px;
 }
 
 a.request:hover {
@@ -373,3 +382,4 @@ a.request:hover {
 a.request:active {
   background-image: url(../images/Request_3.png);
 }
+

@@ -1,0 +1,240 @@
+/* elevator.css - Specific styles for elevator interface */
+
+.elevator-panel {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.floor-button {
+    padding: 15px 25px;
+    margin: 5px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.floor-button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.floor-button:active {
+    transform: translateY(0);
+}
+
+.floor-button.current {
+    background: #28a745;
+}
+
+.floor-button.disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.elevator-status {
+    text-align: center;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.elevator-status.moving {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.elevator-status.stopped {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.elevator-status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.lockout-status {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #dc3545;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.lockout-status.locked-out {
+    background: linear-gradient(45deg, #dc3545, #c82333);
+    color: white;
+}
+
+.lockout-status.operational {
+    background: #d4edda;
+    color: #155724;
+    border-color: #28a745;
+}
+
+.navigation-links {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: #e9ecef;
+    border-radius: 8px;
+}
+
+.navigation-links a {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    background: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.navigation-links a:hover {
+    background: #495057;
+    text-decoration: none;
+}
+
+/*Personalized Header for All Pages*/
+h1, .h1 {
+  font-size: 60px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  background-color: black;
+  color: goldenrod;
+  padding: 20px;
+}
+
+h2,.h2 {
+  font-size: 40px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+h3,.h3 {
+  font-size: 30px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  color: rebeccapurple;
+
+}
+
+h4, .h4 {
+  font-size: 20px;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  color: blue;
+}
+
+
+body, html {
+  background-color: darkgrey;
+}
+
+
+
+
+/* Panel Styles for Elevator Control */
+.floor-display {
+  width: 250px; /* Width of the panel */
+  height: 100px; /* Height of the panel */
+  background-image: url(../images/floor_display.png); /* Semi-transparent background */
+  background-size: cover;
+  font-size: 100px;
+  color: rgb(202, 0, 0); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.elevator-panel {
+  width: 400px; /* Width of the panel */
+  height: 400px; /* Height of the panel */
+  margin: auto;
+  background-image: url(../images/elevator_panel.png); /* Semi-transparent background */
+  background-size: cover;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.floor-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px; /* space between buttons */
+  width: 100%;
+}
+
+/* Buttons for Elevator Control */
+
+button.up, button.down, button.floor {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* Adjust as needed */
+  box-sizing: border-box;
+  color: #222; /* or #fff if your image is dark */
+  text-decoration: none;
+  transition: background 0.2s;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+button.up {
+  background-image: url(../images/up.png);
+}
+
+button.up:hover {
+  background-image: url(../images/uphover.png);
+}
+
+button.down {
+  background-image: url(../images/down.png);
+}
+
+button.down:hover {
+  background-image: url(../images/downhover.png);
+}   
+
+button.floor {
+  background-image: url(../images/floor.png);
+}
+
+button.floor:hover {
+  background-image: url(../images/floorhover.png);
+} 
+
+button.up:disabled,
+button.down:disabled {
+  display: none;
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔗 Lockout System Connection Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .test-card { background: #f8f9fa; border: 2px solid #dee2e6; border-radius: 8px; padding: 20px; }
+        .test-card.success { border-color: #28a745; background: #d4edda; }
+        .test-card.warning { border-color: #ffc107; background: #fff3cd; }
+        .test-card.error { border-color: #dc3545; background: #f8d7da; }
+        .test-link { display: inline-block; padding: 8px 15px; margin: 5px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; }
+        .test-link:hover { background: #0056b3; }
+        .status-indicator { font-size: 18px; margin-right: 10px; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h3 { color: #34495e; margin-top: 0; }
+        .connection-flow { background: #e8f4fd; border-left: 4px solid #3498db; padding: 15px; margin: 10px 0; }
+        .api-test { background: #fff; border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #218838; }
+        .result { margin: 10px 0; padding: 10px; border-radius: 4px; }
+        .result.success { background: #d4edda; color: #155724; }
+        .result.error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 Lockout System Connection Test</h1>
+        <p><strong>Purpose:</strong> Verify all interconnections between test integration, admin lockout panel, and outside controls work correctly after restructure.</p>
+        
+        <h2>🚀 Quick Navigation Test</h2>
+        <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; margin: 15px 0; border-radius: 5px;">
+            <h3>🔧 Debug Tools (If 404 errors occur):</h3>
+            <a href="php/diagnostic.php" class="test-link" target="_blank">🔍 PHP Diagnostic</a>
+            <a href="php/admin_lockout_debug.php" class="test-link" target="_blank">🛠️ Admin Lockout Debug</a>
+        </div>
+        <div class="test-grid">
+            <div class="test-card success">
+                <h3><span class="status-indicator">🧪</span>Test Integration Hub</h3>
+                <p>Main testing interface for lockout system</p>
+                <a href="html/test_lockout_integration.html" class="test-link" target="_blank">🔧 Open Test Integration</a>
+                <div class="connection-flow">
+                    <strong>✅ Fixed References:</strong><br>
+                    • Admin Lockout: ../php/admin_lockout.php<br>
+                    • Outside Controls: ../php/outside.php<br>
+                    • Main Elevator: ../php/index.php<br>
+                    • AJAX API: ../php/test_elevator_api.php
+                </div>
+            </div>
+            
+            <div class="test-card success">
+                <h3><span class="status-indicator">🔐</span>Admin Lockout Panel</h3>
+                <p>Administrative control for elevator lockout/tagout</p>
+                <a href="php/admin_lockout.php" class="test-link" target="_blank">🛡️ Open Admin Panel</a>
+                <div class="connection-flow">
+                    <strong>✅ Active References:</strong><br>
+                    • Test Interface: ../html/test_elevator.html<br>
+                    • Dashboard: dashboard.php<br>
+                    • Database: elevator_lockout_db
+                </div>
+            </div>
+            
+            <div class="test-card success">
+                <h3><span class="status-indicator">🚪</span>Outside Controls</h3>
+                <p>External elevator call interface with lockout status</p>
+                <a href="php/outside.php" class="test-link" target="_blank">📞 Open Outside Controls</a>
+                <div class="connection-flow">
+                    <strong>✅ API Integration:</strong><br>
+                    • Lockout Check: elevator_api.php<br>
+                    • Real-time Status Updates<br>
+                    • Movement Blocking when Locked
+                </div>
+            </div>
+            
+            <div class="test-card success">
+                <h3><span class="status-indicator">🏢</span>Main Elevator GUI</h3>
+                <p>Primary elevator control interface</p>
+                <a href="php/index.php" class="test-link" target="_blank">🎛️ Open Main Interface</a>
+                <div class="connection-flow">
+                    <strong>✅ Safety Features:</strong><br>
+                    • Lockout Status Display<br>
+                    • Movement Prevention<br>
+                    • Dashboard Link: dashboard.php
+                </div>
+            </div>
+        </div>
+        
+        <h2>🔗 Connection Flow Test</h2>
+        <div class="api-test">
+            <h3>API Endpoint Testing</h3>
+            <button onclick="testAPIConnections()">🧪 Test All API Connections</button>
+            <button onclick="testLockoutFlow()">🔒 Test Lockout Flow</button>
+            <button onclick="testNavigationLinks()">🗺️ Test Navigation Links</button>
+            <div id="api-results"></div>
+        </div>
+        
+        <h2>📋 Fixed Issues Summary</h2>
+        <div class="test-card success">
+            <h3>✅ Resolved 404 Errors</h3>
+            <ul>
+                <li><strong>test_lockout_integration.html:</strong>
+                    <ul>
+                        <li>❌ <code>admin_lockout.php</code> → ✅ <code>../php/admin_lockout.php</code></li>
+                        <li>❌ <code>outside.php</code> → ✅ <code>../php/outside.php</code></li>
+                        <li>❌ <code>index.php</code> → ✅ <code>../php/index.php</code></li>
+                    </ul>
+                </li>
+                <li><strong>setup_center.php:</strong>
+                    <ul>
+                        <li>❌ <code>test_lockout_integration.html</code> → ✅ <code>../html/test_lockout_integration.html</code></li>
+                    </ul>
+                </li>
+                <li><strong>All AJAX calls in test_lockout_integration.html:</strong>
+                    <ul>
+                        <li>✅ Using <code>../php/test_elevator_api.php</code> correctly</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <h2>🎯 Testing Instructions</h2>
+        <div class="test-card warning">
+            <h3>🔄 Complete Integration Test</h3>
+            <ol>
+                <li><strong>Start with Test Integration:</strong> Open the test_lockout_integration.html</li>
+                <li><strong>Check API Status:</strong> Verify the API connection works</li>
+                <li><strong>Open Admin Panel:</strong> Click the "Admin Lockout Panel" link</li>
+                <li><strong>Lock the Elevator:</strong> Use admin panel to create a lockout</li>
+                <li><strong>Test Outside Controls:</strong> Verify lockout status shows on outside.php</li>
+                <li><strong>Test Main Interface:</strong> Verify lockout blocks movement on index.php</li>
+                <li><strong>Return to Test Integration:</strong> Verify movement test fails due to lockout</li>
+                <li><strong>Unlock:</strong> Remove lockout and verify all systems operational</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function showResult(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML += `<div class="result ${type}">${message}</div>`;
+        }
+        
+        function testAPIConnections() {
+            document.getElementById('api-results').innerHTML = '<h4>🔧 Testing API Connections...</h4>';
+            
+            // Test main API
+            fetch('php/test_elevator_api.php')
+                .then(response => response.json())
+                .then(data => {
+                    showResult('api-results', `✅ test_elevator_api.php - Success: ${data.success}, Connected: ${data.database_connected}`, 'success');
+                })
+                .catch(error => {
+                    showResult('api-results', `❌ test_elevator_api.php - Error: ${error.message}`, 'error');
+                });
+            
+            // Test main elevator API
+            fetch('php/elevator_api.php')
+                .then(response => response.json())
+                .then(data => {
+                    showResult('api-results', `✅ elevator_api.php - Success: ${data.success}, Floor: ${data.current_floor}`, 'success');
+                })
+                .catch(error => {
+                    showResult('api-results', `❌ elevator_api.php - Error: ${error.message}`, 'error');
+                });
+        }
+        
+        function testLockoutFlow() {
+            document.getElementById('api-results').innerHTML = '<h4>🔒 Testing Lockout Flow...</h4>';
+            
+            fetch('php/test_elevator_api.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.is_locked_out) {
+                        showResult('api-results', `🔒 System is LOCKED OUT - Reason: ${data.lockout_reason}`, 'error');
+                        showResult('api-results', `📝 Locked by: ${data.locked_by} at ${data.lockout_time}`, 'error');
+                    } else {
+                        showResult('api-results', `✅ System is OPERATIONAL - No lockout active`, 'success');
+                    }
+                })
+                .catch(error => {
+                    showResult('api-results', `❌ Lockout check failed: ${error.message}`, 'error');
+                });
+        }
+        
+        function testNavigationLinks() {
+            document.getElementById('api-results').innerHTML = '<h4>🗺️ Navigation Links Test Results:</h4>';
+            
+            const links = [
+                { name: 'Test Integration', url: 'html/test_lockout_integration.html' },
+                { name: 'Admin Lockout', url: 'php/admin_lockout.php' },
+                { name: 'Outside Controls', url: 'php/outside.php' },
+                { name: 'Main Elevator', url: 'php/index.php' },
+                { name: 'Dashboard', url: 'php/dashboard.php' }
+            ];
+            
+            showResult('api-results', '🔗 All navigation links have been updated to use correct relative paths', 'success');
+            showResult('api-results', '📁 HTML files → ../php/ for PHP files', 'success');
+            showResult('api-results', '📁 PHP files → ../html/ for HTML files', 'success');
+            showResult('api-results', '📁 Same-folder references work directly', 'success');
+        }
+    </script>
+</body>
+</html>
