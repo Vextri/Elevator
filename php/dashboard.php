@@ -96,6 +96,7 @@ $user_id = $_SESSION['user_id'] ?? 'Unknown ID';
         <a href="logout.php">Logout</a>
         <a href="inside.php">Outside Elevator</a>
         <a href="outside.php">Inside Elevator</a>
+        <a href="../diagnostics/diagnostics.php">Height Diagnostics</a>
     </div>
 </div>
 </body>
