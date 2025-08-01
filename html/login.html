@@ -14,6 +14,11 @@
     <a href="website.html" class="btn btn-primary" style="margin: 1rem; display: inline-block;">Home</a>
   <h2 style="text-align:center;">Login</h2>
   
+  <!-- Error message display -->
+  <div id="error-message" style="background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 5px; padding: 10px; margin: 20px auto; max-width: 500px; text-align: center; display: none;">
+    <strong>Login Error:</strong> <span id="error-text"></span>
+  </div>
+  
   <!-- Card Scan Status Display -->
   <div id="card-scan-status" style="background: #e3f2fd; border: 1px solid #2196f3; border-radius: 5px; padding: 15px; margin: 20px auto; max-width: 500px; text-align: center; display: none;">
     <h3 style="color: #1976d2; margin-top: 0;">🎓 Card Scanner Active</h3>
@@ -27,7 +32,7 @@
     Your browser does not support the audio element.
   </audio>
 
-  <form id="login-form" action="../php/login1.php" method="post">
+  <form id="login-form" action="../php/login.php" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     
@@ -49,6 +54,9 @@
       
     // Focus the Username input field
     usernameInput.focus();
+    
+    // Check for error messages in URL
+    checkForErrors();
     
     // Check if user was logged in via card scan
     checkCardScanStatus();
@@ -89,6 +97,32 @@
   // Global variables for polling
   var cardLoginPollInterval;
   var isPolling = false;
+  
+  function checkForErrors() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    
+    if (error) {
+      const errorDiv = document.getElementById('error-message');
+      const errorText = document.getElementById('error-text');
+      
+      switch(error) {
+        case 'length':
+          errorText.textContent = 'Username and password must both be at least 7 characters.';
+          break;
+        case 'invalid':
+          errorText.textContent = 'Invalid username or password.';
+          break;
+        default:
+          errorText.textContent = 'An error occurred during login.';
+      }
+      
+      errorDiv.style.display = 'block';
+      
+      // Clear the error from URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }
   
   function checkCardScanStatus() {
     // Always show card scan status and start polling 
