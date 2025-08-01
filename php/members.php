@@ -68,6 +68,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
             }
         }
+    } catch (InvalidFloorException $e) {
+        $message = "Floor Error: " . $e->getMessage();
+        $messageType = 'error';
+    } catch (NetworkCommunicationException $e) {
+        $message = "Network Error: " . $e->getMessage();
+        $messageType = 'error';
+    } catch (CANBusException $e) {
+        $message = "CAN Bus Error: " . $e->getMessage();
+        $messageType = 'error';
+    } catch (ElevatorDatabaseException $e) {
+        $message = "Database Error: " . $e->getMessage();
+        $messageType = 'error';
+    } catch (InvalidNodeConfigException $e) {
+        $message = "Configuration Error: " . $e->getMessage();
+        $messageType = 'error';
+    } catch (ElevatorException $e) {
+        $message = "Elevator System Error: " . $e->getMessage();
+        $messageType = 'error';
     } catch (Exception $e) {
         $message = "Error: " . $e->getMessage();
         $messageType = 'error';
@@ -126,7 +144,7 @@ try {
             <a href="dashboard.php" class="btn btn-secondary">← Back to Dashboard</a>
         </div>
         
-        <h1>🏢 Elevator Network Management</h1>
+        <h1>Elevator Network Management</h1>
         <p><strong>Database Deliverables:</strong> Primary/Foreign Keys, Unique Constraints, Indexes, Update Functions, Transactions, CRUD Operations</p>
         
         <?php if ($message): ?>
@@ -137,8 +155,7 @@ try {
         
         <!-- Insert/Update Form -->
         <div class="form-section">
-            <h3><?php echo $editRecord ? '✏️ Edit' : '➕ Add'; ?> Elevator Network Node 
-                <span class="deliverable-badge"><?php echo $editRecord ? '8 marks' : '4 marks'; ?></span>
+            <h3><?php echo $editRecord ? 'Edit' : 'Add'; ?> Elevator Network Node 
             </h3>
             
             <form method="POST">
@@ -197,8 +214,8 @@ try {
         
         <!-- Display Records -->
         <div class="form-section">
-            <h3>📊 Elevator Network Nodes (Parent Table)
-                <span class="deliverable-badge">4 marks display</span>
+            <h3>Elevator Network Nodes (Parent Table)
+                <span class="deliverable-badge"></span>
             </h3>
             <p><strong>Features:</strong> Primary Key (nodeID), Unique Key (ipAddress), Index (status, nodeType)</p>
             
@@ -212,7 +229,7 @@ try {
                         <th>Floor</th>
                         <th>Status (Indexed)</th>
                         <th>Last Update</th>
-                        <th>Actions <span class="deliverable-badge">8 marks</span></th>
+                        <th>Actions <span class="deliverable-badge"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -247,7 +264,7 @@ try {
         
         <!-- CAN Components Display -->
         <div class="form-section">
-            <h3>🔌 CAN Network Components (Child Table with Foreign Key)</h3>
+            <h3>CAN Network Components (Child Table with Foreign Key)</h3>
             <p><strong>Features:</strong> Foreign Key (nodeID → elevatorNetwork.nodeID), Unique Key (canAddress)</p>
             
             <table>
@@ -285,18 +302,7 @@ try {
             </table>
         </div>
         
-        <!-- Deliverables Summary -->
-        <div class="form-section" style="background: #e7f3ff; border: 1px solid #b3d9ff;">
-            <h3>✅ Deliverables Implemented</h3>
-            <ul>
-                <li><strong>[4 marks]</strong> Database with Primary Keys (nodeID, canID), Foreign Key (nodeID), Unique Keys (ipAddress, canAddress), Indexes (status, nodeType, componentType)</li>
-                <li><strong>[8 marks]</strong> Update function that prevents primary key updates and validates input</li>
-                <li><strong>[4 marks]</strong> Transaction-based update function with exception handling and rollback</li>
-                <li><strong>[4 marks]</strong> Insert and display functionality for elevatorNetwork table</li>
-                <li><strong>[8 marks]</strong> Modify (edit) and delete functionality for existing rows</li>
-            </ul>
-            <p><strong>Total: 28 marks implemented</strong> 🎯</p>
-        </div>
+    
     </div>
 </body>
 </html>
