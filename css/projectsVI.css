@@ -109,7 +109,7 @@ form::before {
   max-width: 420px;
   margin: 2rem auto;
   padding: 1.2rem 1rem;
-  background-image: url(../images/teto2.gif);
+  /* background-image: url(../images/teto2.gif); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -204,7 +204,7 @@ form input[type="submit"]:hover {
 }
 
 .request-access-bg {
-background-image: url(../images/teto.gif);
+/* background-image: url(../images/teto.gif); */
 cursor: url(../images/cursor.cur), auto;
 height: 100%;
 

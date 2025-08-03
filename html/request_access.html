@@ -7,48 +7,236 @@
   <link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
   <title>Request Access</title>
   <style>
+    /* Clean, modern styling */
+    .request-container {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border: 1px solid #e0e6ed;
+    }
+    
+    .request-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+      font-size: 2.2rem;
+      font-weight: 300;
+      border-bottom: 2px solid #0078d7;
+      padding-bottom: 1rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #495057;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ced4da;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #0078d7;
+      box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.1);
+    }
+    
+    .form-textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ced4da;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+    }
+    
+    .form-textarea:focus {
+      outline: none;
+      border-color: #0078d7;
+      box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.1);
+    }
+    
+    .char-counter {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #6c757d;
+      text-align: right;
+    }
+    
+    .char-counter.warning {
+      color: #dc3545;
+      font-weight: 500;
+    }
+    
+    .warning-message {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 4px;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+    
+    .submit-button {
+      width: 100%;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, #28a745, #1e7e34);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    
+    .submit-button:hover {
+      background: linear-gradient(135deg, #1e7e34, #155724);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    }
+    
+    .submit-button:active {
+      transform: translateY(0);
+    }
+    
+    .home-link {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.5rem 1rem;
+      background: #6c757d;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    
+    .home-link:hover {
+      background: #5a6268;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+    
+    .requirements {
+      background: #e3f2fd;
+      border: 1px solid #2196f3;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .requirements h4 {
+      margin: 0 0 0.5rem 0;
+      color: #1976d2;
+      font-size: 1rem;
+    }
+    
+    .requirements ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+    
+    .requirements li {
+      margin-bottom: 0.3rem;
+      color: #1976d2;
+    }
   </style>
 </head>
 <body class="request-access-bg">
-  <h2 style="text-align:center;"> Request Access</h2>
-  <form action="../php/request_access.php" method="post">
-    <label for="fullname">Full Name:</label>
-    <input type="text" id="fullname" name="fullname" required>
+  <a href="website.html" class="home-link">Home</a>
+  
+  <div class="request-container">
+    <h2 class="request-header">Request Access</h2>
     
-    <label for="email">Email Address:</label>
-    <input type="email" id="email" name="email" required>
-    
-    <label for="username">Desired Username:</label>
-    <input type="text" id="username" name="username" required>
-    
-    <label for="password">Desired Password:</label>
-    <input type="password" id="password" name="password" required>
-    
-    <label for="reason">Reason for Access:</label><br />
-    <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br /><br />
-
-    <!-- Display remaining characters -->
-    <div id="char-count" style="margin-top: 5px;">
-      <span>Remaining characters: <span id="remaining-char">180</span></span>
-    </div>
-    <!-- Display warning message if character limit exceeded -->
-    <div id="warning-message" class="warning" style="display:none;">
-      You have exceeded the maximum number of characters allowed (180).
+    <div class="requirements">
+      <h4>Password Requirements:</h4>
+      <ul>
+        <li>At least 7 characters long</li>
+        <li>Include one uppercase letter</li>
+        <li>Include one number</li>
+        <li>Include one special character</li>
+      </ul>
     </div>
     
-    <button type="submit" class="request" aria-label="Submit Request">Submit Request</button>
-  </form>
+    <form action="../php/request_access.php" method="post">
+      <div class="form-group">
+        <label for="fullname" class="form-label">Full Name:</label>
+        <input type="text" id="fullname" name="fullname" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address:</label>
+        <input type="email" id="email" name="email" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="username" class="form-label">Desired Username:</label>
+        <input type="text" id="username" name="username" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password" class="form-label">Desired Password:</label>
+        <input type="password" id="password" name="password" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="reason" class="form-label">Reason for Access:</label>
+        <textarea id="reason" name="reason" class="form-textarea" required></textarea>
+        
+        <div class="char-counter" id="char-count">
+          <span>Remaining characters: <span id="remaining-char">180</span></span>
+        </div>
+        
+        <div id="warning-message" class="warning-message">
+          You have exceeded the maximum number of characters allowed (180).
+        </div>
+      </div>
+      
+      <button type="submit" class="submit-button">Submit Request</button>
+    </form>
+  </div>
 
-  <footer style="text-align:center; margin-top:2rem;">
+  <div class="footer">
     &copy; 2025 Blaise Swan. All rights reserved.
-  </footer>
+  </div>
 
-  <!-- JavaScript to handle character count and warning -->
+  <!-- JavaScript to handle character count and validation -->
   <script>
     // Get the textarea and the elements where we will show the remaining characters and the warning
     const textarea = document.getElementById('reason');
     const remainingChar = document.getElementById('remaining-char');
     const warningMessage = document.getElementById('warning-message');
+    const charCount = document.getElementById('char-count');
 
     // Maximum character limit
     const maxLength = 180;
@@ -61,65 +249,81 @@
       // Update the remaining characters display
       remainingChar.textContent = charsLeft;
 
-      // Show warning if characters exceed the limit
+      // Show warning and change styling if characters exceed the limit
       if (currentLength > maxLength) {
         warningMessage.style.display = 'block'; // Show warning
+        charCount.classList.add('warning'); // Add warning styling
+        textarea.style.borderColor = '#dc3545'; // Red border
       } else {
         warningMessage.style.display = 'none'; // Hide warning
+        charCount.classList.remove('warning'); // Remove warning styling
+        textarea.style.borderColor = '#ced4da'; // Default border
+      }
+      
+      // Change color based on remaining characters
+      if (charsLeft < 20) {
+        charCount.style.color = '#dc3545'; // Red when low
+      } else if (charsLeft < 50) {
+        charCount.style.color = '#ffc107'; // Yellow when getting low
+      } else {
+        charCount.style.color = '#6c757d'; // Default gray
       }
     });
 
     // Form validation
-  document.querySelector('form').addEventListener('submit', function(e) {
-    // Get all required fields
-    const fullname = document.getElementById('fullname').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const reason = document.getElementById('reason').value.trim();
+    document.querySelector('form').addEventListener('submit', function(e) {
+      // Get all required fields
+      const fullname = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const reason = document.getElementById('reason').value.trim();
 
-    // Check if any required field is empty
-    if (!fullname || !email || !username || !password || !reason) {
-      alert('Please complete all required fields.');
-      e.preventDefault(); // Stop form from submitting
-      return;
-    }
+      // Check if any required field is empty
+      if (!fullname || !email || !username || !password || !reason) {
+        alert('Please complete all required fields.');
+        e.preventDefault(); // Stop form from submitting
+        return;
+      }
 
-    // Check character limit for reason
-    if (reason.length > 180) {
-      alert('Reason for Access must not exceed 180 characters.');
-      e.preventDefault();
-      return;
-    }
- // Password requirements
-    if (
-      password.length < 7 ||
-      !/[A-Z]/.test(password) ||
-      !/[0-9]/.test(password) ||
-      !/[!@#$%^&*(),.?":{}|<>_\-+=~`]/.test(password)
-    ) {
-      alert('Password must be at least 7 characters long and include one uppercase letter, one special character, and one number.');
-      e.preventDefault();
-      return;
-    }
-  
-    // Custom test: block if any field contains "test" (case-insensitive)
-    const testRegex = /test/i;
-    if (
-      testRegex.test(fullname) ||
-      testRegex.test(email) ||
-      testRegex.test(username) ||
-      testRegex.test(password) ||
-      testRegex.test(reason)
-    ) {
-      alert('Fields cannot contain the word "test".');
-      e.preventDefault();
-      return;
-    }
-  });
+      // Check character limit for reason
+      if (reason.length > 180) {
+        alert('Reason for Access must not exceed 180 characters.');
+        e.preventDefault();
+        return;
+      }
 
+      // Password requirements
+      if (
+        password.length < 7 ||
+        !/[A-Z]/.test(password) ||
+        !/[0-9]/.test(password) ||
+        !/[!@#$%^&*(),.?":{}|<>_\-+=~`]/.test(password)
+      ) {
+        alert('Password must be at least 7 characters long and include one uppercase letter, one special character, and one number.');
+        e.preventDefault();
+        return;
+      }
 
-  
+      // Custom test: block if any field contains "test" (case-insensitive)
+      const testRegex = /test/i;
+      if (
+        testRegex.test(fullname) ||
+        testRegex.test(email) ||
+        testRegex.test(username) ||
+        testRegex.test(password) ||
+        testRegex.test(reason)
+      ) {
+        alert('Fields cannot contain the word "test".');
+        e.preventDefault();
+        return;
+      }
+    });
+
+    // Focus the first input field when page loads
+    window.onload = function() {
+      document.getElementById('fullname').focus();
+    };
   </script>
 
 </body>

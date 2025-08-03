@@ -9,45 +9,208 @@
   <link href="../css/bootstrap.css" type="text/css" rel="stylesheet"/>
   <link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
   <title>Login</title>
+  <style>
+    /* Clean, modern styling */
+    .login-container {
+      max-width: 450px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border: 1px solid #e0e6ed;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+      font-size: 2.2rem;
+      font-weight: 300;
+      border-bottom: 2px solid #0078d7;
+      padding-bottom: 1rem;
+    }
+    
+    .status-card {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .status-card.info {
+      background: #e3f2fd;
+      border-color: #2196f3;
+      color: #1976d2;
+    }
+    
+    .status-card.success {
+      background: #e8f5e8;
+      border-color: #4caf50;
+      color: #2e7d32;
+    }
+    
+    .status-card.error {
+      background: #ffebee;
+      border-color: #f44336;
+      color: #c62828;
+    }
+    
+    .status-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .status-description {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #495057;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ced4da;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #0078d7;
+      box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.1);
+    }
+    
+    .login-button {
+      width: 100%;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, #0078d7, #005fa3);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .login-button:hover {
+      background: linear-gradient(135deg, #005fa3, #004578);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 120, 215, 0.3);
+    }
+    
+    .login-button:active {
+      transform: translateY(0);
+    }
+    
+    .home-link {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.5rem 1rem;
+      background: #6c757d;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    
+    .home-link:hover {
+      background: #5a6268;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .footer-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e9ecef;
+    }
+    
+    .footer-link a {
+      color: #0078d7;
+      text-decoration: none;
+    }
+    
+    .footer-link a:hover {
+      text-decoration: underline;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body class="request-access-bg">
-    <a href="website.html" class="btn btn-primary" style="margin: 1rem; display: inline-block;">Home</a>
-  <h2 style="text-align:center;">Login</h2>
+  <a href="website.html" class="home-link">Home</a>
   
-  <!-- Error message display -->
-  <div id="error-message" style="background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 5px; padding: 10px; margin: 20px auto; max-width: 500px; text-align: center; display: none;">
-    <strong>Login Error:</strong> <span id="error-text"></span>
-  </div>
-  
-  <!-- Card Scan Status Display -->
-  <div id="card-scan-status" style="background: #e3f2fd; border: 1px solid #2196f3; border-radius: 5px; padding: 15px; margin: 20px auto; max-width: 500px; text-align: center; display: none;">
-    <h3 style="color: #1976d2; margin-top: 0;">🎓 Card Scanner Active</h3>
-    <p style="margin: 10px 0;">You can also log in by scanning your student card with the Arduino system.</p>
-    <p style="margin: 10px 0; font-size: 14px; color: #666;">If you have the card scanner running, just scan your card instead of typing your credentials.</p>
-  </div>
-
-  <!-- Audio player (hidden) -->
-  <audio id="background-audio" loop>
-    <source src="audio/teto.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
-
-  <form id="login-form" action="../php/login1.php" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+  <div class="login-container">
+    <h2 class="login-header">System Login</h2>
     
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+    <!-- Error message display -->
+    <div id="error-message" class="status-card error" style="display: none;">
+      <div class="status-title">Login Error</div>
+      <div class="status-description" id="error-text"></div>
+    </div>
     
-    <input type="submit" value="Login">
-  </form>
+    <!-- Card Scan Status Display -->
+    <div id="card-scan-status" class="status-card info" style="display: none;">
+      <div class="status-title" id="card-status-title">Card Scanner Active</div>
+      <div class="status-description" id="card-status-description">
+        You can log in by scanning your student card with the Arduino system.
+      </div>
+    </div>
 
-  <p style="text-align:center;">
-    <a href="request_access.html">Don't have an account? Request access here.</a>
-  </p>
+    <!-- Audio player (hidden) -->
+    <audio id="background-audio" loop>
+      <source src="../audio/teto.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
 
+    <form id="login-form" action="../php/login1.php" method="post">
+      <div class="form-group">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" id="username" name="username" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" id="password" name="password" class="form-input" required>
+      </div>
+      
+      <button type="submit" class="login-button">Login</button>
+    </form>
 
-  <!-- JavaScript to play audio on page click -->
+    <div class="footer-link">
+      <a href="request_access.html">Don't have an account? Request access here.</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Blaise Swan. All rights reserved.
+  </div>
+<  <!-- JavaScript for functionality -->
 <script>
   window.onload = function() {
     var usernameInput = document.getElementById('username');
@@ -62,13 +225,9 @@
     checkCardScanStatus();
     
     // Play background audio when the page loads
-    // Get the audio element
     var audioElement = document.getElementById("background-audio");
-    // Set volume to 50% initially
     audioElement.volume = 0.5;
-    // Add an event listener to play the audio when the user clicks anywhere on the page
     document.body.addEventListener('click', function() {
-      // Play audio only if it hasn't started already
       if (audioElement.paused) {
         audioElement.play();
       }
@@ -82,7 +241,6 @@
         alert('Username and password must both be at least 7 characters.');
         e.preventDefault();
       } else {
-        // Stop polling when user manually submits
         stopCardLoginPolling();
         updateCardScanStatus('Logging in manually...', 'info');
       }
@@ -128,7 +286,6 @@
     // Always show card scan status and start polling 
     document.getElementById('card-scan-status').style.display = 'block';
     
-    // No need to clear sessions since we're using file-based communication
     console.log('Starting card scanner monitoring...');
     updateCardScanStatus('Card scanner system ready - scan your card to login automatically', 'info');
     
@@ -145,7 +302,7 @@
     // Update the card scan status to show polling is active
     updateCardScanStatus('Monitoring for card scans...', 'info');
     
-    // Start polling for card login every 1 second (faster than before)
+    // Start polling for card login every 1 second
     cardLoginPollInterval = setInterval(function() {
       checkForCardLogin();
     }, 1000);
@@ -173,7 +330,7 @@
       
       if (data.status === 'logged_in' || data.status === 'logged_in_manual') {
         console.log('Login detected! Redirecting immediately...');
-        updateCardScanStatus('✅ Login successful! Redirecting...', 'success');
+        updateCardScanStatus('Login successful! Redirecting...', 'success');
         stopCardLoginPolling();
         
         // Simple, direct redirect
@@ -191,33 +348,24 @@
   
   function updateCardScanStatus(message, type) {
     var statusDiv = document.getElementById('card-scan-status');
-    var h3 = statusDiv.querySelector('h3');
-    var firstP = statusDiv.querySelector('p');
+    var titleElement = document.getElementById('card-status-title');
+    var descElement = document.getElementById('card-status-description');
+    
+    // Update classes based on type
+    statusDiv.className = 'status-card ' + type;
+    
+    // Update content
+    titleElement.textContent = message;
     
     if (type === 'success') {
-      statusDiv.style.background = '#e8f5e8';
-      statusDiv.style.borderColor = '#4caf50';
-      h3.style.color = '#2e7d32';
-      h3.innerHTML = '✅ ' + message;
+      descElement.textContent = 'Redirecting to dashboard...';
     } else if (type === 'info') {
-      statusDiv.style.background = '#e3f2fd';
-      statusDiv.style.borderColor = '#2196f3';
-      h3.style.color = '#1976d2';
-      h3.innerHTML = ' ' + message;
+      descElement.textContent = 'Scan your student card with the Arduino system for automatic login.';
     } else if (type === 'error') {
-      statusDiv.style.background = '#ffebee';
-      statusDiv.style.borderColor = '#f44336';
-      h3.style.color = '#c62828';
-      h3.innerHTML = '❌ ' + message;
+      descElement.textContent = 'There was an issue with the card scanner. Please try manual login.';
     }
-    
-    firstP.innerHTML = 'Scan your student card with the Arduino system for automatic login.';
   }
 </script>
-
-<footer style="text-align:center; margin-top:2rem;">
-  &copy; 2025 Blaise Swan. All rights reserved.
-</footer>
 
 </body>
 </html>
