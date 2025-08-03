@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<div style='color: red; text-align: center; margin: 20px;'>";
             echo "Account not approved - pending administrator approval";
             echo "</div>";
-            echo "<a href='login.html' style='display: block; text-align: center;'>Back to Login</a>";
+            echo "<a href='../html/login.html' style='display: block; text-align: center;'>Back to Login</a>";
             $stmt->close();
             $mysqli->close();
             exit();
@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<div style='color: red; text-align: center; margin: 20px;'>";
             echo "Incorrect password!";
             echo "</div>";
-            echo "<a href='login.html' style='display: block; text-align: center;'>Back to Login</a>";
+            echo "<a href='../html/login.html' style='display: block; text-align: center;'>Back to Login</a>";
         }
     } else {
         // Log failed login attempt - user not found
@@ -140,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<div style='color: red; text-align: center; margin: 20px;'>";
         echo "User not found!";
         echo "</div>";
-        echo "<a href='login.html' style='display: block; text-align: center;'>Back to Login</a>";
+        echo "<a href='../html/login.html' style='display: block; text-align: center;'>Back to Login</a>";
     }
 
     $stmt->close();

@@ -1,0 +1,24 @@
+@startuml elevator
+
+scale 2
+
+class Node {
+    ~id: number
+    ~floor: number
+}
+
+class FloorNode {
+    ~elevatorAtFloor: boolean
+}   
+
+class ElevatorCar {
+    +getFloor(id: floor): number
+    +setFloor(floor: number): void
+}
+
+
+Node <|-- FloorNode
+Node <|-- ElevatorCar
+
+
+@enduml

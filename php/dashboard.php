@@ -84,11 +84,15 @@ $user_id = $_SESSION['user_id'] ?? 'Unknown ID';
             <?php endif; ?>
         </p>
         <?php if ($login_method === 'card_scan'): ?>
-            <small style="color: #1976d2;">✅ Your student card was successfully recognized!</small>
+            <small style="color: #1976d2;">Your student card was successfully recognized!</small>
         <?php endif; ?>
     </div>
 
     <div class="nav">
+        <a href="members.php">Elevator Network Management</a>
+        <a href="members1.php">Access Requests Management</a>
+        <a href="test_database.php">Database Test (28 marks)</a>
+        <a href="exception_test.php">Exception Handling Test</a>
         <a href="user_requests.php">User approvals</a>
         <a href="index.php">Elevator control</a>
         <a href="../html/test_lockout_integration.html">Test Lockout Integration</a>
