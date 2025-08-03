@@ -69,39 +69,40 @@
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Smart Elevator System Setup</h1>
+        <h1>Smart Elevator System Setup</h1>
         <p>This intelligent setup will automatically detect your MySQL configuration and set up all required databases.</p>
         
         <?php if (!isset($_POST['start_setup'])): ?>
         
         <div class="setup-section">
-            <h2>🎯 What Will Be Set Up</h2>
+            <h2>What Will Be Set Up</h2>
             <ul>
-                <li><strong>🔐 User Management System</strong> - Authentication and access control</li>
-                <li><strong>🔒 Safety Lockout System</strong> - LOTO (Lockout/Tagout) controls</li>
-                <li><strong>🚁 Elevator Control System</strong> - Movement tracking and API</li>
-                <li><strong>👤 Default Admin Account</strong> - Username: Admin123, Password: Admin123!</li>
+                <li><strong>User Management System</strong> - Authentication and access control</li>
+                <li><strong>Safety Lockout System</strong> - LOTO (Lockout/Tagout) controls</li>
+                <li><strong>Elevator Control System</strong> - Movement tracking and API</li>
+                <li><strong>Default Admin Account</strong> - Username: Admin123, Password: Admin123!</li>
             </ul>
         </div>
         
         <div class="setup-section">
-            <h2>🔍 Pre-Setup Check</h2>
+            <h2>Pre-Setup Check</h2>
             <p>Click below to automatically detect your MySQL configuration and run setup:</p>
             <form method="POST">
-                <button type="submit" name="start_setup">🚀 Auto-Detect & Setup</button>
+                <button type="submit" name="start_setup">Auto-Detect & Setup</button>
             </form>
         </div>
         
         <div class="setup-section">
-            <h2>🛠️ Manual Options</h2>
-            <a href="diagnose_mysql.php"><button type="button">🔍 Diagnose MySQL Issues</button></a>
-            <a href="setup_all_databases.php"><button type="button">⚙️ Manual Setup</button></a>
+            <h2>Manual Options</h2>
+            <a href="diagnose_mysql.php"><button type="button">Diagnose MySQL Issues</button></a>
+            <a href="setup_all_databases.php"><button type="button">Manual Setup</button></a>
+            <a href="documentation.php"><button type="button">Complete Documentation</button></a>
         </div>
         
         <?php else: ?>
         
         <div class="container">
-            <h2>🔄 Running Smart Setup...</h2>
+            <h2>Running Smart Setup...</h2>
             <div class="progress-bar">
                 <div class="progress" id="progress"></div>
             </div>
@@ -132,24 +133,24 @@
             }
             
             echo "<script>document.getElementById('progress').style.width = '10%';</script>";
-            echo "<div class='info'>🔍 Step 1: Detecting MySQL configuration...</div>";
+            echo "<div class='info'>Step 1: Detecting MySQL configuration...</div>";
             flush();
             
             $working_connection = findWorkingConnection();
             
             if (!$working_connection) {
-                echo "<div class='status error'>❌ Could not connect to MySQL with any common configuration.</div>";
-                echo "<div class='warning'>💡 Please check:</div>";
+                echo "<div class='status error'>Could not connect to MySQL with any common configuration.</div>";
+                echo "<div class='warning'>Please check:</div>";
                 echo "<ul>";
                 echo "<li>XAMPP MySQL service is running</li>";
                 echo "<li>No custom MySQL password was set</li>";
                 echo "<li>MySQL port 3306 is not blocked</li>";
                 echo "</ul>";
-                echo "<a href='diagnose_mysql.php'><button>🔍 Run Detailed Diagnostics</button></a>";
+                echo "<a href='diagnose_mysql.php'><button> Run Detailed Diagnostics</button></a>";
                 exit;
             }
             
-            echo "<div class='status success'>✅ Connected using: " . htmlspecialchars($working_connection['description']) . "</div>";
+            echo "<div class='status success'>Connected using: " . htmlspecialchars($working_connection['description']) . "</div>";
             echo "<script>document.getElementById('progress').style.width = '25%';</script>";
             flush();
             
@@ -161,7 +162,7 @@
             
             try {
                 // Setup 1: User Management Database
-                echo "<div class='info'>🔐 Step 2: Setting up User Management Database...</div>";
+                echo "<div class='info'>Step 2: Setting up User Management Database...</div>";
                 echo "<script>document.getElementById('progress').style.width = '40%';</script>";
                 flush();
                 
@@ -178,7 +179,7 @@
                             $result->free();
                         }
                     } while ($mysqli->next_result());
-                    echo "<div class='status success'>✅ User management database created</div>";
+                    echo "<div class='status success'>User management database created</div>";
                 } else {
                     throw new Exception("Failed to create access_requests1: " . $mysqli->error);
                 }
@@ -223,7 +224,7 @@
                             $result->free();
                         }
                     } while ($user_mysqli->next_result());
-                    echo "<div class='status success'>✅ User management tables created</div>";
+                    echo "<div class='status success'>User management tables created</div>";
                 } else {
                     throw new Exception("Failed to create user tables: " . $user_mysqli->error);
                 }
@@ -251,14 +252,14 @@
                 );
                 $dev_stmt->execute();
                 
-                echo "<div class='status success'>✅ Default admin accounts created</div>";
+                echo "<div class='status success'>Default admin accounts created</div>";
                 $user_mysqli->close();
                 
                 echo "<script>document.getElementById('progress').style.width = '60%';</script>";
                 flush();
                 
                 // Setup 2: Lockout Database
-                echo "<div class='info'>🔒 Step 3: Setting up Safety Lockout System...</div>";
+                echo "<div class='info'>Step 3: Setting up Safety Lockout System...</div>";
                 
                 $lockout_sql = "
                     CREATE DATABASE IF NOT EXISTS elevator_lockout_db;
@@ -280,7 +281,7 @@
                             $result->free();
                         }
                     } while ($mysqli->next_result());
-                    echo "<div class='status success'>✅ Safety lockout system created</div>";
+                    echo "<div class='status success'>Safety lockout system created</div>";
                 } else {
                     throw new Exception("Failed to create lockout database: " . $mysqli->error);
                 }
@@ -289,7 +290,7 @@
                 flush();
                 
                 // Setup 3: Elevator Control Database
-                echo "<div class='info'>🚁 Step 4: Setting up Elevator Control System...</div>";
+                echo "<div class='info'>Step 4: Setting up Elevator Control System...</div>";
                 
                 $elevator_sql = "
                     CREATE DATABASE IF NOT EXISTS elevator;
@@ -304,7 +305,7 @@
                             $result->free();
                         }
                     } while ($mysqli->next_result());
-                    echo "<div class='status success'>✅ Elevator control database created</div>";
+                    echo "<div class='status success'>Elevator control database created</div>";
                 } else {
                     throw new Exception("Failed to create elevator database: " . $mysqli->error);
                 }
@@ -332,7 +333,7 @@
                             $result->free();
                         }
                     } while ($elevator_mysqli->next_result());
-                    echo "<div class='status success'>✅ Elevator control table created</div>";
+                    echo "<div class='status success'>Elevator control table created</div>";
                 } else {
                     throw new Exception("Failed to create elevator table: " . $elevator_mysqli->error);
                 }
@@ -342,18 +343,18 @@
                 echo "<script>document.getElementById('progress').style.width = '100%';</script>";
                 flush();
                 
-                echo "<div class='status success'>🎉 Setup completed successfully!</div>";
+                echo "<div class='status success'>Setup completed successfully!</div>";
                 
             } catch (Exception $e) {
-                echo "<div class='status error'>❌ Setup failed: " . htmlspecialchars($e->getMessage()) . "</div>";
-                echo "<div class='warning'>💡 You can try the manual setup or diagnose the issue.</div>";
+                echo "<div class='status error'>Setup failed: " . htmlspecialchars($e->getMessage()) . "</div>";
+                echo "<div class='warning'>You can try the manual setup or diagnose the issue.</div>";
             }
             
             $mysqli->close();
             ?>
             
             <div class="setup-section">
-                <h2>🎯 Login Information</h2>
+                <h2>Login Information</h2>
                 <div class="status info">
                     <strong>Default Admin Account:</strong><br>
                     Username: <strong>Admin123</strong><br>
@@ -367,11 +368,11 @@
             </div>
             
             <div class="setup-section">
-                <h2>🔗 Next Steps</h2>
-                <a href="login1.php"><button>🔑 Test Login</button></a>
-                <a href="index.php"><button>🚁 Open Elevator Interface</button></a>
-                <a href="admin_lockout.php"><button>🔒 Test Lockout System</button></a>
-                <a href="check_database_structure.php"><button>📊 Verify Database Structure</button></a>
+                <h2>Next Steps</h2>
+                <a href="login1.php"><button>Test Login</button></a>
+                <a href="index.php"><button>Open Elevator Interface</button></a>
+                <a href="admin_lockout.php"><button>Test Lockout System</button></a>
+                <a href="check_database_structure.php"><button>Verify Database Structure</button></a>
             </div>
         </div>
         

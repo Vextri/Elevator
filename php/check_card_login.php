@@ -26,7 +26,7 @@ try {
             $_SESSION['email'] = $data['email'];
             $_SESSION['student_card'] = $data['student_card'];
             $_SESSION['login_method'] = 'card_scan';
-            $_SESSION['login_time'] = date('Y-m-d H:i:s');
+            $_SESSION['login_time'] = time(); // Unix timestamp for accurate time tracking
             
             // Delete the status file so it's only used once
             unlink($status_file);

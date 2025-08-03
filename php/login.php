@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = htmlspecialchars($username);
         $_SESSION['login_method'] = 'manual_login';
         $_SESSION['user_id'] = uniqid(); // Generate a unique ID
-        $_SESSION['login_time'] = date('Y-m-d H:i:s');
+        $_SESSION['login_time'] = time(); // Unix timestamp for accurate time tracking
         
         // Redirect to dashboard
         header("Location: dashboard.php");

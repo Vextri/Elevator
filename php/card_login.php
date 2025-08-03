@@ -39,7 +39,7 @@ try {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['student_card'] = $user['student_card'];
                 $_SESSION['login_method'] = 'card_scan';
-                $_SESSION['login_time'] = date('Y-m-d H:i:s');
+                $_SESSION['login_time'] = time(); // Unix timestamp for accurate time tracking
                 
                 // Log successful card login
                 $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';

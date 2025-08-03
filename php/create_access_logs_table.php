@@ -127,7 +127,7 @@
             
             echo "<h3>🚀 Ready to Create?</h3>";
             echo "<p><a href='?create=yes' class='btn'>✅ Create access_logs Table</a></p>";
-            echo "<p><a href='check_lockout_tables.php' class='btn'>🔍 Check Current Tables</a></p>";
+            echo "<p><a href='check_lockout_tables.php' class='btn'>Check Current Tables</a></p>";
         }
         ?>
     </div>

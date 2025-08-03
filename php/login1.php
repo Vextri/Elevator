@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $user['email'];
             $_SESSION['student_card'] = $user['student_card'];
             $_SESSION['login_method'] = 'manual_login';
-            $_SESSION['login_time'] = date('Y-m-d H:i:s');
+            $_SESSION['login_time'] = time(); // Unix timestamp for accurate time tracking
             
             // Log successful login attempt
             $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';

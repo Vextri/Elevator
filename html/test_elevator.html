@@ -325,7 +325,7 @@
     <div class="container">
         <!-- Visual Elevator Building -->
         <div class="elevator-building">
-            <div class="building-title">Test Elevator Shaft</div>
+            <div class="building-title">Elevator Shaft</div>
             <div class="elevator-shaft">
                 <!-- Floor Markers -->
                 <div class="floor-markers">
@@ -345,7 +345,7 @@
         
         <!-- Control Panel -->
         <div class="controls-panel">
-            <div class="panel-title">Elevator Test Controls</div>
+            <div class="panel-title">Elevator Controls</div>
             
             <div id="connectionStatus" class="connection-status disconnected">
                 <div class="status-indicator disconnected"></div>
@@ -388,14 +388,7 @@
             
             <div class="status-message" id="status-message"></div>
             
-            <div class="info-panel">
-                <strong>Test Features:</strong><br>
-                • Visual elevator animation<br>
-                • Real-time floor updates<br>
-                • Door open/close simulation<br>
-                • Connected to same DB as index.php<br>
-                • Database: elevator (ese user)
-            </div>
+
         </div>
     </div>
 
@@ -601,7 +594,7 @@
                 setButtonsEnabled(false);
             } else {
                 lockoutDiv.className = 'lockout-status operational';
-                lockoutDiv.innerHTML = '✅ System Operational';
+                lockoutDiv.innerHTML = 'System Operational';
                 
                 // Re-enable controls if not locked out
                 setButtonsEnabled(true);

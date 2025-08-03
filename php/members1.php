@@ -446,7 +446,7 @@ $mysqli->close();
             
             <!-- Display Access Logs -->
             <div class="form-section">
-                <h3>📋 Access Logs (Last 50 entries)</h3>
+                <h3>Access Logs (Last 50 entries)</h3>
                 <p><strong>Total Shown:</strong> <?php echo count($access_logs); ?></p>
                 
                 <table>
@@ -492,10 +492,10 @@ $mysqli->close();
         <!-- Admin Tools Tab -->
         <div class="tab-content <?php echo $activeTab === 'admin' ? 'active' : ''; ?>">
             <div class="form-section">
-                <h3>⚙️ Database Administration</h3>
+                <h3>Database Administration</h3>
                 
                 <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 15px; margin: 20px 0;">
-                    <h4>🗄️ Database Tables</h4>
+                    <h4>Database Tables</h4>
                     <p><strong>Database:</strong> access_requests1</p>
                     <p><strong>Tables found:</strong></p>
                     <ul>
@@ -506,7 +506,7 @@ $mysqli->close();
                 </div>
                 
                 <div style="background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; padding: 15px; margin: 20px 0;">
-                    <h4>🗑️ Clear Old Access Logs</h4>
+                    <h4>Clear Old Access Logs</h4>
                     <p>Remove access log entries older than specified days:</p>
                     <form method="POST" onsubmit="return confirm('This will permanently delete old log entries. Continue?')">
                         <input type="hidden" name="action" value="clear_logs">
