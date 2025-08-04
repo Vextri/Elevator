@@ -15,7 +15,7 @@ if ($mysqli->connect_error) {
 }
 
 // Connect to existing user database for authentication
-$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 if ($user_mysqli->connect_error) {
     // Debug: Log the error and show a more helpful message
     error_log("Admin lockout DB connection failed: " . $user_mysqli->connect_error);

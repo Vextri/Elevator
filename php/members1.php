@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Database connection for access_requests1
-$mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+$mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);

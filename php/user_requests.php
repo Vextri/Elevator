@@ -36,6 +36,7 @@ if (isset($_SESSION['flash_message'])) {
 
 <?php
 // Connect to the database
+//This is a password I made up for the sake of the project it is not confidential
 $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
 
 // DEBUG: Show which database we're connected to

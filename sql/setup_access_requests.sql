@@ -5,6 +5,7 @@
 CREATE DATABASE IF NOT EXISTS access_requests1;
 
 -- Grant permissions to Blaise user
+-- This is a password I made up for the sake of the project it is not confidential
 GRANT ALL PRIVILEGES ON access_requests1.* TO 'Blaise'@'localhost' IDENTIFIED BY 'Gitdead32!32';
 FLUSH PRIVILEGES;
 

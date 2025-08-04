@@ -671,7 +671,7 @@ setInterval(function() {
             <div class="code-block">// Three-tier database security approach
 
 // 1. User Management Database (access_requests1)
-Connection: mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1")
+Connection: mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1") //This is a password I made up for the sake of the project it is not confidential
 Purpose: Authentication, user accounts, access logging
 Tables: requests, access_logs
 
@@ -688,7 +688,7 @@ Tables: elevator_lockout</div>
             <h4>Prepared Statement Security Pattern</h4>
             <div class="code-block">// SQL injection prevention throughout system
 function secureUserLookup($username, $password) {
-    $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+    $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
     
     // SECURE: Prepared statement with parameter binding
     $sql = "SELECT id, username, password, approved FROM requests WHERE username = ?";
@@ -1170,7 +1170,7 @@ foreach (diagnoseMySQLConnections() as $result) {
             <div class="code-block">// php/check_database_structure.php - Complete system validation
 function validateDatabaseStructure() {
     $databases = [
-        'access_requests1' =&gt; ['host' =&gt; 'localhost', 'user' =&gt; 'Blaise', 'pass' =&gt; 'Gitdead32!32'],
+        'access_requests1' =&gt; ['host' =&gt; 'localhost', 'user' =&gt; 'Blaise', 'pass' =&gt; 'Gitdead32!32'], //This is a password I made up for the sake of the project it is not confidential
         'elevator_lockout_db' =&gt; ['host' =&gt; 'localhost', 'user' =&gt; 'root', 'pass' =&gt; ''],
         'elevator' =&gt; ['host' =&gt; 'localhost', 'user' =&gt; 'ese', 'pass' =&gt; 'ese']
     ];
@@ -1724,7 +1724,7 @@ class ElevatorCar extends Node {
             
             <h4>Database Connection Patterns</h4>
             <div class="code-block"># User Database Connection
-$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 
 # Lockout Database Connection  
 $lockout_db = new PDO('mysql:host=localhost;dbname=elevator_lockout_db', 'root', '');

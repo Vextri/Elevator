@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔍 Quick MySQL Root Password Test</h1>
+        <h1>Quick MySQL Root Password Test</h1>
         <p>This will test common root passwords to determine what your MySQL is using.</p>
         
         <?php
@@ -94,7 +94,7 @@
             echo "<p>2. Try the password reset tool:</p>";
             echo "<a href='reset_mysql_password.bat' download style='background: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>💾 Download Password Reset Tool</a>";
             echo "<p>3. Or use the comprehensive diagnostic tool:</p>";
-            echo "<a href='diagnose_mysql.php' style='background: #ffc107; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🔍 Full Diagnostics</a>";
+            echo "<a href='diagnose_mysql.php' style='background: #ffc107; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Full Diagnostics</a>";
         }
         ?>
         

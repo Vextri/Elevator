@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 // Database credentials - try different users
 $credentials = [
-    ['username' => 'Blaise', 'password' => 'Gitdead32!32'],
+    ['username' => 'Blaise', 'password' => 'Gitdead32!32'], //This is a password I made up for the sake of the project it is not confidential
     ['username' => 'root', 'password' => ''],
     ['username' => 'root', 'password' => 'ese'],
     ['username' => 'ese', 'password' => 'ese']
@@ -127,7 +127,7 @@ function testConnection($servername, $username, $password, $dbname) {
 </head>
 <body>
     <div class="container">
-        <h1>🔍 Request Access Debug Tool</h1>
+        <h1> Request Access Debug Tool</h1>
         <p style="text-align: center; color: #6c757d;">
             Diagnose and fix the "Duplicate entry '' for key 'PRIMARY'" error
         </p>
@@ -452,7 +452,7 @@ function testConnection($servername, $username, $password, $dbname) {
         </div>
 
         <div class="section">
-            <h2>🔍 SQL Diagnostics</h2>
+            <h2>SQL Diagnostics</h2>
             <pre><?php
             echo "Current working credentials:\n";
             echo "Username: " . $working_creds['username'] . "\n";
@@ -494,7 +494,7 @@ function testConnection($servername, $username, $password, $dbname) {
                 
                 <?php
                 // Let's do some detective work
-                echo "<h3>🔍 System Analysis:</h3>";
+                echo "<h3> System Analysis:</h3>";
                 
                 // Check current PHP version
                 echo "<div class='status info'>PHP Version: " . phpversion() . "</div>";

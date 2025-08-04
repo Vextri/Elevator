@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 // Database credentials - try multiple configurations for portability
 $credentials = [
-    ['username' => 'Blaise', 'password' => 'Gitdead32!32'],
+    ['username' => 'Blaise', 'password' => 'Gitdead32!32'], //This is a password I made up for the sake of the project it is not confidential
     ['username' => 'root', 'password' => ''],
     ['username' => 'root', 'password' => 'ese'],
     ['username' => 'ese', 'password' => 'ese']

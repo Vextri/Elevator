@@ -70,7 +70,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔍 MySQL Connection Diagnostics</h1>
+        <h1> MySQL Connection Diagnostics</h1>
         <p>This tool will help diagnose and fix MySQL connection issues on your XAMPP installation.</p>
         
         <?php if (!isset($_POST['diagnose']) && !isset($_POST['test_connection'])): ?>
@@ -94,7 +94,7 @@
         </div>
         
         <form method="POST">
-            <button type="submit" name="diagnose">🔍 Run Full Diagnostics</button>
+            <button type="submit" name="diagnose">Run Full Diagnostics</button>
         </form>
         
         <div class="fix-section">
@@ -109,7 +109,7 @@
         <?php elseif (isset($_POST['diagnose'])): ?>
         
         <div class="container">
-            <h2>🔍 Running MySQL Diagnostics...</h2>
+            <h2> Running MySQL Diagnostics...</h2>
             
             <?php
             echo "<h3>📊 System Information</h3>";

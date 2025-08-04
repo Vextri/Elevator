@@ -677,7 +677,7 @@ class ElevatorCar extends Node {
 #### **Database Connection Patterns**
 ```php
 # User Database Connection
-$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 
 # Lockout Database Connection  
 $lockout_db = new PDO('mysql:host=localhost;dbname=elevator_lockout_db', 'root', '');

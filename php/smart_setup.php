@@ -165,7 +165,7 @@
                 echo "<div class='info'>Step 2: Setting up User Management Database...</div>";
                 echo "<script>document.getElementById('progress').style.width = '40%';</script>";
                 flush();
-                
+                //This is a password I made up for the sake of the project it is not confidential
                 $access_sql = "
                     CREATE DATABASE IF NOT EXISTS access_requests1;
                     CREATE USER IF NOT EXISTS 'Blaise'@'localhost' IDENTIFIED BY 'Gitdead32!32';
@@ -185,6 +185,7 @@
                 }
                 
                 // Connect as Blaise to create tables
+                //This is a password I made up for the sake of the project it is not confidential
                 $user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
                 if ($user_mysqli->connect_error) {
                     throw new Exception("Could not connect as Blaise user: " . $user_mysqli->connect_error);

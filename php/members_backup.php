@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
 
 // Database connection
 try {
-    $db = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+    $db = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
     if ($db->connect_error) {
         // Try alternative connection
         $db = new mysqli("localhost", "root", "", "access_requests1");
