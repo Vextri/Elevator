@@ -8,7 +8,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 try {
-    $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+    $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 
     if ($mysqli->connect_error) {
         throw new Exception('Database connection failed: ' . $mysqli->connect_error);
@@ -39,7 +39,7 @@ try {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['student_card'] = $user['student_card'];
                 $_SESSION['login_method'] = 'card_scan';
-                $_SESSION['login_time'] = date('Y-m-d H:i:s');
+                $_SESSION['login_time'] = time(); // Unix timestamp for accurate time tracking
                 
                 // Log successful card login
                 $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';

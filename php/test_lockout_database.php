@@ -30,6 +30,7 @@
         
         try {
             // Test database connection
+            //This is a password I made up for the sake of the project it is not confidential
             $pdo = new PDO('mysql:host=localhost;dbname=elevator_lockout_db', 'Blaise', 'Gitdead32!32');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             

@@ -52,7 +52,7 @@ try {
 // Test user database
 echo "<h3>User Database (access_requests1):</h3>";
 try {
-    $user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+    $user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
     if ($user_mysqli->connect_error) {
         echo "<p>❌ Connection failed: " . $user_mysqli->connect_error . "</p>";
     } else {

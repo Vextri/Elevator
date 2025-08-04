@@ -24,7 +24,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔐 Elevator Lockout Database Setup</h1>
+        <h1> Elevator Lockout Database Setup</h1>
         
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -44,12 +44,14 @@
                 echo "<div class='success'>✅ Database 'elevator_lockout_db' created</div>";
                 
                 // Grant privileges to Blaise user
+                //This is a password I made up for the sake of the project it is not confidential
                 $root_pdo->exec("GRANT ALL PRIVILEGES ON elevator_lockout_db.* TO 'Blaise'@'localhost' IDENTIFIED BY 'Gitdead32!32'");
                 $root_pdo->exec("GRANT ALL PRIVILEGES ON elevator_lockout_db.* TO 'Blaise'@'127.0.0.1' IDENTIFIED BY 'Gitdead32!32'");
                 $root_pdo->exec("FLUSH PRIVILEGES");
                 echo "<div class='success'>✅ Granted privileges to user 'Blaise'</div>";
                 
                 // Now connect as Blaise to create tables
+                //This is a password I made up for the sake of the project it is not confidential
                 $pdo = new PDO('mysql:host=localhost;dbname=elevator_lockout_db', 'Blaise', 'Gitdead32!32');
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 

@@ -21,7 +21,7 @@
     try {
         // Check access_requests1 database
         echo "<h2>access_requests1 Database:</h2>";
-        $db = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+        $db = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
         
         if ($db->connect_error) {
             echo "<div class='error'>Connection failed: " . $db->connect_error . "</div>";

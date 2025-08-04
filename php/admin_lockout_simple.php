@@ -40,7 +40,7 @@ try {
 }
 
 echo "<h2>🔗 Navigation:</h2>";
-echo '<p><a href="admin_lockout.php">🛡️ Full Admin Lockout Panel</a></p>';
-echo '<p><a href="diagnostic.php">🔍 Diagnostic Page</a></p>';
-echo '<p><a href="../html/test_lockout_integration.html">🧪 Back to Test Integration</a></p>';
+echo '<p><a href="admin_lockout.php">Full Admin Lockout Panel</a></p>';
+echo '<p><a href="diagnostic.php">Diagnostic Page</a></p>';
+echo '<p><a href="../html/test_lockout_integration.html">Back to Test Integration</a></p>';
 ?>

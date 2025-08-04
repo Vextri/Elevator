@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 try {
-    $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+    $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 
     if ($mysqli->connect_error) {
         throw new Exception('Database connection failed: ' . $mysqli->connect_error);

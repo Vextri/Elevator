@@ -1,6 +1,6 @@
 <?php
 // diagnostic.php - Simple test to check if PHP is working
-echo "<h1>🔍 PHP Diagnostic Test</h1>";
+echo "<h1>PHP Diagnostic Test</h1>";
 echo "<p><strong>Current Directory:</strong> " . __DIR__ . "</p>";
 echo "<p><strong>Script Name:</strong> " . $_SERVER['SCRIPT_NAME'] . "</p>";
 echo "<p><strong>Document Root:</strong> " . $_SERVER['DOCUMENT_ROOT'] . "</p>";

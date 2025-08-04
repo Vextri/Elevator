@@ -35,6 +35,7 @@
             
             try {
                 // First, try to connect to MySQL to create database
+                //This is a password I made up for the sake of the project it is not confidential
                 $conn = new mysqli("localhost", "Blaise", "Gitdead32!32");
                 
                 if ($conn->connect_error) {
@@ -54,6 +55,7 @@
                 $conn->close();
                 
                 // Now connect to the specific database and create tables
+                //This is a password I made up for the sake of the project it is not confidential
                 $db = new mysqli("localhost", "Blaise", "Gitdead32!32", "elevator_lockout_db");
                 
                 if ($db->connect_error) {

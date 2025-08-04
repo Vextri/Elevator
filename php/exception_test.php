@@ -26,14 +26,14 @@ try {
         'message' => $e->getMessage(),
         'code' => $e->getErrorCode(),
         'context' => $e->getContext(),
-        'status' => 'CAUGHT ✅'
+        'status' => 'CAUGHT'
     ];
 } catch (Exception $e) {
     $testResults[] = [
         'test' => 'Invalid Floor Request',
         'exception' => get_class($e),
         'message' => $e->getMessage(),
-        'status' => 'UNEXPECTED ❌'
+        'status' => 'UNEXPECTED'
     ];
 }
 
@@ -48,14 +48,14 @@ try {
         'message' => $e->getMessage(),
         'code' => $e->getErrorCode(),
         'context' => $e->getContext(),
-        'status' => 'CAUGHT ✅'
+        'status' => 'CAUGHT'
     ];
 } catch (Exception $e) {
     $testResults[] = [
         'test' => 'Network Communication Error',
         'exception' => get_class($e),
         'message' => $e->getMessage(),
-        'status' => 'UNEXPECTED ❌'
+        'status' => 'UNEXPECTED'
     ];
 }
 
@@ -70,14 +70,14 @@ try {
         'message' => $e->getMessage(),
         'code' => $e->getErrorCode(),
         'context' => $e->getContext(),
-        'status' => 'CAUGHT ✅'
+        'status' => 'CAUGHT'
     ];
 } catch (Exception $e) {
     $testResults[] = [
         'test' => 'CAN Bus Communication Error',
         'exception' => get_class($e),
         'message' => $e->getMessage(),
-        'status' => 'UNEXPECTED ❌'
+        'status' => 'UNEXPECTED'
     ];
 }
 
@@ -92,14 +92,14 @@ try {
         'message' => $e->getMessage(),
         'code' => $e->getErrorCode(),
         'context' => $e->getContext(),
-        'status' => 'CAUGHT ✅'
+        'status' => 'CAUGHT'
     ];
 } catch (Exception $e) {
     $testResults[] = [
         'test' => 'Invalid Node Configuration',
         'exception' => get_class($e),
         'message' => $e->getMessage(),
-        'status' => 'UNEXPECTED ❌'
+        'status' => 'UNEXPECTED'
     ];
 }
 
@@ -114,14 +114,14 @@ try {
         'message' => $e->getMessage(),
         'code' => $e->getErrorCode(),
         'context' => $e->getContext(),
-        'status' => 'CAUGHT ✅'
+        'status' => 'CAUGHT'
     ];
 } catch (Exception $e) {
     $testResults[] = [
         'test' => 'Database Error',
         'exception' => get_class($e),
         'message' => $e->getMessage(),
-        'status' => 'UNEXPECTED ❌'
+        'status' => 'UNEXPECTED'
     ];
 }
 
@@ -136,14 +136,14 @@ try {
         'message' => $e->getMessage(),
         'code' => $e->getErrorCode(),
         'context' => $e->getContext(),
-        'status' => 'CAUGHT ✅'
+        'status' => 'CAUGHT'
     ];
 } catch (Exception $e) {
     $testResults[] = [
         'test' => 'Invalid IP Address Format',
         'exception' => get_class($e),
         'message' => $e->getMessage(),
-        'status' => 'UNEXPECTED ❌'
+        'status' => 'UNEXPECTED'
     ];
 }
 
@@ -158,14 +158,14 @@ try {
         'message' => $e->getMessage(),
         'code' => $e->getErrorCode(),
         'context' => $e->getContext(),
-        'status' => 'CAUGHT ✅'
+        'status' => 'CAUGHT'
     ];
 } catch (Exception $e) {
     $testResults[] = [
         'test' => 'Empty Parameters',
         'exception' => get_class($e),
         'message' => $e->getMessage(),
-        'status' => 'UNEXPECTED ❌'
+        'status' => 'UNEXPECTED'
     ];
 }
 ?>
@@ -200,11 +200,11 @@ try {
             <a href="dashboard.php" class="btn btn-primary">🏠 Dashboard</a>
         </div>
         
-        <h1>🚨 Exception Handling Test Results</h1>
+        <h1> Exception Handling Test Results</h1>
         <p><strong>Purpose:</strong> Demonstrate custom exception classes that extend Exception to handle elevator system errors</p>
         
         <div class="summary-box" style="background: #d1ecf1;">
-            <h3>🎯 Custom Exception Classes Implemented:</h3>
+            <h3>Custom Exception Classes Implemented:</h3>
             <ul>
                 <li><strong>ElevatorException</strong> - Base class for all elevator exceptions</li>
                 <li><strong>InvalidFloorException</strong> - Invalid floor requests (e.g., floor 15 when max is 10)</li>
@@ -217,7 +217,7 @@ try {
         </div>
         
         <?php foreach ($testResults as $result): ?>
-        <div class="test-result <?php echo $result['status'] === 'CAUGHT ✅' ? 'exception-caught' : 'exception-unexpected'; ?>">
+        <div class="test-result <?php echo $result['status'] === 'CAUGHT' ? 'exception-caught' : 'exception-unexpected'; ?>">
             <h4><?php echo $result['test']; ?> - <?php echo $result['status']; ?></h4>
             
             <p><strong>Exception Class:</strong> <code><?php echo $result['exception']; ?></code></p>
@@ -234,22 +234,22 @@ try {
         <?php endforeach; ?>
         
         <div class="highlight-box" style="background: #d4edda;">
-            <h3>✅ Exception Handling Summary:</h3>
+            <h3>Exception Handling Summary:</h3>
             <p><strong>All <?php echo count($testResults); ?> exception types successfully caught and handled!</strong></p>
             <ul>
-                <li>Custom exception classes extend base Exception class ✅</li>
-                <li>Exceptions thrown from various locations in code ✅</li>
-                <li>Single try-catch blocks handle multiple exception types ✅</li>
-                <li>Context data preserved for debugging ✅</li>
-                <li>Error codes and messages properly formatted ✅</li>
-                <li>Handles unexpected input (invalid floors, IP addresses) ✅</li>
-                <li>Handles communication errors (network, CAN bus) ✅</li>
-                <li>Handles system errors (database, configuration) ✅</li>
+                <li>Custom exception classes extend base Exception class</li>
+                <li>Exceptions thrown from various locations in code</li>
+                <li>Single try-catch blocks handle multiple exception types</li>
+                <li>Context data preserved for debugging</li>
+                <li>Error codes and messages properly formatted</li>
+                <li>Handles unexpected input (invalid floors, IP addresses)</li>
+                <li>Handles communication errors (network, CAN bus)</li>
+                <li>Handles system errors (database, configuration)</li>
             </ul>
         </div>
         
         <div class="summary-box" style="background: #fff3cd;">
-            <h3>🔍 Code Examples Demonstrated:</h3>
+            <h3>Code Examples Demonstrated:</h3>
             <h4>1. Exception Classes (elevator_exceptions.php):</h4>
             <pre>class InvalidFloorException extends ElevatorException {
     public function __construct($requestedFloor, $maxFloor = 10, $minFloor = 1) {

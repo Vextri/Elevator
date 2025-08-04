@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['login_method']) && $_SESSION
 }
 
 // Connect to the database
-$mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+$mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 
 // Check connection
 if ($mysqli->connect_error) {
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $user['email'];
             $_SESSION['student_card'] = $user['student_card'];
             $_SESSION['login_method'] = 'manual_login';
-            $_SESSION['login_time'] = date('Y-m-d H:i:s');
+            $_SESSION['login_time'] = time(); // Unix timestamp for accurate time tracking
             
             // Log successful login attempt
             $client_ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';

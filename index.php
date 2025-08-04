@@ -9,6 +9,6 @@ if (isset($_GET['setup'])) {
 }
 
 // Default redirect to login
-header("Location: html/login.html");
+header("Location: html/website.html");
 exit;
 ?>

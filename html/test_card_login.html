@@ -109,9 +109,9 @@
             if (isMonitoring) return;
             
             isMonitoring = true;
-            log('🔍 Started monitoring for card logins...');
-            updateStatus('🔍 Monitoring for card logins...', 'info');
-            
+            log('Started monitoring for card logins...');
+            updateStatus('Monitoring for card logins...', 'info');
+
             pollInterval = setInterval(checkCardLogin, 1000);
         }
 

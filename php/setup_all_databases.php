@@ -113,18 +113,18 @@
 
         <form method="POST">
             <div class="setup-section">
-                <h2>🔐 MySQL Configuration</h2>
+                <h2>MySQL Configuration</h2>
                 <p>Enter your MySQL root password (leave empty if using default XAMPP setup):</p>
                 <input type="password" name="root_password" placeholder="MySQL root password (optional for XAMPP)" id="password-field">
                 <br>
-                <button type="button" onclick="autoDetectPassword()" style="background: #ffc107; color: #000;">🔍 Auto-Detect Password</button>
-                <button type="submit">🚀 Setup All Databases</button>
+                <button type="button" onclick="autoDetectPassword()" style="background: #ffc107; color: #000;">Auto-Detect Password</button>
+                <button type="submit">Setup All Databases</button>
                 <div id="detection-result" style="margin-top: 10px;"></div>
                 
                 <script>
                 function autoDetectPassword() {
                     const resultDiv = document.getElementById('detection-result');
-                    resultDiv.innerHTML = '<div style="color: #0c5460; padding: 10px; background: #d1ecf1; border-radius: 5px;">🔍 Testing common passwords...</div>';
+                    resultDiv.innerHTML = '<div style="color: #0c5460; padding: 10px; background: #d1ecf1; border-radius: 5px;">Testing common passwords...</div>';
                     
                     // Test common passwords
                     const passwords = ['', 'root', 'admin', 'password', 'mysql'];
@@ -236,10 +236,10 @@
             
             // Hash the password Admin123!
             $hashed_password = password_hash('Admin123!', PASSWORD_DEFAULT);
-            
+            //This is a password I made up for the sake of the project it is not confidential
             $access_sql = "
                 CREATE DATABASE IF NOT EXISTS access_requests1;
-                GRANT ALL PRIVILEGES ON access_requests1.* TO 'Blaise'@'localhost' IDENTIFIED BY 'Gitdead32!32';
+                GRANT ALL PRIVILEGES ON access_requests1.* TO 'Blaise'@'localhost' IDENTIFIED BY 'Gitdead32!32'; 
                 FLUSH PRIVILEGES;
             ";
             
@@ -257,7 +257,8 @@
             $mysqli->close();
             
             // Connect as Blaise to create tables
-            $user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+            //This is a password I made up for the sake of the project it is not confidential
+            $user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); 
             if ($user_mysqli->connect_error) {
                 throw new Exception("Blaise user connection failed: " . $user_mysqli->connect_error);
             }

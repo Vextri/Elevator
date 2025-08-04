@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 // Database credentials - try multiple configurations for portability
 $credentials = [
-    ['username' => 'Blaise', 'password' => 'Gitdead32!32'],
+    ['username' => 'Blaise', 'password' => 'Gitdead32!32'], //This is a password I made up for the sake of the project it is not confidential
     ['username' => 'root', 'password' => ''],
     ['username' => 'root', 'password' => 'ese'],
     ['username' => 'ese', 'password' => 'ese']
@@ -33,16 +33,203 @@ foreach ($credentials as $cred) {
 }
 
 if (!$conn) {
-    die("Connection failed: Unable to connect with any of the configured credentials. Please check your MySQL setup.");
+    showErrorPage("Connection failed: Unable to connect with any of the configured credentials. Please check your MySQL setup.");
+    exit;
+}
+
+// Function to display themed pages
+function showPage($type, $title, $message, $details = '') {
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/bootstrap.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/projectsVI.css" type="text/css" rel="stylesheet"/>
+        <title><?php echo htmlspecialchars($title); ?></title>
+        <style>
+            .result-container {
+                max-width: 500px;
+                margin: 3rem auto;
+                padding: 2.5rem;
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                border: 1px solid #e0e6ed;
+                text-align: center;
+            }
+            
+            .result-header {
+                margin-bottom: 1.5rem;
+                font-size: 2rem;
+                font-weight: 300;
+                padding-bottom: 1rem;
+                border-bottom: 2px solid #dee2e6;
+            }
+            
+            .result-icon {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+            }
+            
+            .result-message {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.6;
+            }
+            
+            .result-details {
+                background: #f8f9fa;
+                border-radius: 6px;
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            
+            .success {
+                border-left: 4px solid #28a745;
+            }
+            
+            .success .result-header {
+                color: #28a745;
+                border-bottom-color: #28a745;
+            }
+            
+            .success .result-icon {
+                color: #28a745;
+            }
+            
+            .error {
+                border-left: 4px solid #dc3545;
+            }
+            
+            .error .result-header {
+                color: #dc3545;
+                border-bottom-color: #dc3545;
+            }
+            
+            .error .result-icon {
+                color: #dc3545;
+            }
+            
+            .warning {
+                border-left: 4px solid #ffc107;
+            }
+            
+            .warning .result-header {
+                color: #e0a800;
+                border-bottom-color: #ffc107;
+            }
+            
+            .warning .result-icon {
+                color: #e0a800;
+            }
+            
+            .action-buttons {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 0.75rem 1.5rem;
+                border: none;
+                border-radius: 6px;
+                font-size: 1rem;
+                font-weight: 500;
+                text-decoration: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: inline-block;
+            }
+            
+            .btn-primary {
+                background: linear-gradient(135deg, #0078d7, #005fa3);
+                color: white;
+            }
+            
+            .btn-primary:hover {
+                background: linear-gradient(135deg, #005fa3, #004578);
+                transform: translateY(-1px);
+                color: white;
+                text-decoration: none;
+            }
+            
+            .btn-secondary {
+                background: linear-gradient(135deg, #6c757d, #545b62);
+                color: white;
+            }
+            
+            .btn-secondary:hover {
+                background: linear-gradient(135deg, #545b62, #383d41);
+                transform: translateY(-1px);
+                color: white;
+                text-decoration: none;
+            }
+            
+            .btn-success {
+                background: linear-gradient(135deg, #28a745, #1e7e34);
+                color: white;
+            }
+            
+            .btn-success:hover {
+                background: linear-gradient(135deg, #1e7e34, #155724);
+                transform: translateY(-1px);
+                color: white;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body class="request-access-bg">
+        <div class="result-container <?php echo $type; ?>">
+            <div class="result-icon">
+                <?php 
+                switch($type) {
+                    case 'success': echo '✓'; break;
+                    case 'error': echo '✗'; break;
+                    case 'warning': echo '⚠'; break;
+                    default: echo 'ℹ'; break;
+                }
+                ?>
+            </div>
+            <h1 class="result-header"><?php echo htmlspecialchars($title); ?></h1>
+            <div class="result-message"><?php echo $message; ?></div>
+            <?php if ($details): ?>
+                <div class="result-details"><?php echo $details; ?></div>
+            <?php endif; ?>
+            <div class="action-buttons">
+                <a href="../html/website.html" class="btn btn-primary">Home</a>
+                <a href="../html/request_access.html" class="btn btn-success">Submit Another Request</a>
+                <a href="../html/login.html" class="btn btn-secondary">Login</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    <?php
+}
+
+function showSuccessPage($requestId) {
+    $message = "Your access request has been submitted successfully and is being reviewed by an administrator.";
+    $details = "Request ID: " . htmlspecialchars($requestId) . "<br>You will be notified once your request has been processed.";
+    showPage('success', 'Request Submitted', $message, $details);
+}
+
+function showErrorPage($message, $details = '') {
+    showPage('error', 'Request Error', $message, $details);
+}
+
+function showWarningPage($message, $details = '') {
+    showPage('warning', 'Request Warning', $message, $details);
 }
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate input data
     if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['reason']) || empty($_POST['fullname'])) {
-        echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-        echo "Error: All fields are required!";
-        echo "</div>";
+        showErrorPage("All fields are required!", "Please go back and complete all required fields in the form.");
     } else {
         // Get form data and validate
         $fullname = trim($_POST['fullname']);
@@ -53,21 +240,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Additional validation
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-            echo "Error: Invalid email format!";
-            echo "</div>";
+            showErrorPage("Invalid email format!", "Please provide a valid email address.");
         } elseif (strlen($username) < 3) {
-            echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-            echo "Error: Username must be at least 3 characters long!";
-            echo "</div>";
+            showErrorPage("Username too short!", "Username must be at least 3 characters long.");
         } elseif (strlen($password) < 6) {
-            echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-            echo "Error: Password must be at least 6 characters long!";
-            echo "</div>";
+            showErrorPage("Password too short!", "Password must be at least 6 characters long.");
         } elseif (strlen($fullname) < 2) {
-            echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-            echo "Error: Full name must be at least 2 characters long!";
-            echo "</div>";
+            showErrorPage("Name too short!", "Full name must be at least 2 characters long.");
         } else {
             // Escape strings for SQL
             $fullname = $conn->real_escape_string($fullname);
@@ -88,9 +267,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result = $check_stmt->get_result();
                 
                 if ($result->num_rows > 0) {
-                    echo "<div style='color: orange; padding: 10px; border: 1px solid orange; margin: 10px; border-radius: 5px;'>";
-                    echo "Error: Username or email already exists in the system!";
-                    echo "</div>";
+                    showWarningPage("Username or email already exists!", "This username or email address is already in our system. Please try a different username or contact an administrator if you need help.");
                 } else {
                     // Proceed with insertion - explicitly exclude id to ensure AUTO_INCREMENT works
                     $sql = "INSERT INTO requests (fullname, email, username, password, reason, created_at, approved) VALUES (?, ?, ?, ?, ?, NOW(), FALSE)";
@@ -101,35 +278,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         if ($stmt->execute()) {
                             $new_id = $conn->insert_id;
-                            echo "<div style='color: green; padding: 10px; border: 1px solid green; margin: 10px; border-radius: 5px;'>";
-                            echo "✅ Request submitted successfully! Request ID: " . $new_id;
-                            echo "<br>Your request will be reviewed by an administrator.";
-                            echo "<br><br><a href='request_access.html' style='color: blue;'>Submit another request</a>";
-                            echo "</div>";
+                            showSuccessPage($new_id);
                         } else {
-                            echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-                            echo "Error executing statement: " . $stmt->error;
-                            echo "<br>Error code: " . $stmt->errno;
-                            echo "<br>SQL State: " . $conn->sqlstate;
-                            echo "</div>";
+                            showErrorPage("Database error occurred!", "Error: " . $stmt->error . "<br>Please try again or contact support if the problem persists.");
                         }
                         $stmt->close();
                     } else {
-                        echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-                        echo "Error preparing statement: " . $conn->error;
-                        echo "</div>";
+                        showErrorPage("System error occurred!", "Unable to prepare database statement. Please try again later.");
                     }
                 }
                 $check_stmt->close();
             } else {
-                echo "<div style='color: red; padding: 10px; border: 1px solid red; margin: 10px; border-radius: 5px;'>";
-                echo "Error preparing check statement: " . $conn->error;
-                echo "</div>";
+                showErrorPage("System error occurred!", "Unable to check existing records. Please try again later.");
             }
         }
     }
     
     // Close the connection
     $conn->close();
+} else {
+    // If accessed directly without POST, redirect to the form
+    header("Location: ../html/request_access.html");
+    exit;
 }
 ?>

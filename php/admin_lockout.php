@@ -15,7 +15,7 @@ if ($mysqli->connect_error) {
 }
 
 // Connect to existing user database for authentication
-$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
+$user_mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1"); //This is a password I made up for the sake of the project it is not confidential
 if ($user_mysqli->connect_error) {
     // Debug: Log the error and show a more helpful message
     error_log("Admin lockout DB connection failed: " . $user_mysqli->connect_error);
@@ -285,7 +285,7 @@ $is_locked_out = $lockout_status && $lockout_status['is_locked_out'];
 <body>
     <div class="lockout-panel">
         <div class="header">
-            <h1>🔒 Elevator Lockout/Tagout Control</h1>
+            <h1> Elevator Lockout/Tagout Control</h1>
             <p>Safety system for maintenance and emergency situations</p>
         </div>
         
@@ -305,12 +305,12 @@ $is_locked_out = $lockout_status && $lockout_status['is_locked_out'];
             </div>
             
             <div class="control-form">
-                <h3>🔓 Unlock Elevator</h3>
+                <h3>Unlock Elevator</h3>
                 <p>Click below to restore normal elevator operation:</p>
                 <form method="POST" onsubmit="return confirm('Are you sure you want to UNLOCK the elevator and restore normal operation?')">
                     <input type="hidden" name="action" value="unlock">
                     <button type="submit" class="unlock-btn">
-                        🔓 UNLOCK ELEVATOR
+                        UNLOCK ELEVATOR
                     </button>
                 </form>
             </div>
@@ -321,7 +321,7 @@ $is_locked_out = $lockout_status && $lockout_status['is_locked_out'];
             </div>
             
             <div class="control-form">
-                <h3>🔒 Lockout Elevator</h3>
+                <h3>Lockout Elevator</h3>
                 <p>Use this feature for maintenance, emergencies, or safety concerns:</p>
                 <form method="POST" onsubmit="return confirm('Are you sure you want to LOCK OUT the elevator? This will disable all elevator operations.')">
                     <input type="hidden" name="action" value="lockout">
@@ -330,14 +330,14 @@ $is_locked_out = $lockout_status && $lockout_status['is_locked_out'];
                               placeholder="Enter detailed reason for lockout (e.g., Scheduled maintenance, Emergency repair, Safety inspection, etc.)" 
                               required></textarea>
                     <button type="submit" class="lockout-btn">
-                        🔒 LOCKOUT ELEVATOR
+                        LOCKOUT ELEVATOR
                     </button>
                 </form>
             </div>
         <?php endif; ?>
         
         <div class="history-section">
-            <h3>📋 Recent Lockout History</h3>
+            <h3> Recent Lockout History</h3>
             <?php
             $history_query = "SELECT * FROM elevator_lockout WHERE elevator_id = 1 ORDER BY id DESC LIMIT 10";
             $history_result = $mysqli->query($history_query);
@@ -345,7 +345,7 @@ $is_locked_out = $lockout_status && $lockout_status['is_locked_out'];
             if ($history_result->num_rows > 0):
                 while ($row = $history_result->fetch_assoc()): ?>
                     <div class="history-item <?= $row['is_locked_out'] ? 'locked' : 'unlocked' ?>">
-                        <strong><?= $row['is_locked_out'] ? '🔒 LOCKOUT' : '🔓 UNLOCK' ?></strong><br>
+                        <strong><?= $row['is_locked_out'] ? 'LOCKOUT' : 'UNLOCK' ?></strong><br>
                         <strong>Reason:</strong> <?= htmlspecialchars($row['lockout_reason']) ?><br>
                         <strong>By:</strong> <?= htmlspecialchars($row['locked_by_username']) ?><br>
                         <strong>Time:</strong> <?= $row['lockout_timestamp'] ?>
@@ -366,10 +366,9 @@ $is_locked_out = $lockout_status && $lockout_status['is_locked_out'];
         </div>
         
         <div class="nav-links">
-            <a href="index.php">🏢 Elevator Controls</a>
-            <a href="dashboard.php">📊 Dashboard</a>
-            <a href="../html/test_elevator.html">🧪 Test Interface</a>
-            <a href="logout.php">🚪 Logout</a>
+            <a href="../html/test_elevator.html">Elevator Controls</a>
+            <a href="dashboard.php">Dashboard</a>
+            <a href="logout.php">Logout</a>
         </div>
     </div>
 </body>

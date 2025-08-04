@@ -36,16 +36,16 @@ if (isset($_SESSION['flash_message'])) {
 
 <?php
 // Connect to the database
+//This is a password I made up for the sake of the project it is not confidential
 $mysqli = new mysqli("localhost", "Blaise", "Gitdead32!32", "access_requests1");
 
 // DEBUG: Show which database we're connected to
 echo "<div style='background: #e3f2fd; padding: 10px; margin: 10px; border: 1px solid #2196f3;'>";
-echo "<h3>DATABASE CONNECTION DEBUG:</h3>";
-echo "Connected to database: access_requests1<br>";
+echo "<h3>DATABASE CONNECTION VALIDATION:</h3>";
 $db_check = $mysqli->query("SELECT DATABASE() as current_db");
 if ($db_check) {
     $db_name = $db_check->fetch_assoc();
-    echo "Actually connected to: " . $db_name['current_db'] . "<br>";
+    echo "Database Connected: " . $db_name['current_db'] . "<br>";
 }
 echo "</div>";
 
