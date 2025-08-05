@@ -347,10 +347,10 @@ $user_id = $_SESSION['user_id'] ?? 'Unknown ID';
                     <div class="nav-link-icon">D</div>
                     Database Management
                 </a>
-                <a href="members1.php" class="nav-link">
+                <!-- <a href="members1.php" class="nav-link">
                     <div class="nav-link-icon">A</div>
                     Access Requests
-                </a>
+                </a> -->
                 <a href="user_requests.php" class="nav-link">
                     <div class="nav-link-icon">U</div>
                     User Approvals
@@ -365,10 +365,6 @@ $user_id = $_SESSION['user_id'] ?? 'Unknown ID';
                 Testing & Tools
             </h2>
             <div class="nav-links">
-                <a href="exception_test.php" class="nav-link">
-                    <div class="nav-link-icon">X</div>
-                    Exception Testing
-                </a>
                 <a href="../diagnostics/diagnostics.php" class="nav-link">
                     <div class="nav-link-icon">H</div>
                     Height Diagnostics
@@ -376,6 +372,10 @@ $user_id = $_SESSION['user_id'] ?? 'Unknown ID';
                 <a href="../jsdoom-dosbox/index.html" target="_blank" class="nav-link">
                     <div class="nav-link-icon">G</div>
                     JS DOOM Game
+                </a>
+                <a href="documentation.php" class="nav-link">
+                    <div class="nav-link-icon">D</div>
+                    Documentation
                 </a>
             </div>
         </div>

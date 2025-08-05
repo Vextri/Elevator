@@ -274,7 +274,7 @@ try {
         <div class="tab-content <?php echo $activeTab === 'requests' ? 'active' : ''; ?>">
             <!-- Add/Edit Request Form -->
             <div class="form-section">
-                <h3><?php echo ($editRecord && !isset($editRecord['log_id'])) ? 'Edit' : 'Add'; ?> Access Request</h3>
+                <h3><?php echo ($editRecord && !isset($editRecord['log_id'])) ? 'Edit' : 'Add'; ?> User</h3>
                 
                 <form method="POST">
                     <input type="hidden" name="action" value="<?php echo ($editRecord && !isset($editRecord['log_id'])) ? 'update_request' : 'insert_request'; ?>">

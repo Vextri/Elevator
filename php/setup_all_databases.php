@@ -85,7 +85,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🚁 Complete Elevator System Setup</h1>
+        <h1> Complete Elevator System Setup</h1>
         <p style="text-align: center; font-size: 18px; color: #6c757d;">
             One-click setup for all elevator system databases
         </p>
@@ -95,17 +95,17 @@
     
     <div class="container">
         <div class="setup-section">
-            <h2>📋 Setup Overview</h2>
+            <h2> Setup Overview</h2>
             <p>This setup will create and configure all three databases needed for the elevator system:</p>
             <ul>
-                <li><strong>🔐 access_requests1</strong> - User management and authentication system</li>
-                <li><strong>🔒 elevator_lockout_db</strong> - Lockout/tagout safety system</li>
-                <li><strong>🚁 elevator</strong> - Elevator movement and status tracking</li>
+                <li><strong> access_requests1</strong> - User management and authentication system</li>
+                <li><strong> elevator_lockout_db</strong> - Lockout/tagout safety system</li>
+                <li><strong> elevator</strong> - Elevator movement and status tracking</li>
             </ul>
         </div>
 
         <div class="credentials">
-            <h3>🎯 Default Login Credentials</h3>
+            <h3> Default Login Credentials</h3>
             <p><strong>Username:</strong> Admin123</p>
             <p><strong>Password:</strong> Admin123!</p>
             <p><em>You can change these after setup or create additional users.</em></p>
@@ -380,7 +380,7 @@
         }
         
         // Setup 3: elevator database (Movement Control)
-        echo "<h3>🚁 Setting up Elevator Control Database...</h3>";
+        echo "<h3> Setting up Elevator Control Database...</h3>";
         try {
             $mysqli = new mysqli("localhost", "root", $root_password);
             
@@ -429,10 +429,10 @@
             echo "</div>";
             echo "<p><strong>🚀 Your elevator system is now ready! Try these links:</strong></p>";
             echo "<ul>";
-            echo "<li><a href='login1.php' style='color: #007bff; font-weight: bold;'>🔐 Login to System</a></li>";
-            echo "<li><a href='request_access.php' style='color: #007bff; font-weight: bold;'>👤 Register New User</a></li>";
-            echo "<li><a href='admin_lockout.php' style='color: #007bff; font-weight: bold;'>🔒 Lockout Control Panel</a></li>";
-            echo "<li><a href='index.php' style='color: #007bff; font-weight: bold;'>🚁 Main Elevator Interface</a></li>";
+            echo "<li><a href='login1.php' style='color: #007bff; font-weight: bold;'> Login to System</a></li>";
+            echo "<li><a href='request_access.php' style='color: #007bff; font-weight: bold;'> Register New User</a></li>";
+            echo "<li><a href='admin_lockout.php' style='color: #007bff; font-weight: bold;'>Lockout Control Panel</a></li>";
+            echo "<li><a href='index.php' style='color: #007bff; font-weight: bold;'> Main Elevator Interface</a></li>";
             echo "<li><a href='test_elevator.html' style='color: #007bff; font-weight: bold;'>🧪 Test Interface</a></li>";
             echo "</ul>";
             echo "</div>";
@@ -456,7 +456,7 @@
     
     <div class="container">
         <div class="setup-section">
-            <h3>🔗 Related Files & Documentation</h3>
+            <h3>Related Files & Documentation</h3>
             <ul>
                 <li><strong>Manual Setup Scripts:</strong> <code>sql/setup_access_requests.sql</code>, <code>sql/simple_setup.sql</code></li>
                 <li><strong>Documentation:</strong> <code>README.md</code></li>

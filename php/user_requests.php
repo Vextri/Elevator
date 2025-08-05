@@ -4,9 +4,12 @@ session_start();
 
 // Check if a flash message is set
 if (isset($_SESSION['flash_message'])) {
-    echo "<div class='alert alert-success'>" . $_SESSION['flash_message'] . "</div>";
+    $message_type = $_SESSION['flash_message_type'] ?? 'success';
+    $alert_class = $message_type === 'success' ? 'alert-success' : 'alert-danger';
+    echo "<div class='alert $alert_class'>" . $_SESSION['flash_message'] . "</div>";
     // Clear the flash message after displaying it
     unset($_SESSION['flash_message']);
+    unset($_SESSION['flash_message_type']);
 }
 ?>
 <!DOCTYPE html>
@@ -21,9 +24,12 @@ if (isset($_SESSION['flash_message'])) {
         .back-link:hover { background: #545b62; }
         .alert { padding: 15px; margin: 10px 0; border-radius: 4px; }
         .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-danger { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         .request-item { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; background: #f8f9fa; }
-        .approve-btn { background: #28a745; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; }
+        .approve-btn { background: #28a745; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; margin-right: 10px; }
         .approve-btn:hover { background: #218838; }
+        .deny-btn { background: #dc3545; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; }
+        .deny-btn:hover { background: #c82333; }
     </style>
 </head>
 <body>
@@ -66,6 +72,7 @@ if ($result->num_rows > 0) {
         echo "<p><strong>Username:</strong> " . htmlspecialchars($row['username']) . "</p>";
         echo "<p><strong>Reason:</strong> " . htmlspecialchars($row['reason']) . "</p>";
         echo "<a href='approve_user.php?user_id=" . $row['id'] . "' class='approve-btn'>Approve User</a>";
+        echo "<a href='deny_user.php?user_id=" . $row['id'] . "' class='deny-btn' onclick='return confirm(\"Are you sure you want to deny this request?\")'>Deny User</a>";
         echo "</div>";
     }
 } else {

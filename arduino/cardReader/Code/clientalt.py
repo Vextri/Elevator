@@ -13,10 +13,62 @@ import time
 import requests
 import json
 
-# Web server configuration
-WEB_SERVER_URL = 'http://localhost/projectsite/Elevator/php/card_login.php'  # New PHP file we'll create
-REGISTER_USER_URL = 'http://localhost/projectsite/Elevator/php/register_user.php'  # New registration endpoint
-XAMPP_SERVER = 'http://localhost'
+# Web server configuration localhost
+# WEB_SERVER_URL = 'http://localhost/projectsite/Elevator/php/card_login.php'  # New PHP file we'll create
+# REGISTER_USER_URL = 'http://localhost/projectsite/Elevator/php/register_user.php'  # New registration endpoint
+# XAMPP_SERVER = 'http://localhost'
+
+# Web server configuration for remote server
+WEB_SERVER_URL = 'http://192.168.1.203/projectsite/Elevator/php/card_login.php'
+REGISTER_USER_URL = 'http://192.168.1.203/projectsite/Elevator/php/register_user.php'
+XAMPP_SERVER = 'http://192.168.1.203'
+
+def configure_server_settings():
+    """Interactive function to configure server settings"""
+    global WEB_SERVER_URL, REGISTER_USER_URL, XAMPP_SERVER
+    
+    print("\n🌐 SERVER CONFIGURATION")
+    print("=" * 40)
+    print("Current settings:")
+    print(f"  Server: {XAMPP_SERVER}")
+    print(f"  Login URL: {WEB_SERVER_URL}")
+    print(f"  Register URL: {REGISTER_USER_URL}")
+    print()
+    print("Configuration options:")
+    print("1. localhost (127.0.0.1) - Local development")
+    print("2. 192.168.1.203 - Network server")
+    print("3. Custom IP address")
+    print("4. Keep current settings")
+    
+    choice = input("Select option (1-4): ").strip()
+    
+    if choice == '1':
+        server_ip = 'localhost'
+    elif choice == '2':
+        server_ip = '192.168.1.203'
+    elif choice == '3':
+        server_ip = input("Enter IP address (e.g., 192.168.1.100): ").strip()
+        if not server_ip:
+            print("❌ Invalid IP, keeping current settings")
+            return
+    elif choice == '4':
+        print("✅ Keeping current settings")
+        return
+    else:
+        print("❌ Invalid choice, keeping current settings")
+        return
+    
+    # Update global variables
+    XAMPP_SERVER = f'http://{server_ip}'
+    WEB_SERVER_URL = f'http://{server_ip}/projectsite/Elevator/php/card_login.php'
+    REGISTER_USER_URL = f'http://{server_ip}/projectsite/Elevator/php/register_user.php'
+    
+    print(f"\n✅ Server configuration updated!")
+    print(f"  New server: {XAMPP_SERVER}")
+    print(f"  New login URL: {WEB_SERVER_URL}")
+    print(f"  New register URL: {REGISTER_USER_URL}")
+    input("Press Enter to continue...")
+
 
 def test_web_server_connection():
     """Test if the web server and PHP file are accessible"""
@@ -26,12 +78,12 @@ def test_web_server_connection():
     print(f"Expected file location: c:\\xampp\\htdocs\\projectsite\\Elevator\\php\\card_login.php")
     
     try:
-        # Test basic connectivity to localhost
-        basic_response = requests.get('http://localhost', timeout=5)
-        print(f"✅ Basic localhost connection: OK (Status: {basic_response.status_code})")
+        # Test basic connectivity to the configured server
+        basic_response = requests.get(XAMPP_SERVER, timeout=5)
+        print(f"✅ Basic server connection: OK (Status: {basic_response.status_code})")
     except requests.exceptions.RequestException as e:
-        print(f"❌ Basic localhost connection: FAILED ({e})")
-        print("💡 XAMPP Apache server is not running!")
+        print(f"❌ Basic server connection: FAILED ({e})")
+        print("💡 XAMPP Apache server is not running or IP is unreachable!")
         return False
     
     try:
@@ -449,9 +501,9 @@ def test_ajax_system():
     print("would detect it and redirect automatically.")
     print("")
     
-    # Test the check_card_login.php endpoint
-    check_url = 'http://localhost/projectsite/Elevator/check_card_login.php'
-    clear_url = 'http://localhost/projectsite/Elevator/clear_session.php'
+    # Test the check_card_login.php endpoint - use configured server
+    check_url = f'{XAMPP_SERVER}/projectsite/Elevator/check_card_login.php'
+    clear_url = f'{XAMPP_SERVER}/projectsite/Elevator/clear_session.php'
     
     print("0. Clearing any existing sessions...")
     try:
@@ -545,7 +597,7 @@ def test_ajax_system():
     
     print("\n" + "=" * 50)
     print("💡 TIP: To test browser auto-redirect:")
-    print("1. Open: http://localhost/projectsite/Elevator/login.html")
+    print(f"1. Open: {XAMPP_SERVER}/projectsite/Elevator/login.html")
     print("2. Run this test again")
     print("3. Browser should redirect within 2 seconds after successful login")
     input("Press Enter to continue...")
@@ -553,14 +605,15 @@ def test_ajax_system():
 def main():
     """Main function"""
     while True:
-        print("\n🎓 WEB LOGIN CARD SCANNER & USER REGISTRATION")
-        print("1. 📱 Start Card Scanning for Web Login")
-        print("2. 🖱️  Manual Testing Mode")
-        print("3. 👤 Register New User (with Card Scan)")
-        print("4. ✍️  Register New User (Manual Entry)")
-        print("5. ⚙️  Test Web Connection")
-        print("6. 🌐 Test Browser AJAX System")
-        print("7. ❌ Exit")
+        print("\n WEB LOGIN CARD SCANNER & USER REGISTRATION")
+        print("1. Start Card Scanning for Web Login")
+        print("2. Manual Testing Mode")
+        print("3. Register New User (with Card Scan)")
+        print("4. Register New User (Manual Entry)")
+        print("5. Test Web Connection")
+        print("6. Test Browser AJAX System")
+        print("7. Configure Server Settings")
+        print("8. Exit")
         
         choice = input("Choose an option: ").strip()
         
@@ -594,6 +647,8 @@ def main():
         elif choice == '6':
             test_ajax_system()
         elif choice == '7':
+            configure_server_settings()
+        elif choice == '8':
             print("👋 Goodbye!")
             break
         else:

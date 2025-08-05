@@ -76,7 +76,7 @@
         <?php if (!isset($_POST['diagnose']) && !isset($_POST['test_connection'])): ?>
         
         <div class="fix-section">
-            <h2>📋 Common Issues & Solutions</h2>
+            <h2> Common Issues & Solutions</h2>
             <div class="step">
                 <h3>1. MySQL Service Not Running</h3>
                 <p><strong>Solution:</strong> Start XAMPP Control Panel and click "Start" next to MySQL</p>
@@ -98,11 +98,11 @@
         </form>
         
         <div class="fix-section">
-            <h2>🧪 Test MySQL Connection</h2>
+            <h2> Test MySQL Connection</h2>
             <p>Test different connection methods to find what works:</p>
             <form method="POST">
                 <input type="password" name="test_password" placeholder="MySQL root password (leave empty to test no password)">
-                <button type="submit" name="test_connection">🔌 Test Connection</button>
+                <button type="submit" name="test_connection"> Test Connection</button>
             </form>
         </div>
         
@@ -112,7 +112,7 @@
             <h2> Running MySQL Diagnostics...</h2>
             
             <?php
-            echo "<h3>📊 System Information</h3>";
+            echo "<h3> System Information</h3>";
             echo "<div class='info'>PHP Version: " . phpversion() . "</div>";
             echo "<div class='info'>Operating System: " . php_uname() . "</div>";
             
@@ -124,7 +124,7 @@
             }
             
             // Test different connection methods
-            echo "<h3>🔌 Testing Connection Methods</h3>";
+            echo "<h3> Testing Connection Methods</h3>";
             
             $connection_tests = [
                 ['host' => 'localhost', 'user' => 'root', 'password' => '', 'description' => 'Default XAMPP (no password)'],
@@ -172,7 +172,7 @@
                         break;
                     }
                 } catch (Exception $e) {
-                    echo "<div class='status error'>❌ Exception: " . htmlspecialchars($e->getMessage()) . "</div>";
+                    echo "<div class='status error'>Exception: " . htmlspecialchars($e->getMessage()) . "</div>";
                 }
                 echo "</div>";
             }
@@ -181,10 +181,10 @@
                 echo "<div class='status success'>🎉 Found working connection: " . htmlspecialchars($working_connection['description']) . "</div>";
                 echo "<form method='POST' action='setup_all_databases.php'>";
                 echo "<input type='hidden' name='root_password' value='" . htmlspecialchars($working_connection['password']) . "'>";
-                echo "<button type='submit'>🚀 Use This Connection for Setup</button>";
+                echo "<button type='submit'> Use This Connection for Setup</button>";
                 echo "</form>";
             } else {
-                echo "<div class='status error'>❌ No working connection found. Please see manual fixes below.</div>";
+                echo "<div class='status error'> No working connection found. Please see manual fixes below.</div>";
             }
             ?>
             
@@ -243,14 +243,14 @@ EXIT;</div>
                     
                     // Provide specific error solutions
                     if (strpos($mysqli->connect_error, 'Access denied') !== false) {
-                        echo "<div class='warning'>💡 This is a password issue. Try:</div>";
+                        echo "<div class='warning'> This is a password issue. Try:</div>";
                         echo "<ul>";
                         echo "<li>Leave password empty for default XAMPP</li>";
                         echo "<li>Try common passwords: root, admin, password</li>";
                         echo "<li>Check if you set a custom password</li>";
                         echo "</ul>";
                     } elseif (strpos($mysqli->connect_error, 'Connection refused') !== false) {
-                        echo "<div class='warning'>💡 MySQL service is not running. Start it in XAMPP Control Panel.</div>";
+                        echo "<div class='warning'>MySQL service is not running. Start it in XAMPP Control Panel.</div>";
                     }
                 } else {
                     echo "<div class='status success'>✅ Connection successful!</div>";
@@ -284,10 +284,10 @@ EXIT;</div>
         <?php endif; ?>
         
         <div class="container">
-            <h2>🔗 Quick Links</h2>
-            <a href="setup_all_databases.php"><button>🚀 Go to Main Setup</button></a>
-            <a href="http://localhost/phpmyadmin" target="_blank"><button>🗃️ Open phpMyAdmin</button></a>
-            <a href="check_database_structure.php"><button>📊 Check Database Status</button></a>
+            <h2> Quick Links</h2>
+            <a href="setup_all_databases.php"><button> Go to Main Setup</button></a>
+            <a href="http://localhost/phpmyadmin" target="_blank"><button> Open phpMyAdmin</button></a>
+            <a href="check_database_structure.php"><button> Check Database Status</button></a>
         </div>
     </div>
 </body>
