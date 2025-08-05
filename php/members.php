@@ -325,33 +325,41 @@ try {
             
             <!-- Display Requests -->
             <div class="form-section">
-                <h3>Access Requests Management</h3>
-                <p><strong>Total Requests:</strong> <?php echo count($requests); ?></p>
+                <h3>User Management</h3>
+                <p><strong>Total Requests:</strong> <?php 
+                    $pendingCount = 0;
+                    foreach ($requests as $request) {
+                        if (($request['approved'] ?? 0) == 0) {
+                            $pendingCount++;
+                        }
+                    }
+                    echo $pendingCount;
+                ?></p>
                 
                 <table>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Student ID</th>
-                            <th>Name</th>
+                            <th>Username</th>
                             <th>Email</th>
+                            <th>Student Card</th>
                             <th>Reason</th>
                             <th>Status</th>
-                            <th>Created</th>
+                            <th>Created Date</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($requests as $request): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($request['id']); ?></td>
-                            <td><?php echo htmlspecialchars($request['student_id']); ?></td>
-                            <td><?php echo htmlspecialchars($request['name']); ?></td>
-                            <td><?php echo htmlspecialchars($request['email']); ?></td>
-                            <td><?php echo htmlspecialchars(substr($request['reason'], 0, 50)) . (strlen($request['reason']) > 50 ? '...' : ''); ?></td>
+                            <td><?php echo htmlspecialchars($request['id'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($request['username'] ?? $request['name'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($request['email'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($request['student_card'] ?? $request['student_id'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars(substr($request['reason'] ?? '', 0, 50)) . (strlen($request['reason'] ?? '') > 50 ? '...' : ''); ?></td>
                             <td>
                                 <?php 
-                                $status = $request['approved'];
+                                $status = $request['approved'] ?? 0;
                                 if ($status == 1) {
                                     echo '<span class="status-approved">Approved</span>';
                                 } elseif ($status == -1) {
@@ -361,16 +369,40 @@ try {
                                 }
                                 ?>
                             </td>
-                            <td><?php echo $request['created_at']; ?></td>
+                            <td><?php echo $request['created_at'] ?? ''; ?></td>
                             <td class="actions">
+                                <?php if (($request['approved'] ?? 0) == 0): ?>
+                                    <form method="POST" style="display: inline;">
+                                        <input type="hidden" name="action" value="update_request">
+                                        <input type="hidden" name="id" value="<?php echo $request['id'] ?? ''; ?>">
+                                        <input type="hidden" name="student_id" value="<?php echo $request['student_id'] ?? ''; ?>">
+                                        <input type="hidden" name="name" value="<?php echo $request['name'] ?? ''; ?>">
+                                        <input type="hidden" name="email" value="<?php echo $request['email'] ?? ''; ?>">
+                                        <input type="hidden" name="reason" value="<?php echo $request['reason'] ?? ''; ?>">
+                                        <input type="hidden" name="approved" value="1">
+                                        <button type="submit" class="btn btn-success">Approve</button>
+                                    </form>
+                                    <form method="POST" style="display: inline;">
+                                        <input type="hidden" name="action" value="update_request">
+                                        <input type="hidden" name="id" value="<?php echo $request['id'] ?? ''; ?>">
+                                        <input type="hidden" name="student_id" value="<?php echo $request['student_id'] ?? ''; ?>">
+                                        <input type="hidden" name="name" value="<?php echo $request['name'] ?? ''; ?>">
+                                        <input type="hidden" name="email" value="<?php echo $request['email'] ?? ''; ?>">
+                                        <input type="hidden" name="reason" value="<?php echo $request['reason'] ?? ''; ?>">
+                                        <input type="hidden" name="approved" value="-1">
+                                        <button type="submit" class="btn btn-danger">Deny</button>
+                                    </form>
+                                <?php endif; ?>
+                                
                                 <form method="POST" style="display: inline;">
                                     <input type="hidden" name="action" value="edit_request">
-                                    <input type="hidden" name="id" value="<?php echo $request['id']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $request['id'] ?? ''; ?>">
                                     <button type="submit" class="btn btn-warning">Edit</button>
                                 </form>
+                                
                                 <form method="POST" style="display: inline;" onsubmit="return confirm('Delete this request?')">
                                     <input type="hidden" name="action" value="delete_request">
-                                    <input type="hidden" name="id" value="<?php echo $request['id']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $request['id'] ?? ''; ?>">
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
@@ -447,22 +479,22 @@ try {
                     </thead>
                     <tbody>
                         <?php foreach ($access_logs as $log): ?>
-                        <tr class="<?php echo $log['success'] ? 'log-success' : 'log-failed'; ?>">
-                            <td><?php echo $log['log_id']; ?></td>
-                            <td><?php echo htmlspecialchars($log['student_card']); ?></td>
-                            <td><?php echo $log['access_time']; ?></td>
-                            <td><?php echo $log['success'] ? 'Success' : 'Failed'; ?></td>
-                            <td><?php echo htmlspecialchars($log['reason']); ?></td>
-                            <td><?php echo htmlspecialchars($log['ip_address']); ?></td>
+                        <tr class="<?php echo ($log['success'] ?? 0) ? 'log-success' : 'log-failed'; ?>">
+                            <td><?php echo $log['log_id'] ?? ''; ?></td>
+                            <td><?php echo htmlspecialchars($log['student_card'] ?? ''); ?></td>
+                            <td><?php echo $log['access_time'] ?? ''; ?></td>
+                            <td><?php echo ($log['success'] ?? 0) ? 'Success' : 'Failed'; ?></td>
+                            <td><?php echo htmlspecialchars($log['reason'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($log['ip_address'] ?? ''); ?></td>
                             <td class="actions">
                                 <form method="POST" style="display: inline;">
                                     <input type="hidden" name="action" value="edit_log">
-                                    <input type="hidden" name="log_id" value="<?php echo $log['log_id']; ?>">
+                                    <input type="hidden" name="log_id" value="<?php echo $log['log_id'] ?? ''; ?>">
                                     <button type="submit" class="btn btn-warning">Edit</button>
                                 </form>
                                 <form method="POST" style="display: inline;" onsubmit="return confirm('Delete this log entry?')">
                                     <input type="hidden" name="action" value="delete_log">
-                                    <input type="hidden" name="log_id" value="<?php echo $log['log_id']; ?>">
+                                    <input type="hidden" name="log_id" value="<?php echo $log['log_id'] ?? ''; ?>">
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
